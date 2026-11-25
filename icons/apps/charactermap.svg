@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="charactermap-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1F4F8"/><stop offset="1" stop-color="#CBD5E0"/></linearGradient><linearGradient id="charactermap-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="charactermap-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B7CF0"/><stop offset="1" stop-color="#1450C8"/></linearGradient></defs>
+<path d="M21 4H39a3 3 0 0 1 3 3V25a3 3 0 0 1-3 3H21a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M21 4H39a3 3 0 0 1 3 3V25a3 3 0 0 1-3 3H21a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z" fill="url(#charactermap-g1)"/>
+<path d="M21 4H39a3 3 0 0 1 3 3V25a3 3 0 0 1-3 3H21a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M21 4.6H39" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M26 6L26 26" stroke="#B8C5D3" stroke-opacity="1.0" stroke-width="0.9" stroke-linecap="round"/>
+<path d="M20 18L40 18" stroke="#B8C5D3" stroke-opacity="1.0" stroke-width="0.9" stroke-linecap="round"/>
+<path d="M34 6L34 26" stroke="#B8C5D3" stroke-opacity="1.0" stroke-width="0.9" stroke-linecap="round"/>
+<path d="M20 26L40 26" stroke="#B8C5D3" stroke-opacity="1.0" stroke-width="0.9" stroke-linecap="round"/>
+<path d="M9.5 12H30.5a3.5 3.5 0 0 1 3.5 3.5V40.5a3.5 3.5 0 0 1-3.5 3.5H9.5a3.5 3.5 0 0 1-3.5-3.5V15.5a3.5 3.5 0 0 1 3.5-3.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M9.5 12H30.5a3.5 3.5 0 0 1 3.5 3.5V40.5a3.5 3.5 0 0 1-3.5 3.5H9.5a3.5 3.5 0 0 1-3.5-3.5V15.5a3.5 3.5 0 0 1 3.5-3.5Z" fill="url(#charactermap-g2)"/>
+<path d="M9.5 12H30.5a3.5 3.5 0 0 1 3.5 3.5V40.5a3.5 3.5 0 0 1-3.5 3.5H9.5a3.5 3.5 0 0 1-3.5-3.5V15.5a3.5 3.5 0 0 1 3.5-3.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M9.5 12.6H30.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M12 38.5L20 16.5L28 38.5" fill="none" stroke="url(#charactermap-g3)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.2 31L24.8 31" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3.4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,7 @@
+#!/bin/sh
+# This repository's own pre-commit hook (core.hooksPath = .githooks; a fresh clone sets it with
+# `git config core.hooksPath .githooks`). It runs the todo kit's hook first, as the kit asks of a project with hooks
+# of its own, then the project's checks on what is staged.
+root=$(git rev-parse --show-toplevel) || exit 1
+"$root/scripts/hooks/pre-commit" || exit 1
+python3 "$root/tools/check_icons.py" --staged || exit 1

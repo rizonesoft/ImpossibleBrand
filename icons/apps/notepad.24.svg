@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="notepad-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="notepad-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M13 10H35a3 3 0 0 1 3 3V41a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3Z" fill="url(#notepad-24-g1)"/>
+<path d="M13.0 11.0H35.0a2.0 2.0 0 0 1 2.0 2.0V41.0a2.0 2.0 0 0 1-2.0 2.0H13.0a2.0 2.0 0 0 1-2.0-2.0V13.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2"/>
+<path d="M12 6H36a2 2 0 0 1 2 2V12a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="url(#notepad-24-g2)"/>
+<path d="M15 3L15 9" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M21 3L21 9" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M27 3L27 9" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M33 3L33 9" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 21L33 21" stroke="#1B74E2" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 27L31 27" stroke="#1B74E2" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 33L33 33" stroke="#1B74E2" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+<path d="M15 39L27 39" stroke="#1B74E2" stroke-opacity="1.0" stroke-width="2" stroke-linecap="round"/>
+</svg>

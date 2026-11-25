@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="nibble-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="nibble-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="nibble-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="nibble-16-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDE73"/><stop offset="1" stop-color="#F0B429"/></linearGradient></defs>
+<path d="M7.5 9H40.5a4.5 4.5 0 0 1 4.5 4.5V34.5a4.5 4.5 0 0 1-4.5 4.5H7.5a4.5 4.5 0 0 1-4.5-4.5V13.5a4.5 4.5 0 0 1 4.5-4.5Z" fill="url(#nibble-16-g1)"/>
+<path d="M7.5 10.5H40.5a3.0 3.0 0 0 1 3.0 3.0V34.5a3.0 3.0 0 0 1-3.0 3.0H7.5a3.0 3.0 0 0 1-3.0-3.0V13.5a3.0 3.0 0 0 1 3.0-3.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="3"/>
+<path d="M10.5 15H13.5a1.5 1.5 0 0 1 1.5 1.5V19.5a1.5 1.5 0 0 1-1.5 1.5H10.5a1.5 1.5 0 0 1-1.5-1.5V16.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="#FFFFFF" fill-opacity="0.22"/>
+<path d="M22.5 15H25.5a1.5 1.5 0 0 1 1.5 1.5V19.5a1.5 1.5 0 0 1-1.5 1.5H22.5a1.5 1.5 0 0 1-1.5-1.5V16.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="url(#nibble-16-g2)"/>
+<path d="M34.5 15H37.5a1.5 1.5 0 0 1 1.5 1.5V19.5a1.5 1.5 0 0 1-1.5 1.5H34.5a1.5 1.5 0 0 1-1.5-1.5V16.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="#FFFFFF" fill-opacity="0.22"/>
+<path d="M10.5 27H13.5a1.5 1.5 0 0 1 1.5 1.5V31.5a1.5 1.5 0 0 1-1.5 1.5H10.5a1.5 1.5 0 0 1-1.5-1.5V28.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="url(#nibble-16-g3)"/>
+<path d="M22.5 27H25.5a1.5 1.5 0 0 1 1.5 1.5V31.5a1.5 1.5 0 0 1-1.5 1.5H22.5a1.5 1.5 0 0 1-1.5-1.5V28.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="#FFFFFF" fill-opacity="0.22"/>
+<path d="M34.5 27H37.5a1.5 1.5 0 0 1 1.5 1.5V31.5a1.5 1.5 0 0 1-1.5 1.5H34.5a1.5 1.5 0 0 1-1.5-1.5V28.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="url(#nibble-16-g4)"/>
+</svg>

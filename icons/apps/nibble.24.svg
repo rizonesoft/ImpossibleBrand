@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="nibble-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="nibble-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="nibble-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDE73"/><stop offset="1" stop-color="#F0B429"/></linearGradient><linearGradient id="nibble-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M8 8H40a4 4 0 0 1 4 4V36a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4Z" fill="url(#nibble-24-g1)"/>
+<path d="M8.0 9.0H40.0a3.0 3.0 0 0 1 3.0 3.0V36.0a3.0 3.0 0 0 1-3.0 3.0H8.0a3.0 3.0 0 0 1-3.0-3.0V12.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2"/>
+<path d="M11 14H15a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H11a1 1 0 0 1-1-1V15a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M19 14H23a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H19a1 1 0 0 1-1-1V15a1 1 0 0 1 1-1Z" fill="url(#nibble-24-g2)"/>
+<path d="M27 14H31a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H27a1 1 0 0 1-1-1V15a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M35 14H39a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H35a1 1 0 0 1-1-1V15a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M11 22H15a1 1 0 0 1 1 1V25a1 1 0 0 1-1 1H11a1 1 0 0 1-1-1V23a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M19 22H23a1 1 0 0 1 1 1V25a1 1 0 0 1-1 1H19a1 1 0 0 1-1-1V23a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M27 22H31a1 1 0 0 1 1 1V25a1 1 0 0 1-1 1H27a1 1 0 0 1-1-1V23a1 1 0 0 1 1-1Z" fill="url(#nibble-24-g3)"/>
+<path d="M35 22H39a1 1 0 0 1 1 1V25a1 1 0 0 1-1 1H35a1 1 0 0 1-1-1V23a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M11 30H15a1 1 0 0 1 1 1V33a1 1 0 0 1-1 1H11a1 1 0 0 1-1-1V31a1 1 0 0 1 1-1Z" fill="url(#nibble-24-g4)"/>
+<path d="M19 30H23a1 1 0 0 1 1 1V33a1 1 0 0 1-1 1H19a1 1 0 0 1-1-1V31a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M27 30H31a1 1 0 0 1 1 1V33a1 1 0 0 1-1 1H27a1 1 0 0 1-1-1V31a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+<path d="M35 30H39a1 1 0 0 1 1 1V33a1 1 0 0 1-1 1H35a1 1 0 0 1-1-1V31a1 1 0 0 1 1-1Z" fill="#FFFFFF" fill-opacity="0.2"/>
+</svg>

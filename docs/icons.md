@@ -100,6 +100,23 @@ Polish does not wait for a person (decided 2026-11-14): the section here that de
 | Icon | File | Needed by | Drafted |
 | --- | --- | --- | --- |
 
+## App icons
+
+Every program repository gets an app icon, drawn here: a free-standing, full-colour object with rounded edges, in the same light, palette and edges as the system set, with no tile behind it and no third-party glyph. Each icon was chosen by the operator from three options on a comparison board.
+
+- **Sources:** three drawings per program, all on the 48 grid: `icons/apps/<program>.svg` (the main drawing, used from 48 px up), `<program>.24.svg` (drawn for 24 px, used at 24 and 32) and `<program>.16.svg` (drawn for 16 px, used at 16 and 20). Gradient ids start with the drawing's own name: `<program>-`, `<program>-24-`, `<program>-16-`.
+- **Small drawings are redrawn for their size, never shrunk,** as Windows 11 does. At 16 px a pixel is 3 units and at 24 px it is 2, and every horizontal and vertical edge sits on a whole pixel: outlines are one pixel wide and lie inside the shape's edge, never straddling it; strokes are one pixel or more and centred on a pixel; shadows and highlight lines are left out, because they turn to blur. Diagonals and curves stay smooth and anti-aliased, as in Windows 11; never step them into visible pixels. A letter keeps its smooth legs while its apex, crossbar and feet sit on whole pixels. The small drawings keep the main drawing's silhouette and colours so all three read as one icon, recognisable and clean at its size.
+- **The check:** `python3 tools/check_icons.py` refuses a missing drawing, a wrong grid, anything outside the system SVG profile, an id without its prefix, and blur: it renders each small drawing at 8x and counts the pixels a straight horizontal or vertical edge cuts through, and more than 5 percent is refused. It runs on every commit (`.githooks/pre-commit`, staged icons only) and before every unattended run. `--measure` prints each drawing's share beside the main drawing shrunk to the same size.
+
+| Program | Repository | The icon shows |
+| --- | --- | --- |
+| Notepad | Notepad | A white pad on a blue spiral binding, with three lines of text |
+| WordPad | WordPad | A page with a heading, a picture and running text |
+| Markdown | Colophon | A page with a heading hash |
+| Hex Editor | Nibble | A dark panel of byte cells, three of them lit in the brand colours |
+| Compare | Compare | Two overlapping pages, one line removed in red and one added in green |
+| Character Map | CharacterMap | A large A on a card, in front of a character grid |
+
 ## Adding or changing an icon
 
 1. Edit or add the SVG in `icons/src/`. Give every gradient an id prefixed with the icon name, so several icons can be inlined into one page without collisions.

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="compare-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="compare-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M6.5 9H23.5a2.5 2.5 0 0 1 2.5 2.5V39.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V11.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M6.5 9H23.5a2.5 2.5 0 0 1 2.5 2.5V39.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V11.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#compare-g1)"/>
+<path d="M6.5 9H23.5a2.5 2.5 0 0 1 2.5 2.5V39.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V11.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M6.5 9.6H23.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M7.5 16.0L20.5 16.0" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M7.5 20.6L18.5 20.6" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M7 23.0H23a1 1 0 0 1 1 1V26.4a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V24.0a1 1 0 0 1 1-1Z" fill="#D93A30" fill-opacity="0.2"/>
+<path d="M7.5 25.2L20.5 25.2" stroke="#D93A30" stroke-opacity="1" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M7.5 29.799999999999997L16.5 29.799999999999997" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M7.5 34.4L19.5 34.4" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M24.5 5H41.5a2.5 2.5 0 0 1 2.5 2.5V35.5a2.5 2.5 0 0 1-2.5 2.5H24.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M24.5 5H41.5a2.5 2.5 0 0 1 2.5 2.5V35.5a2.5 2.5 0 0 1-2.5 2.5H24.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#compare-g2)"/>
+<path d="M24.5 5H41.5a2.5 2.5 0 0 1 2.5 2.5V35.5a2.5 2.5 0 0 1-2.5 2.5H24.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M24.5 5.6H41.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M25.5 12.0L38.5 12.0" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M25.5 16.6L36.5 16.6" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M25 19.0H41a1 1 0 0 1 1 1V22.4a1 1 0 0 1-1 1H25a1 1 0 0 1-1-1V20.0a1 1 0 0 1 1-1Z" fill="#1E9E50" fill-opacity="0.2"/>
+<path d="M25.5 21.2L38.5 21.2" stroke="#1E9E50" stroke-opacity="1" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M25.5 25.799999999999997L34.5 25.799999999999997" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+<path d="M25.5 30.4L37.5 30.4" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.7" stroke-linecap="round"/>
+</svg>

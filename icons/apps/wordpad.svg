@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="wordpad-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="wordpad-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCE3EB"/><stop offset="1" stop-color="#B8C5D3"/></linearGradient><linearGradient id="wordpad-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient></defs>
+<path d="M11.5 5H32L39 12V40.5a2.5 2.5 0 0 1-2.5 2.5H11.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M11.5 5H32L39 12V40.5a2.5 2.5 0 0 1-2.5 2.5H11.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#wordpad-g1)"/>
+<path d="M11.5 5H32L39 12V40.5a2.5 2.5 0 0 1-2.5 2.5H11.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M11.5 5.6H31.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M32 5V10.5a1.5 1.5 0 0 0 1.5 1.5H39Z" fill="url(#wordpad-g2)"/>
+<path d="M13.5 12.5L27 12.5" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3.4" stroke-linecap="round"/>
+<path d="M15.0 18H21.5a1.5 1.5 0 0 1 1.5 1.5V25.0a1.5 1.5 0 0 1-1.5 1.5H15.0a1.5 1.5 0 0 1-1.5-1.5V19.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="url(#wordpad-g3)"/>
+<path d="M15.0 18.6H21.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M13.5 24.5l3.2-3.4 2.4 2.2 1.8-1.6 2.1 2.8v1.2a1.5 1.5 0 0 1-1.5 1.5h-6.5a1.5 1.5 0 0 1-1.5-1.5Z" fill="#1E9E50" fill-opacity="0.9"/>
+<path d="M25.5 19.5L34.5 19.5" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M25.5 23.7L32.5 23.7" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M13.5 32.0L34.5 32.0" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M13.5 36.2L34.5 36.2" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M13.5 40.4L28.5 40.4" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="colophon-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="colophon-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCE3EB"/><stop offset="1" stop-color="#B8C5D3"/></linearGradient></defs>
+<path d="M11.5 5H32L39 12V40.5a2.5 2.5 0 0 1-2.5 2.5H11.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M11.5 5H32L39 12V40.5a2.5 2.5 0 0 1-2.5 2.5H11.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#colophon-g1)"/>
+<path d="M11.5 5H32L39 12V40.5a2.5 2.5 0 0 1-2.5 2.5H11.5a2.5 2.5 0 0 1-2.5-2.5V7.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M11.5 5.6H31.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M32 5V10.5a1.5 1.5 0 0 0 1.5 1.5H39Z" fill="url(#colophon-g2)"/>
+<path d="M21.0 14.5L19.0 28.5" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round"/>
+<path d="M28.0 14.5L26.0 28.5" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round"/>
+<path d="M16.5 18.0L30.5 18.0" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round"/>
+<path d="M15.9 25.0L29.9 25.0" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round"/>
+<path d="M14 34.0L33 34.0" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M14 38.4L27 38.4" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

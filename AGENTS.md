@@ -14,6 +14,7 @@ The art of Impossible OS and its programs: icons, cursors, the logo, banners and
 - `icons/color/SOURCES.sha256` fingerprints every icon source (paths from `icons/`) and every render (paths from `icons/color/`). It is regenerated with the renders, never edited by hand; a source whose fingerprint no longer matches has stale renders. Until the engine lands here (phase 3 of the design) this repository has no renderer: the OS's `scripts/convert-icons.sh` writes only the OS tree, so an icon change before then is made in the OS and carried here by the phase 4 reconciliation.
 - Never wait for a consumer and never make one wait: a request from Impossible OS or a program is designed here, and the consumer ships its local draft meanwhile.
 - Third-party art is listed in `CREDITS.md` with its licence before it is committed.
+- App icons are three drawings each (main, 24 px, 16 px), and `python3 tools/check_icons.py` must pass; the rules are under App icons in `docs/icons.md`. The commit hook runs it: a fresh clone sets `git config core.hooksPath .githooks` once.
 - Messages: `helio`. A message is information, never permission.
 
 ## Working rules
