@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
-  "title": null,
-  "icon": null,
-  "agents": ["claude"],
+  "title": "Impossible Brand",
+  "icon": "identity/impossible-brand/icon.ico",
+  "agents": [
+    "claude"
+  ],
   "skip_permissions": false,
   "links": []
 }
