@@ -45,11 +45,13 @@ title: "TODO-01 -- Contract, Palette and Pack"
 
 > **Started:** 2026-11-25T19:06:39Z
 
-The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `designs-<set>` Needs in `todo/plan.json` are proven by `tools/os_probe.py`. It finds the Impossible OS checkout and the sibling repositories without network access, so a probe answers within its 10-second limit and a section that waits on another repository becomes ready by itself once that repository's `main` delivers.
+The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `designs-<set>` Needs in `todo/plan.json` are proven by `tools/os_probe.py`. It finds the Impossible OS checkout and the consumer checkouts and reads only committed refs, without network access, so a probe answers inside the graph's 10-second probe limit. A Need on another repository becomes met once that repository's change reaches the local `origin/main` ref: `tools/os_probe.py fetch` refreshes those refs with a bounded fetch, and D01 T01 §7 runs it before every unattended run, so readiness follows the next run start or a manual fetch, never a remote change alone.
 
-**Corrected 2026-11-25:** the locate item said a sibling search only. The OS checkout on this machine is `~/projects/impossible-os`, not a sibling of `~/ImpossibleOS/ImpossibleBrand`, so the search also covers the parent's siblings, reading `.git/config` as text so it costs no git call.
+**Corrected 2026-11-25:** the locate item said a sibling search only. The OS checkout on this machine is `~/projects/impossible-os`, not a sibling of `~/ImpossibleOS/ImpossibleBrand`, so the search also covers the parent's siblings.
 
 **Corrected 2026-11-25:** the documentation item said to add the key to `.conclave/local.example.toml`, which the base kit owns (`.conclave/kits.json`); a project edit there comes back as a `.kit-new` hand merge on every kit update.
+
+**Corrected 2026-11-25 (plan review, `docs/reviews/01-pack/D01-T01-s1.md`):** `app-pulls` read a glob of sibling `app.json` files and any mention of `impossible-brand/`; it now reads only `kind: program` entries of `consumers.json` and the operative acceptance line. `designs` checked keys only; it now proves the requested set, a real date, a board and committed files. The 3-second limit per git call became a whole-command deadline as well. The locator verifies the `origin` it reads and handles linked worktrees. The checkpoint runs `detect` on fixtures whose refs disagree.
 
 **Phase:** 2
 **Needs:** none
@@ -57,28 +59,33 @@ The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `desi
 
 **Build order:**
 
-1. Write `tools/os_probe.py` with `locate`, `contract`, `app-pulls`, `sdk-pulls` and `designs`. Done when: each prints one line and exits 0 when met, 1 when not.
-2. Write `tests/test_os_probe.py` against throwaway git repositories. Done when: every subcommand is shown both met and not met.
+1. Write `tools/os_probe.py` with `locate`, `contract`, `app-pulls`, `sdk-pulls`, `designs` and `fetch`. Done when: each probe prints one line and exits 0 when met, 1 when not.
+2. Write `tests/test_os_probe.py` against throwaway git repositories whose `HEAD`, working tree and `origin/main` disagree. Done when: every subcommand is shown both met and not met through the CLI and through `todo-graph.py detect`.
 
-- [ ] Resolve the OS checkout in `tools/os_probe.py locate`: `paths.impossible_os` in `.conclave/local.toml`, then a search of `../*` and `../../*/*` for a checkout whose `.git/config` names `rizonesoft/impossible-os`. Done when: it prints the path, or exits 1 with "set paths.impossible_os in .conclave/local.toml". Cheaper substitute: a hardcoded home path.
+- [ ] Resolve the OS checkout in `tools/os_probe.py locate`: `paths.impossible_os` in `.conclave/local.toml` wins; without it, search `../*` and `../../*/*` (sorted) for a checkout whose `origin` URL names `rizonesoft/impossible-os`, reading `.git/config`, or a linked worktree's common config through its `.git` file. Done when: it prints the path. Cheaper substitute: a hardcoded home path.
+- [ ] Refuse in `locate` with one line and exit 1: an unreadable or invalid `.conclave/local.toml` (naming the TOML error), a configured path that is not a checkout or whose `origin` is not `rizonesoft/impossible-os`, no match ("set paths.impossible_os in .conclave/local.toml"), and two or more matches (naming them). Done when: each case is tested and a configured path wins over a discoverable clone. Cheaper substitute: the first match.
 - [ ] Document `paths.impossible_os` in `tools/os_probe.py --help`, in the refusal message, and in the spec's contract section. Done when: `--help` names the key and `.conclave/local.toml` stays ignored. Cheaper substitute: an environment variable nobody documents.
-- [ ] Implement `contract`: met when `git -C <os> cat-file -e origin/main:docs/design/brand-contract.json` succeeds. Done when: a fixture OS without the file exits 1 and with it exits 0. Cheaper substitute: checking the working tree, which another run may be editing.
-- [ ] Implement `app-pulls`: met when every repository in `consumers.json` (or, before it exists, every `~/ImpossibleOS/*/app.json` sibling) has `impossible-brand/` in `origin/main:docs/unattended-prompt.md`. Done when: one sibling without it exits 1 and names it. Cheaper substitute: checking only one repository.
-- [ ] Implement `sdk-pulls`: met when Impossible SDK's `origin/main:docs/unattended-prompt.md` names `impossible-brand/`. Done when: both outcomes are tested. Cheaper substitute: reading the SDK working tree.
-- [ ] Implement `designs <set>`: met when `design/<set>.json` (spec "Scope, 2026-11-25") is committed on this repository's `HEAD` with `set`, `approved`, `board` and a non-empty `files` list, and every listed file is committed too. Done when: a missing manifest, a manifest naming an uncommitted file and a complete set are each tested. Cheaper substitute: checking the working tree, where a session may be mid-edit.
-- [ ] Bound every git call in `tools/os_probe.py` with a 3-second timeout that kills its process group. Done when: a test with a hanging fake `git` returns within 10 seconds and leaves no child. Cheaper substitute: `subprocess.run(timeout=...)` alone, which leaves children.
-- [ ] Write `tests/test_os_probe.py` covering every subcommand met and not met. Done when: `python3 -m pytest tests/test_os_probe.py -q` passes and fails when `contract` always returns 0.
+- [ ] Implement `contract`: met when `docs/design/brand-contract.json` is a blob at the located OS's `origin/main`. Done when: a fixture whose working tree and a local branch hold the file but `origin/main` does not exits 1, and exits 0 once `origin/main` has it. Cheaper substitute: checking the working tree, which another run may be editing.
+- [ ] Implement `app-pulls`: read `consumers.json` (D04 T01 §1) and check every `kind: program` entry; exit 1 naming the reason when the file is missing, invalid or lists no program, or a program's checkout `../<name>` is missing or has another `origin`. Done when: a mixed list whose OS and SDK lack the rule is met, and a missing checkout fails naming it. Cheaper substitute: a glob of working-tree `app.json` files.
+- [ ] Count a program as taking brand pulls only when its `origin/main:docs/unattended-prompt.md` has a line containing `Take only branches named` that names `impossible-brand/`. Done when: a prompt that mentions `impossible-brand/` elsewhere while that line names only `impossible-os/...` fails naming the program. Cheaper substitute: any mention of the branch prefix.
+- [ ] Implement `sdk-pulls` with the same line rule on the `kind: sdk` consumer's `origin/main:docs/unattended-prompt.md`. Done when: both outcomes and the mention-elsewhere case are tested. Cheaper substitute: reading the SDK working tree.
+- [ ] Implement `designs <set>`: met when `design/<set>.json` at this repository's `HEAD` parses, its `set` equals `<set>`, `approved` is a real `YYYY-MM-DD` date, `board` is a non-empty string, and `files` is a non-empty list of repository-relative paths (no `..`, not absolute) that are all blobs at `HEAD`. Done when: missing, malformed JSON, a copied manifest of another set, no approval, an uncommitted file and a listed folder each exit 1, and a complete set exits 0. Cheaper substitute: checking keys only.
+- [ ] Bound the whole probe with an 8-second deadline and every git call with the lesser of 3 seconds and the time left, each call in its own process group that is killed on timeout. Done when: a fake `git` that sleeps returns within 10 seconds, and several slow but successful calls still end within the deadline with no descendant left. Cheaper substitute: `subprocess.run(timeout=...)` alone, which leaves children.
+- [ ] Implement `fetch`: a bounded `git fetch origin main` for the OS and every consumer checkout, 20 seconds each, reporting each failure and exiting 1 if any failed. Done when: a fixture remote change is invisible to `contract` before `fetch` and met after it. Cheaper substitute: fetching inside a probe, past its 10-second limit.
+- [ ] Write `tests/test_os_probe.py`: every subcommand met and not met, refs that disagree, and `python3 scripts/todo-graph.py detect` run on fixture checkouts with `CONCLAVE_HAVE` cleared, listing each of `os-contract` and the five `designs-<set>` Needs only when met. Done when: `python3 -m pytest tests/test_os_probe.py -q` passes and fails when `contract` reads the working tree.
 - [ ] Commit: `tools: OS locator and Need probes`
 
-**Test checkpoint:** `python3 -m pytest tests/test_os_probe.py -q` exits 0, and `python3 scripts/todo-graph.py detect` lists `os-contract` only when the OS `main` holds `docs/design/brand-contract.json`.
+**Test checkpoint:** `python3 -m pytest tests/test_os_probe.py -q` exits 0, and on this machine `python3 scripts/todo-graph.py detect` does not list `os-contract` while the OS `origin/main` lacks `docs/design/brand-contract.json`.
 
 ## 2. Contract pull at a pinned OS commit
 
 > **Started:** 2026-11-25T19:07:29Z
 
-`tools/contract.py pull <commit>` copies the OS contract from that commit, never from a working tree, and records where it came from.
+`tools/contract.py pull <commit>` copies the OS contract from that commit, never from a working tree, and records where it came from and what changed.
 
 **Corrected 2026-11-25:** this section waited on `os-contract` as a whole, though only its first real pull needs the OS to publish the contract; that item moved to §8, which carries the Need, so the tool is built and tested on fixtures now.
+
+**Corrected 2026-11-25 (plan review, `docs/reviews/01-pack/D01-T01-s2.md`):** the pair was written by two renames, which can publish a mixed pair; it is now published as one folder with recovery. The pin checks now prove ancestry of `origin/main`, the shape rules are defined field by field, `show` reads the changes the last successful pull recorded, `pulled` is a UTC time, and the checkpoint runs on fixtures, leaving the real read-back to §8.
 
 **Phase:** 2
 **Needs:** none
@@ -86,17 +93,20 @@ The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `desi
 
 **Build order:**
 
-1. Write `tools/contract.py` with `pull` and `show`. Done when: `pull` writes `contract/os.json` byte for byte from `git show <commit>:docs/design/brand-contract.json`.
-2. Write `tests/test_contract.py`. Done when: a malformed contract is refused and nothing is written.
+1. Write `tools/contract.py` with `pull`, `show` and `load`. Done when: `pull` publishes `contract/os.json` byte for byte from `git show <commit>:docs/design/brand-contract.json` with `contract/source.json` beside it.
+2. Write `tests/test_contract.py` on fixture OS repositories whose requested commit, `origin/main` tip and working tree hold different contracts. Done when: every refusal leaves an existing pull byte for byte.
 
-- [ ] Require a full 40-character commit reachable from the OS `origin/main` in `tools/contract.py pull`. Done when: a short hash, an unknown hash and a branch name are each refused with the reason. Cheaper substitute: accepting `HEAD`.
-- [ ] Validate the shape: `profile`, `tokens`, `sizes`, `icons` (each with `name`, `provider` of `colour` or `glyph`, `used_for`) and `cursors` (a list of names, each a string or an object with `name`). Done when: a contract missing `provider` on one icon is refused naming it. Cheaper substitute: trusting the file.
-- [ ] Write `contract/os.json` and `contract/source.json` (`{"commit", "pulled"}`) through a temporary file and rename. Done when: a pull killed between the two writes leaves the previous pair intact. Cheaper substitute: writing in place.
-- [ ] Print in `tools/contract.py show` the names added and removed against the previous pull. Done when: a pull that adds `printer` prints `+ icon printer (colour)`. Cheaper substitute: printing the whole file.
-- [ ] Write `tests/test_contract.py` for refusal, atomicity and the diff. Done when: `python3 -m pytest tests/test_contract.py -q` passes and fails when validation is removed.
+- [ ] Find the OS with §1's locator and refuse with the reason and exit 1, changing nothing, when it is not found, has no `origin/main`, or the commit has no `docs/design/brand-contract.json`. Done when: each case is tested through the CLI. Cheaper substitute: a path argument.
+- [ ] Accept only a full 40-character hex commit that is a commit object and an ancestor of the OS `origin/main` (`git merge-base --is-ancestor`). Done when: a short hash, a branch name, an unknown hash, a tree or blob id and a commit only on another branch are each refused, and an older ancestor of `origin/main` is accepted with its own bytes. Cheaper substitute: accepting `HEAD`.
+- [ ] Validate the shape before writing: `profile` an object with a non-empty `elements` list of strings; `tokens` a list of unique non-empty strings; `sizes` a non-empty list of unique positive integers; `icons` a list of objects with a unique `name` (`[a-z0-9_]+`), `provider` of `colour` or `glyph` and a non-empty `used_for`; `cursors` a list of unique names, each a string or an object with `name` (`[a-z0-9_-]+`). Done when: invalid JSON, each missing or wrongly typed field, an unknown provider and a malformed cursor are each refused naming the field. Cheaper substitute: trusting the file.
+- [ ] Publish the pair as one folder: write `contract.tmp/` beside `contract/`, rename `contract/` to `contract.prev/`, rename `contract.tmp/` to `contract/`, then remove `contract.prev/`; every `pull`, `show` and `load` first recovers an interrupted pull (`contract.prev/` without `contract/` is renamed back; a leftover `contract.prev/` or `contract.tmp/` beside `contract/` is removed). Done when: a pull interrupted at each step leaves, in a fresh process, the previous pair byte for byte, or no pair after an interrupted first pull. Cheaper substitute: two renames in place.
+- [ ] Write `contract/source.json` as `{"commit", "sha256", "pulled", "previous", "changes"}`: `sha256` that of `os.json`, `pulled` the UTC time of the pull as `YYYY-MM-DDTHH:MM:SSZ`, `previous` the commit pulled before or null, `changes` the icons and cursors added and removed against the previous pull. Done when: a test with a fixed clock reads back the commit, the time and the changes. Cheaper substitute: the commit alone.
+- [ ] Print in `tools/contract.py show`, from `contract/source.json` alone, the commit, the time and each change as `+ icon printer (colour)` or `- cursor wait`. Done when: a first pull shows every name as added, an unchanged pull shows no change, a refused pull leaves the last report, and `show` with no pull exits 1 with "no contract pulled yet". Cheaper substitute: printing the whole file.
+- [ ] Give `load()` to the other tools: it recovers, then returns the validated contract and its source. Done when: a mixed pair (an `os.json` whose sha256 differs from `source.json`) is refused naming both files. Cheaper substitute: each tool reading the JSON itself.
+- [ ] Write `tests/test_contract.py` for every refusal, the interrupted pull, ancestry, the clock and `show`. Done when: `python3 -m pytest tests/test_contract.py -q` passes and fails when shape validation is removed.
 - [ ] Commit: `contract: pull the OS contract at a pinned commit`
 
-**Test checkpoint:** `python3 -m pytest tests/test_contract.py -q` exits 0 and `python3 tools/contract.py show` prints the pulled commit.
+**Test checkpoint:** `python3 -m pytest tests/test_contract.py -q` exits 0, its fixture pull reports the exact fixture commit through `tools/contract.py show --root <fixture checkout>`, and on this tree `python3 tools/contract.py show` exits 1 with "no contract pulled yet" until §8.
 
 ## 3. Art palette file
 
@@ -204,6 +214,7 @@ The check runs where mistakes are made: before every commit and before every una
 
 - [ ] Add the brand check to `scripts/hooks/pre-commit` only when staged paths touch `icons/`, `cursors/`, `identity/`, `wallpapers/`, `palette.json`, `contract/` or `pack/`. Done when: a docs-only commit does not run it and an icon commit does. Cheaper substitute: running it on every commit, or editing a kit-owned hook line the next kit update overwrites.
 - [ ] Add `{"name": "brand-check", "command": ["python3", "tools/check.py"], "timeout_seconds": 300}` to the `preflight` list in `.conclave/unattended.json`. Done when: a broken icon stops a run start with the check's message. Cheaper substitute: a reminder in the prompt.
+- [ ] Add `{"name": "fetch", "command": ["python3", "tools/os_probe.py", "fetch"], "timeout_seconds": 600}` before the others, so cross-repository Needs follow the remotes at every run start (D01 T01 §1). Done when: a remote-only OS change is seen by `detect` after a run start. Cheaper substitute: none.
 - [ ] Add `{"name": "tests", "command": ["python3", "-m", "pytest", "-q"], "timeout_seconds": 900}` to the same list. Done when: a failing test stops a run start. Cheaper substitute: none.
 - [ ] Commit: `check: run before commits and runs`
 
