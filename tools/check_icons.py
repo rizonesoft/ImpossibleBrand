@@ -2,8 +2,8 @@
 """Check the icons: python3 tools/check_icons.py [--staged] [--root <repo>]
 
 Every icon, an app icon in icons/apps/ or a system icon in icons/src/, is three drawings: <name>.svg (the main
-drawing, 48 grid), <name>.24.svg (drawn for 24 px, used at 24 and 32) and <name>.16.svg (drawn for 16 px, used at
-16 and 20). A small drawing is
+drawing, 48 grid), <name>.24.svg (drawn for 24 px, used at 20 and 24) and <name>.16.svg (drawn for 16 px, used at
+16); from 32 px up the main drawing is used. A small drawing is
 redrawn for its size, as Windows 11 does, not the main drawing shrunk. This refuses:
 
   name       a file in either folder that is not <name>.svg, <name>.24.svg or <name>.16.svg (no subfolders)
