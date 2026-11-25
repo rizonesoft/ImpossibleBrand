@@ -8,14 +8,15 @@ Format and rules: `todo/README.md`. Run sections with the `process-plan`, `proce
 
 ### Phase 2: Contract, palette and pack
 
-Sections: 7 | Checklist items: 47
+Sections: 8 | Checklist items: 49
 
 | Status | Reference  | Deliverable                          | Needs       | Items |
 | ------ | ---------- | ------------------------------------ | ----------- | ----- |
 | [ ]    | D01 T01 §1 | OS locator and Need probes           | none        | 9     |
-| [ ]    | D01 T01 §2 | Contract pull at a pinned OS commit  | os-contract | 7     |
+| [ ]    | D01 T01 §2 | Contract pull at a pinned OS commit  | none        | 6     |
 | [ ]    | D01 T01 §3 | Art palette file                     | none        | 6     |
 | [ ]    | D01 T01 §4 | Named colours in every seeded source | none        | 6     |
+| [ ]    | D01 T01 §8 | First contract pull                  | os-contract | 3     |
 | [ ]    | D01 T01 §5 | Pack manifest generator              | none        | 7     |
 | [ ]    | D01 T01 §6 | Brand check                          | none        | 8     |
 | [ ]    | D01 T01 §7 | Check wired into commits and runs    | none        | 4     |
@@ -97,6 +98,6 @@ Sections: 3 | Checklist items: 13
 | [ ]    | D06 T01 §2 | Five wallpaper pairs wired        | designs-wallpapers   | 4     |
 | [ ]    | D06 T01 §3 | Wallpaper default in the manifest | none                 | 4     |
 
-Progress: 0/49 verified sections, 2 ready to run now.
+Progress: 0/50 verified sections, 2 ready to run now.
 
-Checklist: 0/321 items completed (includes Commit items).
+Checklist: 0/323 items completed (includes Commit items).

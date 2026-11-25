@@ -36,13 +36,20 @@ title: "TODO-01 -- Contract, Palette and Pack"
 | 2 | §2 | Contract pull at a pinned OS commit | §1 | [ ] |
 | 3 | §3 | Art palette file | -- | [ ] |
 | 4 | §4 | Named colours in every seeded source | §3 | [ ] |
-| 5 | §5 | Pack manifest generator | §2, §4 | [ ] |
-| 6 | §6 | Brand check | §2, §4, §5 | [ ] |
+| 5 | §5 | Pack manifest generator | §4, §8 | [ ] |
+| 6 | §6 | Brand check | §4, §5, §8 | [ ] |
 | 7 | §7 | Check wired into commits and runs | §6 | [ ] |
+| 8 | §8 | First contract pull | §2 | [ ] |
 
 ## 1. OS locator and Need probes
 
+> **Started:** 2026-11-25T19:06:39Z
+
 The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `designs-<set>` Needs in `todo/plan.json` are proven by `tools/os_probe.py`. It finds the Impossible OS checkout and the sibling repositories without network access, so a probe answers within its 10-second limit and a section that waits on another repository becomes ready by itself once that repository's `main` delivers.
+
+**Corrected 2026-11-25:** the locate item said a sibling search only. The OS checkout on this machine is `~/projects/impossible-os`, not a sibling of `~/ImpossibleOS/ImpossibleBrand`, so the search also covers the parent's siblings, reading `.git/config` as text so it costs no git call.
+
+**Corrected 2026-11-25:** the documentation item said to add the key to `.conclave/local.example.toml`, which the base kit owns (`.conclave/kits.json`); a project edit there comes back as a `.kit-new` hand merge on every kit update.
 
 **Phase:** 2
 **Needs:** none
@@ -53,8 +60,8 @@ The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `desi
 1. Write `tools/os_probe.py` with `locate`, `contract`, `app-pulls`, `sdk-pulls` and `designs`. Done when: each prints one line and exits 0 when met, 1 when not.
 2. Write `tests/test_os_probe.py` against throwaway git repositories. Done when: every subcommand is shown both met and not met.
 
-- [ ] Resolve the OS checkout in `tools/os_probe.py locate`: `paths.impossible_os` in `.conclave/local.toml`, then a sibling search for a checkout whose `origin` is `rizonesoft/impossible-os`. Done when: it prints the path, or exits 1 with "set paths.impossible_os in .conclave/local.toml". Cheaper substitute: a hardcoded home path.
-- [ ] Add `paths.impossible_os` to `.conclave/local.example.toml` with a comment. Done when: the example names the key and `local.toml` stays ignored. Cheaper substitute: an environment variable nobody documents.
+- [ ] Resolve the OS checkout in `tools/os_probe.py locate`: `paths.impossible_os` in `.conclave/local.toml`, then a search of `../*` and `../../*/*` for a checkout whose `.git/config` names `rizonesoft/impossible-os`. Done when: it prints the path, or exits 1 with "set paths.impossible_os in .conclave/local.toml". Cheaper substitute: a hardcoded home path.
+- [ ] Document `paths.impossible_os` in `tools/os_probe.py --help`, in the refusal message, and in the spec's contract section. Done when: `--help` names the key and `.conclave/local.toml` stays ignored. Cheaper substitute: an environment variable nobody documents.
 - [ ] Implement `contract`: met when `git -C <os> cat-file -e origin/main:docs/design/brand-contract.json` succeeds. Done when: a fixture OS without the file exits 1 and with it exits 0. Cheaper substitute: checking the working tree, which another run may be editing.
 - [ ] Implement `app-pulls`: met when every repository in `consumers.json` (or, before it exists, every `~/ImpossibleOS/*/app.json` sibling) has `impossible-brand/` in `origin/main:docs/unattended-prompt.md`. Done when: one sibling without it exits 1 and names it. Cheaper substitute: checking only one repository.
 - [ ] Implement `sdk-pulls`: met when Impossible SDK's `origin/main:docs/unattended-prompt.md` names `impossible-brand/`. Done when: both outcomes are tested. Cheaper substitute: reading the SDK working tree.
@@ -67,10 +74,14 @@ The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `desi
 
 ## 2. Contract pull at a pinned OS commit
 
+> **Started:** 2026-11-25T19:07:29Z
+
 `tools/contract.py pull <commit>` copies the OS contract from that commit, never from a working tree, and records where it came from.
 
+**Corrected 2026-11-25:** this section waited on `os-contract` as a whole, though only its first real pull needs the OS to publish the contract; that item moved to §8, which carries the Need, so the tool is built and tested on fixtures now.
+
 **Phase:** 2
-**Needs:** os-contract
+**Needs:** none
 **Surface:** no
 
 **Build order:**
@@ -79,10 +90,9 @@ The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `desi
 2. Write `tests/test_contract.py`. Done when: a malformed contract is refused and nothing is written.
 
 - [ ] Require a full 40-character commit reachable from the OS `origin/main` in `tools/contract.py pull`. Done when: a short hash, an unknown hash and a branch name are each refused with the reason. Cheaper substitute: accepting `HEAD`.
-- [ ] Validate the shape: `profile`, `tokens`, `sizes`, `icons` (each with `name`, `provider` of `colour` or `glyph`, `used_for`) and `cursors`. Done when: a contract missing `provider` on one icon is refused naming it. Cheaper substitute: trusting the file.
+- [ ] Validate the shape: `profile`, `tokens`, `sizes`, `icons` (each with `name`, `provider` of `colour` or `glyph`, `used_for`) and `cursors` (a list of names, each a string or an object with `name`). Done when: a contract missing `provider` on one icon is refused naming it. Cheaper substitute: trusting the file.
 - [ ] Write `contract/os.json` and `contract/source.json` (`{"commit", "pulled"}`) through a temporary file and rename. Done when: a pull killed between the two writes leaves the previous pair intact. Cheaper substitute: writing in place.
 - [ ] Print in `tools/contract.py show` the names added and removed against the previous pull. Done when: a pull that adds `printer` prints `+ icon printer (colour)`. Cheaper substitute: printing the whole file.
-- [ ] Do the first real pull of the OS `main` and commit `contract/`. Done when: `contract/source.json` names a commit on the OS `origin/main`. Cheaper substitute: a hand-written contract.
 - [ ] Write `tests/test_contract.py` for refusal, atomicity and the diff. Done when: `python3 -m pytest tests/test_contract.py -q` passes and fails when validation is removed.
 - [ ] Commit: `contract: pull the OS contract at a pinned commit`
 
@@ -198,6 +208,25 @@ The check runs where mistakes are made: before every commit and before every una
 - [ ] Commit: `check: run before commits and runs`
 
 **Test checkpoint:** `python3 scripts/unattended-preflight.py` exits 0 on the clean tree and exits non-zero after a deliberately broken icon is staged.
+
+## 8. First contract pull
+
+The first real pull of the OS contract, once Impossible OS publishes `docs/design/brand-contract.json` on its `main` (OS TODO-01 §11): the one step of the contract work that waits on the OS.
+
+**Phase:** 2
+**Needs:** os-contract
+**Surface:** no
+
+**Build order:**
+
+1. Pull the contract at the OS `origin/main` commit. Done when: `contract/os.json` and `contract/source.json` are committed.
+2. Read the result back. Done when: `tools/contract.py show` prints the commit and the names.
+
+- [ ] Run `python3 tools/contract.py pull $(git -C <os> rev-parse origin/main)` with the OS from `tools/os_probe.py locate`. Done when: `contract/source.json` names a commit on the OS `origin/main`. Cheaper substitute: a hand-written contract.
+- [ ] Commit `contract/os.json` and `contract/source.json`. Done when: `git show HEAD:contract/source.json` names the OS commit. Cheaper substitute: leaving the pull uncommitted.
+- [ ] Commit: `contract: first pull of the OS contract`
+
+**Test checkpoint:** `python3 tools/contract.py show` exits 0 and prints the pulled OS commit, and `git -C <os> merge-base --is-ancestor <that commit> origin/main` exits 0.
 
 ## Verification
 

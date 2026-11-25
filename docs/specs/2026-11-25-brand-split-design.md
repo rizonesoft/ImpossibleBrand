@@ -45,6 +45,8 @@ Neither side waits for the other. Each pins the other by commit: the OS pins a b
 
 Only `colour` names are this repository's work; a `glyph` name is drawn by the Fluent font and never gets a draft. The check here lists every `colour` icon and every cursor in the contract that the pack does not yet hold.
 
+**Where is the OS checkout?** `tools/os_probe.py locate` reads `paths.impossible_os` from `.conclave/local.toml` (ignored by git, one per machine), and without it searches `../*` and `../../*/*` for a checkout whose `.git/config` names `rizonesoft/impossible-os`. Every read is of committed refs (`origin/main`), never a working tree another run may be editing.
+
 **Colours.** Today the seeded SVGs carry literal palette hex values and the OS theme has no tokens for them. Phase 2 adds `palette.json` here (the art palette, with light, dark and high-contrast values) and migrates every source to reference palette or theme names; the engine resolves names to plain SVG colours when it renders, so the OS renderer never sees a name it cannot draw. The check refuses a literal colour only after that migration lands.
 
 ## What is the brand pack?
