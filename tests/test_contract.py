@@ -2,8 +2,12 @@
 each hold a different contract."""
 import datetime
 import json
+import os
 import shutil
+import subprocess
 import sys
+import threading
+import time
 from pathlib import Path
 
 import contract  # tools/ is put on sys.path by tests/conftest.py
@@ -13,15 +17,15 @@ from gitfixtures import REPO, commit_files, git, run_tree
 PATH = "docs/design/brand-contract.json"
 
 
-def make_contract(icons=(("computer", "colour"),), cursors=("default",), **override):
-    data = {"profile": {"elements": ["path", "rect"]}, "tokens": ["accent"], "sizes": [16, 48],
-            "icons": [{"name": n, "provider": p, "used_for": f"the {n}"} for n, p in icons],
+def make_contract(icons=(("computer", "colour"),), cursors=("default",), newline="\n", **override):
+    data = {"profile": {"elements": ["path", "rect"], "attributes": ["d", "fill"]}, "tokens": ["accent"],
+            "sizes": [16, 48], "icons": [{"name": n, "provider": p, "used_for": f"the {n}"} for n, p in icons],
             "cursors": list(cursors)}
     data.update(override)
-    return json.dumps(data, indent=1) + "\n"
+    return (json.dumps(data, indent=1) + "\n").replace("\n", newline)
 
 
-V1 = make_contract()
+V1 = make_contract(newline="\r\n")  # CRLF: the pin must keep the blob's bytes
 V2 = make_contract(icons=(("computer", "colour"), ("printer", "colour")), cursors=("default", "wait"))
 OFF = make_contract(icons=(("off", "glyph"),))
 
@@ -32,7 +36,10 @@ def os_world(world):
     shutil.copy2(REPO / "tools" / "contract.py", brand / "tools" / "contract.py")
     work = world["os_work"]
     seed = git(work, "rev-parse", "HEAD").strip()
-    commit_files(work, {PATH: V1}, "v1")
+    (work / PATH).parent.mkdir(parents=True, exist_ok=True)
+    (work / PATH).write_bytes(V1.encode())
+    git(work, "add", "-A")
+    git(work, "commit", "-q", "-m", "v1")
     older = git(work, "rev-parse", "HEAD").strip()
     commit_files(work, {PATH: V2}, "v2")
     tip = git(work, "rev-parse", "HEAD").strip()
@@ -60,9 +67,18 @@ def test_pull_an_older_main_commit_takes_its_own_bytes(os_world):
     root = os_world["brand"]
     code, out = cli(root, "pull", os_world["older"])
     assert code == 0, out
-    assert (root / "contract" / "os.json").read_text() == V1
+    blob_id = git(os_world["os"], "rev-parse", f"{os_world['older']}:{PATH}").strip()
+    pinned_id = git(os_world["os"], "hash-object", str(root / "contract" / "os.json")).strip()
+    assert pinned_id == blob_id  # the pin is the blob, byte for byte
+    assert (root / "contract" / "os.json").read_bytes() == V1.encode() and b"\r\n" in V1.encode()
     source = json.loads((root / "contract" / "source.json").read_text())
     assert source["commit"] == os_world["older"] and source["previous"] is None
+
+
+def test_an_uppercase_hash_is_accepted_and_recorded_lowercase(os_world):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["tip"].upper())[0] == 0
+    assert json.loads((root / "contract" / "source.json").read_text())["commit"] == os_world["tip"]
 
 
 @pytest.mark.parametrize("which, expected", [
@@ -84,63 +100,84 @@ def test_refusals_leave_the_previous_pull(os_world, which, expected):
     assert pair(root) == before
 
 
-def test_refuses_without_an_os_or_origin_main(os_world):
+def test_refusals_without_an_os_or_origin_main_keep_the_pin(os_world):
     root = os_world["brand"]
+    assert cli(root, "pull", os_world["older"])[0] == 0
+    before = pair(root)
     git(os_world["os"], "update-ref", "-d", "refs/remotes/origin/main")
     code, out = cli(root, "pull", os_world["tip"])
-    assert code == 1 and "has no origin/main" in out
+    assert code == 1 and "has no origin/main" in out and pair(root) == before
     shutil.rmtree(os_world["os"])
     code, out = cli(root, "pull", os_world["tip"])
-    assert code == 1 and "no Impossible OS checkout" in out
-    assert not (root / "contract").exists()
+    assert code == 1 and "no Impossible OS checkout" in out and pair(root) == before
 
 
-def test_invalid_json_on_main_is_refused(os_world):
+def test_invalid_json_on_main_is_refused_and_keeps_the_pin(os_world):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["tip"])[0] == 0
+    before = pair(root)
     commit_files(os_world["os_work"], {PATH: "{"}, "broken")
     git(os_world["os_work"], "push", "-q", "origin", "main")
     git(os_world["os"], "fetch", "-q", "origin", "main")
     broken = git(os_world["os"], "rev-parse", "origin/main").strip()
-    code, out = cli(os_world["brand"], "pull", broken)
-    assert code == 1 and "not valid JSON" in out
+    code, out = cli(root, "pull", broken)
+    assert code == 1 and "not valid JSON" in out and pair(root) == before
 
 
+BASE = json.loads(make_contract())
 BAD = {
-    "not an object": [],
-    "profile missing": {k: v for k, v in json.loads(V1).items() if k != "profile"},
-    "elements empty": {**json.loads(V1), "profile": {"elements": []}},
-    "tokens repeated": {**json.loads(V1), "tokens": ["a", "a"]},
-    "size zero": {**json.loads(V1), "sizes": [0]},
-    "size text": {**json.loads(V1), "sizes": ["16"]},
-    "icons not list": {**json.loads(V1), "icons": {}},
-    "icon name": {**json.loads(V1), "icons": [{"name": "Bad Name", "provider": "colour", "used_for": "x"}]},
-    "provider": {**json.loads(V1), "icons": [{"name": "x", "provider": "bitmap", "used_for": "x"}]},
-    "provider missing": {**json.loads(V1), "icons": [{"name": "x", "used_for": "x"}]},
-    "used_for": {**json.loads(V1), "icons": [{"name": "x", "provider": "glyph", "used_for": " "}]},
-    "icon twice": {**json.loads(V1), "icons": [{"name": "x", "provider": "glyph", "used_for": "a"}] * 2},
-    "cursor shape": {**json.loads(V1), "cursors": [{"title": "default"}]},
-    "cursor name": {**json.loads(V1), "cursors": ["Default Arrow"]},
-    "cursor twice": {**json.loads(V1), "cursors": ["wait", {"name": "wait"}]},
+    "not an object": ([], "the file must be a JSON object"),
+    "profile missing": ({k: v for k, v in BASE.items() if k != "profile"}, "profile is missing"),
+    "sizes missing": ({k: v for k, v in BASE.items() if k != "sizes"}, "sizes is missing"),
+    "elements empty": ({**BASE, "profile": {"elements": [], "attributes": ["d"]}}, "profile.elements"),
+    "attributes missing": ({**BASE, "profile": {"elements": ["path"]}}, "profile.attributes"),
+    "attributes empty map": ({**BASE, "profile": {"elements": ["path"], "attributes": {}}}, "profile.attributes"),
+    "attributes of an element": ({**BASE, "profile": {"elements": ["path"], "attributes": {"path": []}}},
+                                 "profile.attributes.path"),
+    "tokens not list": ({**BASE, "tokens": "accent"}, "tokens must be a list"),
+    "tokens repeated": ({**BASE, "tokens": ["a", "a"]}, "tokens must be unique"),
+    "size zero": ({**BASE, "sizes": [0]}, "sizes must be"),
+    "size text": ({**BASE, "sizes": ["16"]}, "sizes must be"),
+    "icons not list": ({**BASE, "icons": {}}, "icons must be a list"),
+    "icon name": ({**BASE, "icons": [{"name": "Bad Name", "provider": "colour", "used_for": "x"}]}, "icons[0].name"),
+    "icon name newline": ({**BASE, "icons": [{"name": "printer\n", "provider": "colour", "used_for": "x"}]},
+                          "icons[0].name"),
+    "provider": ({**BASE, "icons": [{"name": "x", "provider": "bitmap", "used_for": "x"}]}, "icons[0].provider"),
+    "provider missing": ({**BASE, "icons": [{"name": "x", "used_for": "x"}]}, "icons[0].provider"),
+    "used_for": ({**BASE, "icons": [{"name": "x", "provider": "glyph", "used_for": " "}]}, "icons[0].used_for"),
+    "icon twice": ({**BASE, "icons": [{"name": "x", "provider": "glyph", "used_for": "a"}] * 2}, "listed twice"),
+    "cursor shape": ({**BASE, "cursors": [{"title": "default"}]}, "cursors[0]"),
+    "cursor name": ({**BASE, "cursors": ["Default Arrow"]}, "cursors[0]"),
+    "cursor newline": ({**BASE, "cursors": ["wait\n"]}, "cursors[0]"),
+    "cursor twice": ({**BASE, "cursors": ["wait", {"name": "wait"}]}, "cursors[1] wait is listed twice"),
 }
 
 
 @pytest.mark.parametrize("case", sorted(BAD))
 def test_shape_refusals_name_the_field(case):
+    data, field = BAD[case]
     with pytest.raises(contract.ContractError) as caught:
-        contract.parse(json.dumps(BAD[case]))
-    assert str(caught.value).startswith("contract:")
+        contract.parse(json.dumps(data))
+    assert field in str(caught.value)
 
 
-def test_both_cursor_forms_are_accepted():
-    icons, cursors = contract.parse(make_contract(cursors=("wait", {"name": "text"})))
+def test_non_finite_numbers_are_not_json():
+    with pytest.raises(contract.ContractError) as caught:
+        contract.parse(make_contract()[:-2] + ', "extra": NaN}')
+    assert "not valid JSON" in str(caught.value)
+
+
+def test_both_cursor_forms_and_attribute_maps_are_accepted():
+    _, (icons, cursors) = contract.parse(make_contract(
+        cursors=("wait", {"name": "text"}), profile={"elements": ["path"], "attributes": {"path": ["d"]}}))
     assert cursors == {"wait", "text"} and icons == {"computer": "colour"}
 
 
 class Stop(Exception):
-    pass
+    """Raised by a test double to stop a pull at one step, as a crash would."""
 
 
 def interrupt(monkeypatch, step):
-    """Stop a pull at one step of publishing, as a crash would."""
     real_rename, real_rmtree, real_write = contract.os.rename, contract.shutil.rmtree, contract._write
     calls = {"rename": 0}
 
@@ -193,6 +230,52 @@ def test_an_interrupted_first_pull_leaves_no_pair(os_world, monkeypatch):
     assert not (root / "contract").exists() and not (root / "contract.tmp").exists()
 
 
+def test_a_reader_waits_for_a_publishing_pull(os_world, monkeypatch):
+    root = os_world["brand"]
+    contract.pull(os_world["older"], root)
+    staged, release = threading.Event(), threading.Event()
+    real_sync = contract._sync_dir
+
+    def sync(path):
+        real_sync(path)
+        if Path(path).name == "contract.tmp":
+            staged.set()
+            release.wait(20)
+
+    monkeypatch.setattr(contract, "_sync_dir", sync)
+    result = {}
+    writer = threading.Thread(target=lambda: result.setdefault("source", contract.pull(os_world["tip"], root)))
+    writer.start()
+    assert staged.wait(20)
+    reader = subprocess.Popen([sys.executable, str(root / "tools" / "contract.py"), "show"], stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE, text=True, start_new_session=True)
+    try:
+        time.sleep(1.0)
+        assert reader.poll() is None  # held at the lock, not deleting the staging folder
+        release.set()
+        writer.join(20)
+        out, _ = reader.communicate(timeout=30)
+    finally:
+        release.set()
+        if reader.poll() is None:
+            os.killpg(reader.pid, 9)
+            reader.communicate()
+    assert result["source"]["commit"] == os_world["tip"]
+    assert out.splitlines()[0] == f"commit {os_world['tip']}"
+
+
+def test_a_damaged_pin_is_refused_then_replaced_on_request(os_world):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["older"])[0] == 0
+    (root / "contract" / "os.json").write_text(V2)
+    code, out = cli(root, "pull", os_world["tip"])
+    assert code == 1 and "the current pin is damaged" in out and "--replace-damaged" in out
+    code, out = cli(root, "pull", os_world["tip"], "--replace-damaged")
+    assert code == 0 and "replaced a damaged pin" in out
+    source = json.loads((root / "contract" / "source.json").read_text())
+    assert source["previous"] is None and "do not belong together" in source["replaced_damaged"]
+
+
 def test_source_records_the_time_and_changes(os_world):
     root = os_world["brand"]
     at = datetime.datetime(2026, 11, 25, 12, 0, 0, tzinfo=datetime.UTC)
@@ -220,17 +303,48 @@ def test_show_reports_first_unchanged_and_refused_pulls(os_world):
     assert cli(root, "show") == (code, out)
 
 
-def test_load_refuses_a_mixed_pair(os_world):
+def test_show_reads_source_json_alone(os_world):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["tip"])[0] == 0
+    (root / "contract" / "os.json").unlink()
+    code, out = cli(root, "show")
+    assert code == 0 and out.splitlines()[0] == f"commit {os_world['tip']}"
+
+
+def test_load_returns_contract_and_source_and_refuses_a_mixed_pair(os_world):
     root = os_world["brand"]
     contract.pull(os_world["tip"], root)
+    data, source = contract.load(root)
+    assert source["commit"] == os_world["tip"] and data["icons"][1]["name"] == "printer"
     (root / "contract" / "os.json").write_text(V1)
     with pytest.raises(contract.ContractError) as caught:
         contract.load(root)
     assert "contract/os.json and contract/source.json do not belong together" in str(caught.value)
 
 
-def test_show_on_a_fixture_reports_the_exact_commit(os_world):
+def test_a_filesystem_failure_before_publishing_keeps_the_pin(os_world):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["older"])[0] == 0
+    before = pair(root)
+    os.chmod(root, 0o555)
+    try:
+        code, out = cli(root, "pull", os_world["tip"])
+    finally:
+        os.chmod(root, 0o755)
+    assert code == 1 and "the previous pin is unchanged" in out
+    assert pair(root) == before
+
+
+def test_the_tool_imports_by_its_repository_name():
+    code, _, err = run_tree([sys.executable, "-c", "from tools import contract; print(contract.SOURCE_PATH)"],
+                            cwd=REPO)
+    assert code == 0, err
+
+
+@pytest.mark.parametrize("order", ["before", "after"])
+def test_show_on_a_fixture_reports_the_exact_commit(os_world, order):
     root = os_world["brand"]
     assert cli(root, "pull", os_world["tip"])[0] == 0
-    code, out, _ = run_tree([sys.executable, str(REPO / "tools" / "contract.py"), "--root", str(root), "show"])
+    args = ["--root", str(root), "show"] if order == "before" else ["show", "--root", str(root)]
+    code, out, _ = run_tree([sys.executable, str(REPO / "tools" / "contract.py"), *args])
     assert code == 0 and out.splitlines()[0] == f"commit {os_world['tip']}"

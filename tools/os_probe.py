@@ -3,20 +3,22 @@
 
   locate              print the Impossible OS checkout
   contract            met when the OS origin/main holds docs/design/brand-contract.json
-  app-pulls           met when every program in consumers.json takes impossible-brand/ pull requests
+  app-pulls           met when every program in the committed consumers.json takes impossible-brand/ pull requests
   sdk-pulls           met when Impossible SDK takes impossible-brand/ pull requests
   designs <set>       met when design/<set>.json and every file it lists are committed on this repository's HEAD
   fetch               refresh origin/main of the OS and every consumer checkout (network, bounded)
 
-Each probe prints one line and exits 0 when met, 1 when not (or when it cannot tell). Probes read committed refs
-only (`origin/main`, `HEAD`), never a working tree another run may be editing, so a remote change is seen after the
-next `fetch`; D01 T01 §7 runs `fetch` before every unattended run.
+Each probe prints one line and exits 0 when met, 1 when not (or when it cannot tell). Probes read committed objects
+only (`origin/main`, `HEAD`, and consumers.json as committed on HEAD), never a working tree another session may be
+editing, and never fetch: a partial clone's missing object is a refusal, not a download. A remote change is seen
+after the next `fetch`, which D01 T01 §7 runs before every unattended run.
 
 Where is the OS? `paths.impossible_os` in `.conclave/local.toml` (ignored by git, one per machine) wins. Without it,
 `../*` and `../../*/*` are searched for a checkout whose `origin` names rizonesoft/impossible-os.
 
-A probe ends within an 8-second deadline (the graph allows 10), each git call within the lesser of 3 seconds and the
-time left, and every git call runs in its own process group, which is killed with all its children on a timeout.
+A probe ends within an 8-second deadline (the graph allows 10), the search included, each git call within the lesser
+of 3 seconds and the time left, and every git call runs in its own process group, killed with its children on a
+timeout.
 """
 import argparse
 import datetime
@@ -39,8 +41,9 @@ BRAND_PREFIX = "impossible-brand/"
 DEADLINE_SECONDS = 8.0
 CALL_SECONDS = 3.0
 FETCH_SECONDS = 20.0
-SET_NAME = re.compile(r"^[a-z0-9][a-z0-9-]*$")
-DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+MAIN_REFSPEC = "+refs/heads/main:refs/remotes/origin/main"
+SET_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
+DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
 class NotMet(Exception):
@@ -54,17 +57,21 @@ class Clock:
     def left(self):
         return self.end - time.monotonic()
 
-
-def run_git(args, cwd, limit, clock=None):
-    """Run git in its own process group; on a timeout kill the whole group. Returns (returncode, stdout bytes)."""
-    if clock is not None:
-        left = clock.left()
-        if left <= 0:
+    def check(self):
+        if self.left() <= 0:
             raise NotMet("deadline: the probe ran out of time")
-        limit = min(limit, left)
+
+
+def run_git(args, cwd, limit, clock=None, offline=True):
+    """Run git in its own process group; on a timeout kill the whole group. Returns (returncode, stdout bytes).
+    Offline calls may not fetch a missing object of a partial clone (GIT_NO_LAZY_FETCH)."""
+    if clock is not None:
+        clock.check()
+        limit = min(limit, clock.left())
+    env = {**os.environ, "GIT_NO_LAZY_FETCH": "1"} if offline else None
     try:
         proc = subprocess.Popen(["git", "-C", str(cwd), *args], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, start_new_session=True)
+                                stderr=subprocess.PIPE, start_new_session=True, env=env)
     except OSError as error:
         raise NotMet(f"git could not start: {error}") from None
     try:
@@ -142,8 +149,9 @@ def local_settings(root):
         raise NotMet(f"invalid .conclave/local.toml: {error}") from None
 
 
-def locate(root):
+def locate(root, clock=None):
     """The Impossible OS checkout: the configured path, or the one discoverable checkout of rizonesoft/impossible-os."""
+    clock = clock or Clock(DEADLINE_SECONDS)
     root = Path(root).resolve()
     paths = local_settings(root).get("paths", {})
     if not isinstance(paths, dict):
@@ -161,17 +169,18 @@ def locate(root):
             raise NotMet(f"paths.impossible_os has no origin named {OS_REMOTE}: {path}")
         return path
     seen, found = set(), []
-    candidates = sorted(root.parent.glob("*")) + sorted(root.parent.parent.glob("*/*"))
-    for candidate in candidates:
-        try:
-            resolved = candidate.resolve()
-        except OSError:
-            continue
-        if resolved in seen or resolved == root or not is_checkout(resolved):
-            continue
-        seen.add(resolved)
-        if names_remote(origin_url(resolved), OS_REMOTE):
-            found.append(resolved)
+    for pattern_root, pattern in ((root.parent, "*"), (root.parent.parent, "*/*")):
+        for candidate in sorted(pattern_root.glob(pattern)):
+            clock.check()
+            try:
+                resolved = candidate.resolve()
+            except OSError:
+                continue
+            if resolved in seen or resolved == root or not is_checkout(resolved):
+                continue
+            seen.add(resolved)
+            if names_remote(origin_url(resolved), OS_REMOTE):
+                found.append(resolved)
     if not found:
         raise NotMet("no Impossible OS checkout found: set paths.impossible_os in .conclave/local.toml")
     if len(found) > 1:
@@ -190,8 +199,16 @@ def show(checkout, spec, clock):
     return out if code == 0 else None
 
 
+def head_commit(root, clock):
+    """This repository's HEAD as one commit id, so every read of one probe sees the same commit."""
+    code, out = run_git(["rev-parse", "--verify", "HEAD^{commit}"], root, CALL_SECONDS, clock)
+    if code != 0:
+        raise NotMet("this repository has no HEAD commit")
+    return out.decode().strip()
+
+
 def probe_contract(root, clock):
-    checkout = locate(root)
+    checkout = locate(root, clock)
     if object_type(checkout, "refs/remotes/origin/main", clock) != "commit":
         raise NotMet(f"the OS checkout has no origin/main: {checkout}")
     if object_type(checkout, f"refs/remotes/origin/main:{CONTRACT}", clock) != "blob":
@@ -199,13 +216,10 @@ def probe_contract(root, clock):
     return f"met: the OS origin/main holds {CONTRACT}"
 
 
-def consumers(root):
-    path = Path(root) / "consumers.json"
-    if not path.is_file():
-        raise NotMet("consumers.json is missing (D04 T01 §1)")
+def parse_consumers(raw):
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError) as error:
+        data = json.loads(raw)
+    except ValueError as error:
         raise NotMet(f"consumers.json is invalid: {error}") from None
     entries = data.get("consumers") if isinstance(data, dict) else None
     if not isinstance(entries, list):
@@ -214,16 +228,34 @@ def consumers(root):
         if not (isinstance(entry, dict) and isinstance(entry.get("name"), str) and entry["name"]
                 and isinstance(entry.get("remote"), str) and isinstance(entry.get("kind"), str)):
             raise NotMet(f"consumers.json is invalid: an entry lacks name, remote or kind: {entry!r}")
+        if not re.fullmatch(r"[A-Za-z0-9._-]+", entry["name"]) or entry["name"] in (".", ".."):
+            raise NotMet(f"consumers.json is invalid: not a folder name: {entry['name']!r}")
     return entries
+
+
+def committed_consumers(root, clock):
+    """consumers.json as committed on HEAD (D04 T01 §1), never the working copy another session may be editing."""
+    raw = show(root, f"{head_commit(root, clock)}:consumers.json", clock)
+    if raw is None:
+        raise NotMet("consumers.json is not committed (D04 T01 §1)")
+    return parse_consumers(raw)
+
+
+def consumer_checkout(root, entry):
+    """The consumer's checkout beside this repository, or the reason it cannot be used."""
+    checkout = Path(root).resolve().parent / entry["name"]
+    if not is_checkout(checkout):
+        return None, "no checkout"
+    if not names_remote(origin_url(checkout), entry["remote"]):
+        return None, f"origin is not {entry['remote']}"
+    return checkout, None
 
 
 def takes_brand_pulls(entry, root, clock):
     """None when the consumer's committed prompt takes impossible-brand/ pull requests, else the reason."""
-    checkout = Path(root).resolve().parent / entry["name"]
-    if not is_checkout(checkout):
-        return "no checkout"
-    if not names_remote(origin_url(checkout), entry["remote"]):
-        return f"origin is not {entry['remote']}"
+    checkout, reason = consumer_checkout(root, entry)
+    if reason:
+        return reason
     text = show(checkout, f"refs/remotes/origin/main:{PROMPT}", clock)
     if text is None:
         return f"origin/main has no {PROMPT}"
@@ -234,7 +266,7 @@ def takes_brand_pulls(entry, root, clock):
 
 
 def probe_pulls(root, kind, clock):
-    chosen = [e for e in consumers(root) if e["kind"] == kind]
+    chosen = [e for e in committed_consumers(root, clock) if e["kind"] == kind]
     if not chosen:
         raise NotMet(f"consumers.json lists no {kind}")
     missing = []
@@ -255,10 +287,11 @@ def safe_relative(name):
 
 
 def probe_designs(root, name, clock):
-    if not SET_NAME.match(name or ""):
+    if not SET_NAME.fullmatch(name or ""):
         raise NotMet(f"not a design set name: {name!r}")
     manifest = f"design/{name}.json"
-    raw = show(root, f"HEAD:{manifest}", clock)
+    commit = head_commit(root, clock)
+    raw = show(root, f"{commit}:{manifest}", clock)
     if raw is None:
         raise NotMet(f"{manifest} is not committed on HEAD")
     try:
@@ -271,7 +304,7 @@ def probe_designs(root, name, clock):
         raise NotMet(f"{manifest} names set {data.get('set')!r}, not {name!r}")
     approved = data.get("approved")
     try:
-        valid_date = isinstance(approved, str) and bool(DATE.match(approved)) and datetime.date.fromisoformat(approved)
+        valid_date = isinstance(approved, str) and bool(DATE.fullmatch(approved)) and datetime.date.fromisoformat(approved)
     except ValueError:
         valid_date = False
     if not valid_date:
@@ -284,7 +317,7 @@ def probe_designs(root, name, clock):
     bad = [f for f in files if not safe_relative(f)]
     if bad:
         raise NotMet(f"{manifest} lists paths that are not repository-relative: {bad[:3]}")
-    code, out = run_git(["ls-tree", "-r", "-z", "HEAD"], root, CALL_SECONDS, clock)
+    code, out = run_git(["ls-tree", "-r", "-z", commit], root, CALL_SECONDS, clock)
     if code != 0:
         raise NotMet("cannot list HEAD")
     blobs = set()
@@ -301,29 +334,32 @@ def probe_designs(root, name, clock):
 
 
 def fetch(root):
-    """Refresh origin/main of the OS and every consumer checkout; one line per failure, exit 1 if any failed."""
+    """Refresh refs/remotes/origin/main of the OS and every committed consumer whose checkout's origin is the listed
+    remote; one line per failure or skipped checkout, exit 1 if any."""
     root = Path(root).resolve()
     targets, failures = [], []
     try:
-        targets.append(("Impossible OS", locate(root)))
+        targets.append(("Impossible OS", locate(root, Clock(FETCH_SECONDS))))
     except NotMet as error:
         failures.append(f"Impossible OS: {error}")
-    if (root / "consumers.json").is_file():
-        try:
-            for entry in consumers(root):
-                if entry["kind"] == "os":
-                    continue
-                checkout = root.parent / entry["name"]
-                if is_checkout(checkout):
-                    targets.append((entry["name"], checkout))
-                else:
-                    failures.append(f"{entry['name']}: no checkout")
-        except NotMet as error:
+    try:
+        entries = committed_consumers(root, Clock(FETCH_SECONDS))
+    except NotMet as error:
+        entries = []
+        if "not committed" not in str(error):
             failures.append(str(error))
+    for entry in entries:
+        if entry["kind"] == "os":
+            continue
+        checkout, reason = consumer_checkout(root, entry)
+        if reason:
+            failures.append(f"{entry['name']}: {reason}, not fetched")
+        else:
+            targets.append((entry["name"], checkout))
     fetched = 0
     for name, checkout in targets:
         try:
-            code, _ = run_git(["fetch", "--quiet", "origin", "main"], checkout, FETCH_SECONDS)
+            code, _ = run_git(["fetch", "--quiet", "origin", MAIN_REFSPEC], checkout, FETCH_SECONDS, offline=False)
         except NotMet as error:
             failures.append(f"{name}: {error}")
             continue
@@ -338,20 +374,23 @@ def fetch(root):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--root", type=Path, default=ROOT, help="this repository (default: the one holding this tool)")
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("--root", type=Path, default=argparse.SUPPRESS,
+                        help="this repository (default: the one holding this tool)")
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
+                                     parents=[common])
     sub = parser.add_subparsers(dest="command", required=True)
     for name in ("locate", "contract", "app-pulls", "sdk-pulls", "fetch"):
-        sub.add_parser(name)
-    sub.add_parser("designs").add_argument("set")
+        sub.add_parser(name, parents=[common])
+    sub.add_parser("designs", parents=[common]).add_argument("set")
     args = parser.parse_args(argv)
-    root = args.root.resolve()
+    root = getattr(args, "root", ROOT).resolve()
     if args.command == "fetch":
         return fetch(root)
     clock = Clock(DEADLINE_SECONDS)
     try:
         if args.command == "locate":
-            line = str(locate(root))
+            line = str(locate(root, clock))
         elif args.command == "contract":
             line = probe_contract(root, clock)
         elif args.command == "app-pulls":

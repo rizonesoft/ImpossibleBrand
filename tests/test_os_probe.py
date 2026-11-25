@@ -106,16 +106,27 @@ def add_consumer(world, name, kind, prompt):
     return {"name": name, "remote": f"rizonesoft/{name}", "kind": kind, "requests": "brand.json"}
 
 
-def write_consumers(world, entries):
+def write_consumers(world, entries, commit=True):
     (world["brand"] / "consumers.json").write_text(json.dumps({"schema": 1, "consumers": entries}))
+    if commit:
+        commit_files(world["brand"], {})
 
 
-def test_app_pulls_needs_consumers_json(world):
+def test_app_pulls_needs_a_committed_consumers_json(world):
     code, out = run_probe(world["brand"], "app-pulls")
-    assert code == 1 and "consumers.json is missing" in out
+    assert code == 1 and "consumers.json is not committed" in out
     (world["brand"] / "consumers.json").write_text("[")
+    commit_files(world["brand"], {})
     code, out = run_probe(world["brand"], "app-pulls")
     assert code == 1 and "consumers.json is invalid" in out
+
+
+def test_app_pulls_ignores_an_uncommitted_edit_of_consumers_json(world):
+    entries = [add_consumer(world, "Calc", "program", RULE_BRAND), add_consumer(world, "Clock", "program", RULE_OS)]
+    write_consumers(world, entries)
+    write_consumers(world, entries[:1], commit=False)  # a session drops the failing program without committing
+    code, out = run_probe(world["brand"], "app-pulls")
+    assert code == 1 and "Clock" in out
 
 
 def test_app_pulls_reads_programs_only(world):
@@ -127,6 +138,30 @@ def test_app_pulls_reads_programs_only(world):
     assert code == 0, out
     code, out = run_probe(world["brand"], "sdk-pulls")
     assert code == 1 and "ImpossibleSDK" in out
+
+
+def test_sdk_pulls_met_when_the_sdk_takes_brand_pulls(world):
+    write_consumers(world, [add_consumer(world, "ImpossibleSDK", "sdk", RULE_BRAND),
+                            add_consumer(world, "Calc", "program", RULE_OS)])
+    code, out = run_probe(world["brand"], "sdk-pulls")
+    assert code == 0 and out.startswith("met:")
+    assert run_probe(world["brand"], "app-pulls")[0] == 1
+
+
+def test_a_partial_clone_is_never_fetched_by_a_probe(world):
+    bare, work = make_remote(world["tmp"], "rizonesoft/Lazy", {"README.md": "x\n"})
+    git(bare, "config", "uploadpack.allowFilter", "true")
+    checkout = world["brand"].parent / "Lazy"
+    git(checkout.parent, "clone", "-q", "--filter=blob:none", f"file://{bare}", str(checkout))
+    commit_files(work, {"docs/unattended-prompt.md": RULE_BRAND})
+    git(work, "push", "-q", "origin", "main")
+    git(checkout, "fetch", "-q", "origin")  # the new tree arrives, its blobs do not
+    write_consumers(world, [{"name": "Lazy", "remote": "rizonesoft/Lazy", "kind": "program", "requests": "b"}])
+    code, out = run_probe(world["brand"], "app-pulls")
+    assert code == 1 and "Lazy" in out
+    missing = run_tree(["git", "-C", str(checkout), "cat-file", "-e", "origin/main:docs/unattended-prompt.md"],
+                       env={**os.environ, **GIT_ENV, "GIT_NO_LAZY_FETCH": "1"})[0]
+    assert missing != 0  # the probe did not download the blob
 
 
 def test_app_pulls_wants_the_operative_rule_line(world):
@@ -217,6 +252,25 @@ def test_designs_ignores_the_working_tree(world):
     assert run_probe(world["brand"], "designs", "apps")[0] == 1
 
 
+def test_designs_reads_one_commit_even_when_head_moves(world, monkeypatch):
+    import os_probe
+    design(world, "apps", GOOD, GOOD["files"][:1])  # commit A: approved, one file missing
+    real_show = os_probe.show
+    moved = []
+
+    def show_then_move(checkout, spec, clock):
+        out = real_show(checkout, spec, clock)
+        if not moved:
+            moved.append(1)  # commit B: the file arrives but approval is withdrawn
+            design(world, "apps", {**GOOD, "approved": ""}, GOOD["files"])
+        return out
+
+    monkeypatch.setattr(os_probe, "show", show_then_move)
+    with pytest.raises(os_probe.NotMet) as caught:
+        os_probe.probe_designs(world["brand"], "apps", os_probe.Clock(8))
+    assert "app_clock.svg" in str(caught.value)
+
+
 # deadlines
 
 def fake_git(tmp_path, body):
@@ -246,6 +300,33 @@ def test_a_hanging_git_is_killed_with_its_children(world, tmp_path):
     time.sleep(0.2)
     child = int(pidfile.read_text())
     assert not alive(child)
+
+
+def test_locate_stops_at_the_deadline(world):
+    import os_probe
+    with pytest.raises(os_probe.NotMet) as caught:
+        os_probe.locate(world["brand"], os_probe.Clock(0))
+    assert "deadline" in str(caught.value)
+
+
+def test_fetch_skips_a_checkout_of_another_repository(world):
+    entries = [add_consumer(world, "Calc", "program", RULE_BRAND)]
+    entries[0]["remote"] = "rizonesoft/NotCalc"
+    write_consumers(world, entries)
+    code, out = run_probe(world["brand"], "fetch")
+    assert code == 1 and "Calc: origin is not rizonesoft/NotCalc, not fetched" in out
+
+
+def test_fetch_updates_origin_main_in_a_single_branch_checkout(world, tmp_path):
+    git(world["os_work"], "push", "-q", "origin", "main:other")
+    shutil.rmtree(world["os"])
+    git(tmp_path / "projects", "clone", "-q", "--single-branch", "--branch", "other", str(world["os_bare"]),
+        str(world["os"]))
+    commit_files(world["os_work"], {"docs/design/brand-contract.json": "{}\n"})
+    git(world["os_work"], "push", "-q", "origin", "main")
+    assert run_probe(world["brand"], "contract")[0] == 1
+    assert run_probe(world["brand"], "fetch")[0] == 0
+    assert run_probe(world["brand"], "contract")[0] == 0
 
 
 def test_many_slow_calls_stop_at_the_whole_probe_deadline(world, tmp_path):
@@ -283,7 +364,15 @@ def test_detect_lists_needs_only_when_met(world):
     design(world, "apps", GOOD, GOOD["files"])
     have = detected()
     assert "os-contract" in have and "designs-apps" in have
-    assert not {"designs-system-icons", "designs-cursors-windows-11", "designs-cursors-mac", "designs-wallpapers"} & have
+    others = ["system-icons", "cursors-windows-11", "cursors-mac", "wallpapers"]
+    assert not {f"designs-{s}" for s in others} & have
+    for name in others:
+        design(world, name, {**GOOD, "set": name, "files": [f"{name}/one.svg"]}, [f"{name}/one.svg"])
+    assert {f"designs-{s}" for s in ["apps", *others]} <= detected()
+
+
+def test_root_is_accepted_after_the_command(world):
+    assert run_probe(world["brand"], "locate", "--root", str(world["brand"])) == (0, str(world["os"]))
 
 
 def test_help_names_the_setting():
