@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="camera-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="camera-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="camera-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6DEE8"/><stop offset="1" stop-color="#8A98AA"/></linearGradient><linearGradient id="camera-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B7CF0"/><stop offset="1" stop-color="#0F2A6E"/></linearGradient><linearGradient id="camera-24-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient><linearGradient id="camera-24-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A80"/><stop offset="1" stop-color="#D93A30"/></linearGradient></defs>
+<path d="M6.0 12.0H42.0a4.0 4.0 0 0 1 4.0 4.0V36.0a4.0 4.0 0 0 1-4.0 4.0H6.0a4.0 4.0 0 0 1-4.0-4.0V16.0a4.0 4.0 0 0 1 4.0-4.0Z" fill="url(#camera-24-g1)"/>
+<path d="M3.0 13.0H45.0V39.0H3.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M15.0 8.0H25.0a1.0 1.0 0 0 1 1.0 1.0V11.0a1.0 1.0 0 0 1-1.0 1.0H15.0a1.0 1.0 0 0 1-1.0-1.0V9.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#camera-24-g2)"/>
+<path d="M14.0 26.0a10.0 10.0 0 1 0 20.0 0a10.0 10.0 0 1 0 -20.0 0Z" fill="url(#camera-24-g3)"/>
+<path d="M16.8 26.0a7.2 7.2 0 1 0 14.4 0a7.2 7.2 0 1 0 -14.4 0Z" fill="url(#camera-24-g4)"/>
+<path d="M20.2 24.0a1.8 1.8 0 1 0 3.6 0a1.8 1.8 0 1 0 -3.6 0Z" fill="url(#camera-24-g5)"/>
+<path d="M37.4 17.0a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0Z" fill="url(#camera-24-g6)"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="device_manager-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="device_manager-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B4FC8"/></linearGradient><linearGradient id="device_manager-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient></defs>
+<path d="M4.0 4.0H30.0a2.0 2.0 0 0 1 2.0 2.0V24.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V6.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#device_manager-24-g1)"/>
+<path d="M3.0 5.0H31.0V25.0H3.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M5.0 6.0H29.0a1.0 1.0 0 0 1 1.0 1.0V23.0a1.0 1.0 0 0 1-1.0 1.0H5.0a1.0 1.0 0 0 1-1.0-1.0V7.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#device_manager-24-g2)"/>
+<path d="M14.0 26.0H18.0V28.0H14.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M8.0 28.0H24.0V30.0H8.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M28.0 24.0H40.0a2.0 2.0 0 0 1 2.0 2.0V38.0a2.0 2.0 0 0 1-2.0 2.0H28.0a2.0 2.0 0 0 1-2.0-2.0V26.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#device_manager-24-g3)"/>
+<path d="M30.0 28.0H38.0V36.0H30.0Z" fill="#22B4E8" fill-opacity="1.0"/>
+<path d="M28.0 22.0H30.0V24.0H28.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M28.0 40.0H30.0V42.0H28.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M42.0 28.0H44.0V30.0H42.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M32.0 22.0H34.0V24.0H32.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M32.0 40.0H34.0V42.0H32.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M42.0 32.0H44.0V34.0H42.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M36.0 22.0H38.0V24.0H36.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M36.0 40.0H38.0V42.0H36.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+<path d="M42.0 36.0H44.0V38.0H42.0Z" fill="#9AA8B8" fill-opacity="1.0"/>
+</svg>

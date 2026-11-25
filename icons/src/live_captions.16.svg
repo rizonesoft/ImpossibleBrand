@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="live_captions-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="live_captions-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE680"/><stop offset="1" stop-color="#F0B429"/></linearGradient></defs>
+<path d="M6.0 12.0H42.0a3.0 3.0 0 0 1 3.0 3.0V33.0a3.0 3.0 0 0 1-3.0 3.0H6.0a3.0 3.0 0 0 1-3.0-3.0V15.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="url(#live_captions-16-g1)"/>
+<path d="M4.5 13.5H43.5V34.5H4.5Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="3.0"/>
+<path d="M9.0 18.0H24.0V21.0H9.0Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M9.0 27.0H21.0V30.0H9.0Z" fill="#FFFFFF" fill-opacity="0.7"/>
+<path d="M28.8 18.0H40.2a1.7999999999999998 1.7999999999999998 0 0 1 1.7999999999999998 1.7999999999999998V28.2a1.7999999999999998 1.7999999999999998 0 0 1-1.7999999999999998 1.7999999999999998H28.8a1.7999999999999998 1.7999999999999998 0 0 1-1.7999999999999998-1.7999999999999998V19.8a1.7999999999999998 1.7999999999999998 0 0 1 1.7999999999999998-1.7999999999999998Z" fill="url(#live_captions-16-g2)"/>
+</svg>

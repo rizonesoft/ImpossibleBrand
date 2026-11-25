@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="security-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1450C8"/></linearGradient><linearGradient id="security-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient><linearGradient id="security-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient></defs>
+<path d="M24.0 2.0L44.0 6.0V21.6C44.0 33.599999999999994 33.599999999999994 41.28 24.0 46.0C14.399999999999999 41.28 4.0 33.599999999999994 4.0 21.6V6.0Z" fill="url(#security-24-g1)"/>
+<path d="M24.6 35.0a10.399999999999999 10.399999999999999 0 1 0 20.799999999999997 0a10.399999999999999 10.399999999999999 0 1 0 -20.799999999999997 0Z" fill="url(#security-24-g2)"/>
+<path d="M25.8 35.0a9.2 9.2 0 1 0 18.4 0a9.2 9.2 0 1 0 -18.4 0Z" fill="url(#security-24-g3)"/>
+<path d="M30.4 35.0L34.08 38.68L40.06 31.78" fill="none" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

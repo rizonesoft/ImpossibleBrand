@@ -17,7 +17,8 @@ redrawn for its size, as Windows 11 does, not the main drawing shrunk. This refu
   cap        in a small drawing, an open stroke with a butt or square cap that ends in a curve
 
 The main drawing may use the whole system SVG profile. A small drawing uses a smaller language, so that its edges
-can be read exactly from its geometry: plain paths, rectangles, circles, ellipses and lines, gradients, groups, and
+can be read exactly from its geometry: plain paths, rectangles, circles, ellipses, lines, polylines and polygons,
+gradients, groups, and
 `translate` transforms only (no <use>, <symbol>, clipping, nested <svg>, rotation or scaling). Its edges are every
 straight horizontal or vertical part of a filled shape (an open subpath's fill closes back to its start), both sides
 of a stroked one, and the end of a butt or square cap. At 16 px a pixel is 3 units and at 24 px it is 2; every edge
@@ -46,8 +47,8 @@ TOLERANCE = 0.01  # of a pixel
 # radial gradients, opacity, transforms, defs, use, symbol and clipPath. No masks, filters, text or CSS.
 ELEMENTS = {"svg", "g", "defs", "path", "rect", "circle", "ellipse", "line", "polyline", "polygon", "linearGradient",
             "radialGradient", "stop", "use", "symbol", "clipPath", "title", "desc"}
-SMALL_ELEMENTS = {"svg", "g", "defs", "path", "rect", "circle", "ellipse", "line", "linearGradient", "radialGradient",
-                  "stop", "title", "desc"}
+SMALL_ELEMENTS = {"svg", "g", "defs", "path", "rect", "circle", "ellipse", "line", "polyline", "polygon",
+                  "linearGradient", "radialGradient", "stop", "title", "desc"}
 ATTRIBUTES = {"id", "d", "x", "y", "x1", "y1", "x2", "y2", "cx", "cy", "r", "rx", "ry", "fx", "fy", "width", "height",
               "points", "fill", "fill-opacity", "fill-rule", "stroke", "stroke-width", "stroke-opacity",
               "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "opacity", "transform", "viewBox", "version",

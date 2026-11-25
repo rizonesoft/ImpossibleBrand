@@ -301,3 +301,7 @@ def test_system_icons_are_held_to_the_same_rules(tmp_path, capsys):
     (folder / "settings_apps.16.svg").unlink()
     code, out = run(tmp_path, capsys)
     assert code == 1 and "missing: settings_apps.16.svg" in out
+
+def test_polygons_are_part_of_the_small_language(tmp_path, capsys):
+    passes(tmp_path, capsys, small16=CRISP + '<polygon points="6,6 18,6 12,15" fill="#000"/>')
+    refused(tmp_path, capsys, "a horizontal edge at y=7", small16=CRISP + '<polygon points="6,7 18,7 12,15" fill="#000"/>')

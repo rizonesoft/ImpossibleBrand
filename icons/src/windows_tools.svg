@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="windows_tools-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B429"/><stop offset="1" stop-color="#D9920F"/></linearGradient><linearGradient id="windows_tools-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="windows_tools-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient><linearGradient id="windows_tools-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="windows_tools-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="windows_tools-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient></defs>
+<path d="M4 12a3 3 0 0 1 3-3H18L21 13H41a3 3 0 0 1 3 3V38a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M4 12a3 3 0 0 1 3-3H18L21 13H41a3 3 0 0 1 3 3V38a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Z" fill="url(#windows_tools-g1)"/>
+<path d="M4 12a3 3 0 0 1 3-3H18L21 13H41a3 3 0 0 1 3 3V38a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M8 14H40a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V15a1 1 0 0 1 1-1Z" fill="url(#windows_tools-g2)"/>
+<path d="M7 17H41a3 3 0 0 1 3 3V38a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V20a3 3 0 0 1 3-3Z" fill="url(#windows_tools-g3)"/>
+<path d="M7 17H41a3 3 0 0 1 3 3V38a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V20a3 3 0 0 1 3-3Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M7 17.6H41" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<g transform="translate(19 31) rotate(-40)"><path d="M-1.6 -5V9.5a1.6 1.6 0 0 0 3.2 0V-5Z M-4.6 -9.6a4.8 4.8 0 1 0 9.2 0H1.6V-6.4H-1.6V-9.6Z" fill="url(#windows_tools-g4)" fill-rule="nonzero"/></g>
+<path d="M35.22 31.0L37.98 31.0" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M34.27688383542068 33.27688383542068L36.228498551495555 35.228498551495555" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M32.0 34.22L32.0 36.98" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M29.723116164579316 33.27688383542068L27.771501448504445 35.228498551495555" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M28.78 31.0L26.02 31.0" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M29.723116164579316 28.723116164579316L27.771501448504445 26.771501448504445" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M32.0 27.78L32.0 25.02" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M34.27688383542068 28.723116164579316L36.228498551495555 26.771501448504445" stroke="#4A5768" stroke-opacity="1.0" stroke-width="2.53" stroke-linecap="round"/>
+<path d="M27.4 31a4.6 4.6 0 1 0 9.2 0a4.6 4.6 0 1 0 -9.2 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M27.4 31a4.6 4.6 0 1 0 9.2 0a4.6 4.6 0 1 0 -9.2 0Z" fill="url(#windows_tools-g5)"/>
+<path d="M27.4 31a4.6 4.6 0 1 0 9.2 0a4.6 4.6 0 1 0 -9.2 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M30.068 31a1.9319999999999997 1.9319999999999997 0 1 0 3.8639999999999994 0a1.9319999999999997 1.9319999999999997 0 1 0 -3.8639999999999994 0Z" fill="url(#windows_tools-g6)"/>
+</svg>

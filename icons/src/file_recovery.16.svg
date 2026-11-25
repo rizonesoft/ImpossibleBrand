@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_recovery-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4F0FB"/><stop offset="1" stop-color="#93B0D0"/></linearGradient><linearGradient id="file_recovery-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient><linearGradient id="file_recovery-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient></defs>
+<path d="M6.0 9.0H33.0L30.0 42.0H9.0Z" fill="url(#file_recovery-16-g1)"/>
+<path d="M6.0 9.0H33.0V12.0H6.0Z" fill="#E8F0F8" fill-opacity="1.0"/>
+<path d="M9.0 12.0H30.0V15.0H9.0Z" fill="#6E86A3" fill-opacity="0.6"/>
+<path d="M21.9 34.5a12.600000000000001 12.600000000000001 0 1 0 25.200000000000003 0a12.600000000000001 12.600000000000001 0 1 0 -25.200000000000003 0Z" fill="url(#file_recovery-16-g2)"/>
+<path d="M23.7 34.5a10.8 10.8 0 1 0 21.6 0a10.8 10.8 0 1 0 -21.6 0Z" fill="url(#file_recovery-16-g3)"/>
+<path d="M28.560 34.500A5.940 5.940 0 1 1 32.340 39.900" fill="none" stroke="#FFFFFF" stroke-width="3.0" stroke-linecap="round"/>
+</svg>

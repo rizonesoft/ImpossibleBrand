@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="task_manager-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#D6DEE8"/></linearGradient></defs>
+<path d="M4.0 4.0H44.0a2.0 2.0 0 0 1 2.0 2.0V42.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V6.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#task_manager-24-g1)"/>
+<path d="M4.0 5.0H44.0a1.0 1.0 0 0 1 1.0 1.0V42.0a1.0 1.0 0 0 1-1.0 1.0H4.0a1.0 1.0 0 0 1-1.0-1.0V6.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M2.0 4.0H46.0V10.0H2.0Z" fill="#1E9E50" fill-opacity="1.0"/>
+<path d="M5.00 36.00 L12.60 28.50 L20.20 32.25 L27.80 22.25 L35.40 27.25 L43.00 19.75" fill="none" stroke="#1E9E50" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

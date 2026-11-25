@@ -75,6 +75,30 @@ Every icon is checked at 16 and 24 px on `#202020` and `#F3F3F3` before it lands
 | Accessibility | `settings_accessibility.svg` | Settings category: accessibility (a person within a circle) |
 | Privacy and security | `settings_privacy_security.svg` | Settings category: privacy and security (a shield with a check) |
 | Update | `settings_update.svg` | Settings category: update (circular arrows) |
+| Task Manager | `task_manager.svg` | Task Manager: a window with a usage graph |
+| Device Manager | `device_manager.svg` | Device Manager: a monitor and a chip |
+| Disk Management | `disk_management.svg` | Disk Management: a drive with its partitions on its face |
+| Optimise Drives | `optimize_drives.svg` | Optimise Drives: a drive with its blocks packed together |
+| Snapshots | `snapshot_manager.svg` | The snapshot manager: a drive under stacked layers |
+| File Recovery | `file_recovery.svg` | Deleted-file recovery: the glass bin with a restore arrow |
+| Event Viewer | `event_viewer.svg` | Event Viewer: a log with coloured levels and a warning |
+| System Information | `system_information.svg` | System Information: a monitor with an i badge |
+| ObBrowse | `obbrowse.svg` | ObBrowse: a folder with an object tree |
+| Registry Editor | `registry_editor.svg` | Registry Editor: Resolute RegStudio's icon, converted to the system profile (masks to clip paths) |
+| Services | `services.svg` | Services: a service list with a gear |
+| Task Scheduler | `task_scheduler.svg` | Task Scheduler: a task list with a clock |
+| Computer Management | `computer_management.svg` | Computer Management: a monitor with a gear |
+| Resource Monitor | `resource_monitor.svg` | Resource Monitor: a monitor with two live graphs |
+| Windows Tools | `windows_tools.svg` | The Windows Tools folder: a folder with a wrench and a gear |
+| Security | `security.svg` | Security: a shield with a green check |
+| Camera | `camera.svg` | The Camera app: a camera body and lens |
+| Narrator | `narrator.svg` | Narrator: a page with speech waves |
+| Voice Access | `voice_access.svg` | Voice access: a microphone in a blue circle |
+| Live Captions | `live_captions.svg` | Live captions: a caption bar with a CC mark |
+| Store | `store.svg` | Store: a shopping bag carrying the logo in white |
+| Installer | `installer.svg` | The installer: a box, a download arrow and the logo |
+
+Where an icon shows the Impossible OS logo, it is the logo from `identity/logo.svg`, embedded and never redrawn; its 24 and 16 px drawings snap the logo's own key coordinates to whole pixels, as the Start button's do.
 
 Every icon in the set, like every app icon, has a hand-drawn 24 px drawing (`<name>.24.svg`) and 16 px drawing (`<name>.16.svg`) beside its main drawing, held to the rules under App icons; `tools/check_icons.py` checks `icons/src/` and `icons/apps/` alike.
 

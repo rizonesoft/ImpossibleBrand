@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="services-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#D6DEE8"/></linearGradient><linearGradient id="services-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="services-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient><linearGradient id="services-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient><linearGradient id="services-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient><linearGradient id="services-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient><linearGradient id="services-g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="services-g8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M7 6H33a3 3 0 0 1 3 3V35a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M7 6H33a3 3 0 0 1 3 3V35a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="url(#services-g1)"/>
+<path d="M7 6H33a3 3 0 0 1 3 3V35a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M7 6.6H33" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M7 6H33a3 3 0 0 1 3 3V9.5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="url(#services-g2)"/>
+<path d="M4 10H36V12.5H4Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M8.5 17.0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#services-g3)"/>
+<path d="M14 17.0L30 17.0" stroke="#9FB0C4" stroke-opacity="1.0" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M8.5 22.5a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#services-g4)"/>
+<path d="M14 22.5L26 22.5" stroke="#9FB0C4" stroke-opacity="1.0" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M8.5 28.0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#services-g5)"/>
+<path d="M14 28.0L30 28.0" stroke="#9FB0C4" stroke-opacity="1.0" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M8.5 33.5a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#services-g6)"/>
+<path d="M14 33.5L26 33.5" stroke="#9FB0C4" stroke-opacity="1.0" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M39.06 35.0L42.54 35.0" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M37.870853531617385 37.870853531617385L40.33158513014657 40.33158513014657" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M35.0 39.06L35.0 42.54" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M32.129146468382615 37.870853531617385L29.668414869853432 40.33158513014657" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M30.94 35.0L27.46 35.0" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M32.129146468382615 32.129146468382615L29.66841486985343 29.668414869853432" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M35.0 30.94L35.0 27.46" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M37.870853531617385 32.129146468382615L40.331585130146564 29.66841486985343" stroke="#4A5768" stroke-opacity="1.0" stroke-width="3.19" stroke-linecap="round"/>
+<path d="M29.2 35a5.8 5.8 0 1 0 11.6 0a5.8 5.8 0 1 0 -11.6 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M29.2 35a5.8 5.8 0 1 0 11.6 0a5.8 5.8 0 1 0 -11.6 0Z" fill="url(#services-g7)"/>
+<path d="M29.2 35a5.8 5.8 0 1 0 11.6 0a5.8 5.8 0 1 0 -11.6 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M32.564 35a2.436 2.436 0 1 0 4.872 0a2.436 2.436 0 1 0 -4.872 0Z" fill="url(#services-g8)"/>
+</svg>

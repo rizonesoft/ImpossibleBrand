@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="windows_tools-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B429"/><stop offset="1" stop-color="#D9920F"/></linearGradient><linearGradient id="windows_tools-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient><linearGradient id="windows_tools-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="windows_tools-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8C5D3"/><stop offset="1" stop-color="#7F91A6"/></linearGradient><linearGradient id="windows_tools-24-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient></defs>
+<path d="M2.0 6.0H18.0L20.0 8.0H46.0V44.0H2.0Z" fill="url(#windows_tools-24-g1)"/>
+<path d="M4.0 8.0H44.0V12.0H4.0Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M3.0 14.0H45.0a1.0 1.0 0 0 1 1.0 1.0V43.0a1.0 1.0 0 0 1-1.0 1.0H3.0a1.0 1.0 0 0 1-1.0-1.0V15.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#windows_tools-24-g2)"/>
+<path d="M10.0 38.0L24.0 24.0" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M20.6 23.4a4.0 4.0 0 1 0 8.0 0a4.0 4.0 0 1 0 -8.0 0Z" fill="url(#windows_tools-24-g3)"/>
+<path d="M42.0 34.0H44.0V36.0H42.0Z" fill="#6F7F92" fill-opacity="1.0"/>
+<path d="M30.0 34.0H32.0V36.0H30.0Z" fill="#6F7F92" fill-opacity="1.0"/>
+<path d="M36.0 40.0H38.0V42.0H36.0Z" fill="#6F7F92" fill-opacity="1.0"/>
+<path d="M36.0 28.0H38.0V30.0H36.0Z" fill="#6F7F92" fill-opacity="1.0"/>
+<path d="M39.546 37.546L42.233 40.233" stroke="#6F7F92" stroke-width="2.0" stroke-linecap="round"/>
+<path d="M34.454 37.546L31.767 40.233" stroke="#6F7F92" stroke-width="2.0" stroke-linecap="round"/>
+<path d="M34.454 32.454L31.767 29.767" stroke="#6F7F92" stroke-width="2.0" stroke-linecap="round"/>
+<path d="M39.546 32.454L42.233 29.767" stroke="#6F7F92" stroke-width="2.0" stroke-linecap="round"/>
+<path d="M31.0 35.0a6.0 6.0 0 1 0 12.0 0a6.0 6.0 0 1 0 -12.0 0Z" fill="url(#windows_tools-24-g4)"/>
+<path d="M34.48 35.0a2.52 2.52 0 1 0 5.04 0a2.52 2.52 0 1 0 -5.04 0Z" fill="url(#windows_tools-24-g5)"/>
+</svg>

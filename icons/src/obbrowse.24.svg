@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="obbrowse-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B429"/><stop offset="1" stop-color="#D9920F"/></linearGradient><linearGradient id="obbrowse-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient><linearGradient id="obbrowse-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="obbrowse-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient><linearGradient id="obbrowse-24-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="obbrowse-24-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient></defs>
+<path d="M2.0 6.0H18.0L20.0 8.0H46.0V44.0H2.0Z" fill="url(#obbrowse-24-g1)"/>
+<path d="M4.0 8.0H44.0V12.0H4.0Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M3.0 14.0H45.0a1.0 1.0 0 0 1 1.0 1.0V43.0a1.0 1.0 0 0 1-1.0 1.0H3.0a1.0 1.0 0 0 1-1.0-1.0V15.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#obbrowse-24-g2)"/>
+<path d="M12.0 20.0H14.0V36.0H12.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+<path d="M12.0 26.0H32.0V28.0H12.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+<path d="M12.0 34.0H24.0V36.0H12.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+<path d="M10.0 20.0a3.0 3.0 0 1 0 6.0 0a3.0 3.0 0 1 0 -6.0 0Z" fill="url(#obbrowse-24-g3)"/>
+<path d="M30.0 27.0a3.0 3.0 0 1 0 6.0 0a3.0 3.0 0 1 0 -6.0 0Z" fill="url(#obbrowse-24-g4)"/>
+<path d="M22.0 35.0a3.0 3.0 0 1 0 6.0 0a3.0 3.0 0 1 0 -6.0 0Z" fill="url(#obbrowse-24-g5)"/>
+<path d="M20.0 27.0a3.0 3.0 0 1 0 6.0 0a3.0 3.0 0 1 0 -6.0 0Z" fill="url(#obbrowse-24-g6)"/>
+</svg>

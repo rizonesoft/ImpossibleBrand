@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="voice_access-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="voice_access-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DCE6F2"/></linearGradient></defs>
+<path d="M4 24a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M4 24a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z" fill="url(#voice_access-g1)"/>
+<path d="M4 24a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M24 10H24a5 5 0 0 1 5 5V23a5 5 0 0 1-5 5H24a5 5 0 0 1-5-5V15a5 5 0 0 1 5-5Z" fill="url(#voice_access-g2)"/>
+<path d="M24 10H24a5 5 0 0 1 5 5V23a5 5 0 0 1-5 5H24a5 5 0 0 1-5-5V15a5 5 0 0 1 5-5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M24 10.6H24" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M14.5 23a9.5 9.5 0 0 0 19 0" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M24 32.5L24 37" stroke="#FFFFFF" stroke-opacity="1.0" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="voice_access-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="voice_access-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DCE6F2"/></linearGradient></defs>
+<path d="M3 24a21 21 0 1 0 42 0a21 21 0 1 0 -42 0Z" fill="url(#voice_access-24-g1)"/>
+<path d="M24.0 8.0H24.0a6.0 6.0 0 0 1 6.0 6.0V20.0a6.0 6.0 0 0 1-6.0 6.0H24.0a6.0 6.0 0 0 1-6.0-6.0V14.0a6.0 6.0 0 0 1 6.0-6.0Z" fill="url(#voice_access-24-g2)"/>
+<path d="M15.6 21.0A8.4 8.4 0 0 0 32.4 21.0" fill="none" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="round"/>
+<path d="M22.0 30.0H26.0V34.0H22.0Z" fill="#FFFFFF" fill-opacity="1.0"/>
+</svg>

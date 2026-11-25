@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="task_scheduler-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#D6DEE8"/></linearGradient><linearGradient id="task_scheduler-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient></defs>
+<path d="M4.0 14.0H38.0a2.0 2.0 0 0 1 2.0 2.0V44.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V16.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#task_scheduler-24-g1)"/>
+<path d="M4.0 15.0H38.0a1.0 1.0 0 0 1 1.0 1.0V44.0a1.0 1.0 0 0 1-1.0 1.0H4.0a1.0 1.0 0 0 1-1.0-1.0V16.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M2.0 14.0H40.0V20.0H2.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M6.0 24.0H10.0V28.0H6.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M12.0 24.0H36.0V26.0H12.0Z" fill="#9FB0C4" fill-opacity="1.0"/>
+<path d="M6.0 30.0H10.0V34.0H6.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M12.0 30.0H36.0V32.0H12.0Z" fill="#9FB0C4" fill-opacity="1.0"/>
+<path d="M6.0 36.0H10.0V40.0H6.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M12.0 36.0H36.0V38.0H12.0Z" fill="#9FB0C4" fill-opacity="1.0"/>
+<path d="M23.0 13.0a12.0 12.0 0 1 0 24.0 0a12.0 12.0 0 1 0 -24.0 0Z" fill="url(#task_scheduler-24-g2)"/>
+<circle cx="35.0" cy="13.0" r="10.2" fill="#FFFFFF" stroke="#1B74E2" stroke-width="2.0"/>
+<path d="M35.0 13.0V6.84M35.0 13.0L40.04 15.8" stroke="#1E252E" stroke-width="2.0" stroke-linecap="round"/>
+</svg>

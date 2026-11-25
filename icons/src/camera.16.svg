@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="camera-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="camera-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6DEE8"/><stop offset="1" stop-color="#8A98AA"/></linearGradient><linearGradient id="camera-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B7CF0"/><stop offset="1" stop-color="#0F2A6E"/></linearGradient></defs>
+<path d="M7.5 12.0H40.5a4.5 4.5 0 0 1 4.5 4.5V34.5a4.5 4.5 0 0 1-4.5 4.5H7.5a4.5 4.5 0 0 1-4.5-4.5V16.5a4.5 4.5 0 0 1 4.5-4.5Z" fill="url(#camera-16-g1)"/>
+<path d="M4.5 13.5H43.5V37.5H4.5Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="3.0"/>
+<path d="M15.0 9.0H27.0V12.0H15.0Z" fill="#1E252E" fill-opacity="1.0"/>
+<path d="M14.399999999999999 25.5a9.600000000000001 9.600000000000001 0 1 0 19.200000000000003 0a9.600000000000001 9.600000000000001 0 1 0 -19.200000000000003 0Z" fill="url(#camera-16-g2)"/>
+<path d="M17.4 25.5a6.6000000000000005 6.6000000000000005 0 1 0 13.200000000000001 0a6.6000000000000005 6.6000000000000005 0 1 0 -13.200000000000001 0Z" fill="url(#camera-16-g3)"/>
+</svg>
