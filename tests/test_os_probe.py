@@ -3,8 +3,11 @@ programs beside this repository, and HEAD, working trees and origin/main that di
 import json
 import os
 import shutil
+import subprocess
 import sys
+import threading
 import time
+from pathlib import Path
 
 import pytest
 from gitfixtures import (
@@ -442,6 +445,33 @@ def test_the_watchdog_kills_a_git_still_running_when_it_fires(world, tmp_path):
     assert time.monotonic() - start < 8.6
     time.sleep(0.2)
     assert pidfile.exists() and not alive(int(pidfile.read_text()))
+
+
+def test_the_watchdog_itself_kills_a_child_the_worker_still_holds(world, monkeypatch):
+    """The worker starts a child it has not registered and blocks: only the watchdog's cleanup can end the child."""
+    import os_probe
+    started, child = threading.Event(), {}
+
+    def stuck_locate(root, clock=None):
+        proc = subprocess.Popen(["sleep", "300"], start_new_session=True)
+        child["pid"] = proc.pid
+        started.set()
+        threading.Event().wait()  # blocks like a read on a hung mount
+
+    class Exited(Exception):
+        pass
+
+    def fake_exit(code):
+        raise Exited(code)
+
+    monkeypatch.setattr(os_probe, "locate", stuck_locate)
+    monkeypatch.setattr(os_probe, "WATCHDOG_SECONDS", 1.0)
+    monkeypatch.setattr(os_probe.os, "_exit", fake_exit)
+    with pytest.raises(Exited):
+        os_probe.main(["--root", str(world["brand"]), "locate"])
+    assert started.is_set()
+    time.sleep(0.2)
+    assert not alive(child["pid"]) or Path(f"/proc/{child['pid']}/stat").read_text().split()[2] == "Z"
 
 
 def test_many_slow_calls_stop_at_the_whole_probe_deadline(world, tmp_path):

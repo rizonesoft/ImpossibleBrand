@@ -106,6 +106,36 @@ def kill_group(pid):
         pass
 
 
+def children():
+    """Every live child of this process, read from /proc by parent pid: a git still being launched, whose pid
+    Popen has not returned yet, is found too."""
+    me, found = str(os.getpid()), []
+    for entry in os.scandir("/proc"):
+        if not entry.name.isdigit():
+            continue
+        try:
+            with open(f"/proc/{entry.name}/stat", encoding="ascii", errors="replace") as handle:
+                fields = handle.read().rsplit(")", 1)[1].split()
+        except OSError:  # the process ended while the list was read
+            continue
+        if fields[1] == me:
+            found.append(int(entry.name))
+    return found
+
+
+def end_children():
+    """Kill every child's group, and the child itself in case it has not made its own group yet."""
+    with ACTIVE_LOCK:
+        pids = set(ACTIVE)
+    pids.update(children())
+    for pid in pids:
+        kill_group(pid)
+        try:
+            os.kill(pid, signal.SIGKILL)
+        except ProcessLookupError:  # already gone with its group
+            pass
+
+
 class Unreadable(Exception):
     """A checkout's git config could not be read; the message says why."""
 
@@ -441,9 +471,7 @@ def main(argv=None):
     worker.start()
     worker.join(WATCHDOG_SECONDS - (time.monotonic() - started))
     if worker.is_alive():  # a read that blocks below git (a hung mount, a pipe) cannot be timed out in place
-        with ACTIVE_LOCK:
-            for pid in list(ACTIVE):
-                kill_group(pid)  # no git outlives the probe
+        end_children()  # no git outlives the probe, launched or still launching
         print("deadline: the probe ran out of time")
         sys.stdout.flush()
         os._exit(1)
