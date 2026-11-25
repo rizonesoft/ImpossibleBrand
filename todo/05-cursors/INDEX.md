@@ -2,6 +2,6 @@
 
 ## Active TODOs
 
-- [TODO-01 -- Cursor Set](TODO-01-cursor-set.md)
+- [TODO-01 -- Cursor Themes](TODO-01-cursor-set.md)
 
 ## Completed TODOs

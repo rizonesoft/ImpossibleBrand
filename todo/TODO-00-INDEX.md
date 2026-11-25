@@ -6,6 +6,7 @@
 - [TODO-01 -- Icon Engine](02-engine/TODO-01-icon-engine.md)
 - [TODO-01 -- OS Reconciliation](03-switchover/TODO-01-os-reconciliation.md)
 - [TODO-01 -- Programs and SDK](04-consumers/TODO-01-programs-and-sdk.md)
-- [TODO-01 -- Cursor Set](05-cursors/TODO-01-cursor-set.md)
+- [TODO-01 -- Cursor Themes](05-cursors/TODO-01-cursor-set.md)
+- [TODO-01 -- System Icons and Wallpapers](06-art/TODO-01-system-icons-and-wallpapers.md)
 
 ## Completed TODOs

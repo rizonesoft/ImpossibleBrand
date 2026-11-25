@@ -42,7 +42,7 @@ title: "TODO-01 -- Contract, Palette and Pack"
 
 ## 1. OS locator and Need probes
 
-The Needs `os-contract`, `app-pulls-brand` and `sdk-pulls-brand` in `todo/plan.json` are proven by `tools/os_probe.py`. It finds the Impossible OS checkout and the sibling repositories without network access, so a probe answers within its 10-second limit and a section that waits on another repository becomes ready by itself once that repository's `main` delivers.
+The Needs `os-contract`, `app-pulls-brand`, `sdk-pulls-brand` and the five `designs-<set>` Needs in `todo/plan.json` are proven by `tools/os_probe.py`. It finds the Impossible OS checkout and the sibling repositories without network access, so a probe answers within its 10-second limit and a section that waits on another repository becomes ready by itself once that repository's `main` delivers.
 
 **Phase:** 2
 **Needs:** none
@@ -50,7 +50,7 @@ The Needs `os-contract`, `app-pulls-brand` and `sdk-pulls-brand` in `todo/plan.j
 
 **Build order:**
 
-1. Write `tools/os_probe.py` with `locate`, `contract`, `app-pulls` and `sdk-pulls`. Done when: each prints one line and exits 0 when met, 1 when not.
+1. Write `tools/os_probe.py` with `locate`, `contract`, `app-pulls`, `sdk-pulls` and `designs`. Done when: each prints one line and exits 0 when met, 1 when not.
 2. Write `tests/test_os_probe.py` against throwaway git repositories. Done when: every subcommand is shown both met and not met.
 
 - [ ] Resolve the OS checkout in `tools/os_probe.py locate`: `paths.impossible_os` in `.conclave/local.toml`, then a sibling search for a checkout whose `origin` is `rizonesoft/impossible-os`. Done when: it prints the path, or exits 1 with "set paths.impossible_os in .conclave/local.toml". Cheaper substitute: a hardcoded home path.
@@ -58,6 +58,7 @@ The Needs `os-contract`, `app-pulls-brand` and `sdk-pulls-brand` in `todo/plan.j
 - [ ] Implement `contract`: met when `git -C <os> cat-file -e origin/main:docs/design/brand-contract.json` succeeds. Done when: a fixture OS without the file exits 1 and with it exits 0. Cheaper substitute: checking the working tree, which another run may be editing.
 - [ ] Implement `app-pulls`: met when every repository in `consumers.json` (or, before it exists, every `~/ImpossibleOS/*/app.json` sibling) has `impossible-brand/` in `origin/main:docs/unattended-prompt.md`. Done when: one sibling without it exits 1 and names it. Cheaper substitute: checking only one repository.
 - [ ] Implement `sdk-pulls`: met when Impossible SDK's `origin/main:docs/unattended-prompt.md` names `impossible-brand/`. Done when: both outcomes are tested. Cheaper substitute: reading the SDK working tree.
+- [ ] Implement `designs <set>`: met when `design/<set>.json` (spec "Scope, 2026-11-25") is committed on this repository's `HEAD` with `set`, `approved`, `board` and a non-empty `files` list, and every listed file is committed too. Done when: a missing manifest, a manifest naming an uncommitted file and a complete set are each tested. Cheaper substitute: checking the working tree, where a session may be mid-edit.
 - [ ] Bound every git call in `tools/os_probe.py` with a 3-second timeout that kills its process group. Done when: a test with a hanging fake `git` returns within 10 seconds and leaves no child. Cheaper substitute: `subprocess.run(timeout=...)` alone, which leaves children.
 - [ ] Write `tests/test_os_probe.py` covering every subcommand met and not met. Done when: `python3 -m pytest tests/test_os_probe.py -q` passes and fails when `contract` always returns 0.
 - [ ] Commit: `tools: OS locator and Need probes`
@@ -146,6 +147,7 @@ Every colour attribute in a source becomes `palette:<entry>`, and `tools/palette
 
 - [ ] Create `icons/status.json` mapping each icon to `draft`, `generated` or `hand-authored` and its `requested_by` list. Done when: every file in `icons/src/` has an entry and no entry lacks a file. Cheaper substitute: deriving status from file names.
 - [ ] List every asset in `pack/manifest.json`: icons, cursors, identity files and wallpapers, each with `name`, `kind`, `status`, `source`, `sizes`, `sha256` and `requested_by`, sorted by kind and name. Done when: the manifest of the seed lists 26 icons, 59 cursors, every identity file and 3 wallpapers. Cheaper substitute: icons only.
+- [ ] Write the manifest's `defaults` map from `defaults.json` at the repository root: `{"wallpaper": "silk", "cursor_theme": "linux"}` until D05 T01 §8 and D06 T01 §3 change them, each value checked against an existing wallpaper pair and cursor theme. Done when: a default naming no pair or theme fails `check` naming it. Cheaper substitute: defaults hardcoded in consumers.
 - [ ] Record the pulled contract commit from `contract/source.json` in the manifest's `contract` field. Done when: changing `contract/source.json` makes `check` fail. Cheaper substitute: leaving it null.
 - [ ] Write the manifest with sorted keys and a trailing newline. Done when: two builds are byte-identical. Cheaper substitute: insertion order.
 - [ ] Write `tests/test_pack.py`. Done when: `python3 -m pytest tests/test_pack.py -q` passes and fails when one source byte changes without a rebuild.

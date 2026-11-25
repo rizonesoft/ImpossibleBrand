@@ -1,6 +1,6 @@
 {
   "title": "Impossible Brand implementation plan",
-  "acceptance": "Every consumer builds from a pinned brand pack: the OS and every program get their icons, cursors, identity and wallpapers from here, a missing icon is drafted locally and designed here without anyone waiting, and our own cursor set has replaced Adwaita.",
+  "acceptance": "Every consumer builds from a pinned brand pack: the OS and every program get their icons, cursors, identity and wallpapers from here, a missing icon is drafted locally and designed here without anyone waiting, the session's designs (41 app icons, the shell's system icons, three cursor themes, five wallpaper pairs) are wired and rendered, and the pack's defaults name the Windows 11 style cursors and the default wallpaper pair.",
   "phases": {
     "0": "Repository and tooling",
     "1": "Seed",
@@ -9,6 +9,7 @@
     "4": "OS switch-over",
     "5": "Programs and SDK",
     "6": "Cursors",
+    "7": "System icons and wallpapers",
     "99": "Manual, operator only"
   },
   "needs": [
@@ -24,11 +25,58 @@
     "operator",
     "os-contract",
     "app-pulls-brand",
-    "sdk-pulls-brand"
+    "sdk-pulls-brand",
+    "designs-apps",
+    "designs-system-icons",
+    "designs-cursors-windows-11",
+    "designs-cursors-mac",
+    "designs-wallpapers"
   ],
   "probes": {
-    "os-contract": ["python3", "tools/os_probe.py", "contract"],
-    "app-pulls-brand": ["python3", "tools/os_probe.py", "app-pulls"],
-    "sdk-pulls-brand": ["python3", "tools/os_probe.py", "sdk-pulls"]
+    "os-contract": [
+      "python3",
+      "tools/os_probe.py",
+      "contract"
+    ],
+    "app-pulls-brand": [
+      "python3",
+      "tools/os_probe.py",
+      "app-pulls"
+    ],
+    "sdk-pulls-brand": [
+      "python3",
+      "tools/os_probe.py",
+      "sdk-pulls"
+    ],
+    "designs-apps": [
+      "python3",
+      "tools/os_probe.py",
+      "designs",
+      "apps"
+    ],
+    "designs-system-icons": [
+      "python3",
+      "tools/os_probe.py",
+      "designs",
+      "system-icons"
+    ],
+    "designs-cursors-windows-11": [
+      "python3",
+      "tools/os_probe.py",
+      "designs",
+      "cursors-windows-11"
+    ],
+    "designs-cursors-mac": [
+      "python3",
+      "tools/os_probe.py",
+      "designs",
+      "cursors-mac"
+    ],
+    "designs-wallpapers": [
+      "python3",
+      "tools/os_probe.py",
+      "designs",
+      "wallpapers"
+    ]
   }
 }

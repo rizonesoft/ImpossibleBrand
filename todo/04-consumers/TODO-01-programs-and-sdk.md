@@ -13,9 +13,12 @@ depends_on: ["icon-engine"]
 
 > **Current state:** Measured 2026-11-25. 41 program repositories sit beside this one in `~/ImpossibleOS/`, each with an `app.json` and no app icon: Browser, Calculator, Calendar, CharacterMap, Chat, Chess, Clock, Colophon, ColorPicker, Command, Compare, DiskMap, FTP, Fonts, Heliograph, IconEditor, Imprint, Magnifier, Mail, MediaPlayer, Minesweeper, Music, NewsReader, Nibble, Notepad, OnScreenKeyboard, Paint, Perihelion, Photos, RemoteDesktop, Rename, SSH, Screensavers, Solitaire, SoundRecorder, StickyNotes, Stillframe, Sudoku, Weather, WordPad and Zip. Their unattended runs merge only pull requests from branches named `impossible-os/...` (the `PULLS` rule Impossible SDK's `tools/new_app.py` writes into each `docs/unattended-prompt.md`), so a pull request from this repository is not taken yet. Impossible SDK keeps its own identity in `brand/` (MIT) rendered by its `tools/brand.py`, and its own run is often live: it is never edited from here.
 
+**Corrected 2026-11-25:** this file had the run draw the 41 app icons. The operator moved the drawing into session (spec "Scope, 2026-11-25": three options each, chosen on comparison boards); §5 to §9 now wire the chosen sources from `design/apps.json` and never redraw them.
+
 ## Inputs
 
 - `docs/specs/2026-11-25-brand-split-design.md`: "What happens when something needs an icon that does not exist?" step 4 (collect) and the phase 5 row.
+- `design/apps.json`: the session's approved app icons (Need `designs-apps`, probed by D01 T01 §1).
 - D02 T01: the engine (`draft`, `score`, `sheet`, `polish`, `promote`, `sync`, `tools/pinned.py`, `tools/brand_run.py`).
 - Each program's `app.json` (`name`, `label`) and `AGENTS.md` Goal line: what its icon must say.
 - Impossible SDK `tools/new_app.py` (`PULLS`, `SHARED`) and `tools/contribute.py`: how its rules reach new programs and how a change is offered to it.
@@ -138,129 +141,134 @@ App icons are free-standing full-colour drawings with rounded edges, no tile and
 
 ## 5. App icons: text and documents
 
-Notepad, WordPad, Colophon (Markdown), Nibble (Hex Editor), Compare and CharacterMap. Each is drawn here, polished with `icon_engine.py polish` and promoted.
+Notepad, WordPad, Colophon (Markdown), Nibble (Hex Editor), Compare and CharacterMap. The drawings are the session's (`design/apps.json`); this section wires them.
 
 **Phase:** 5
-**Needs:** none
+**Needs:** designs-apps
 **Surface:** no
 
 **Build order:**
 
-1. Draw each icon as a definition or hand-authored source. Done when: each passes `validate`.
-2. Polish and promote each. Done when: `icon_engine.py drafts` lists none of them, or lists the failing points after round 5.
+1. Validate and score each chosen source. Done when: each passes, or its failing rubric points are recorded on its App icons row for the operator.
+2. Render and list each. Done when: every size is in `icons/color/` and the manifest lists it as `hand-authored`.
 
-- [ ] Draw `app_notepad` (a lined note page and pencil). Done when: promoted or its failing points recorded. Cheaper substitute: `text_file` reused.
-- [ ] Draw `app_wordpad` (a page with formatted text blocks and a pen nib). Done when: promoted or recorded. Cheaper substitute: `app_notepad` recoloured.
-- [ ] Draw `app_colophon` (a page with a Markdown heading mark and a preview pane). Done when: promoted or recorded. Cheaper substitute: the letter M.
-- [ ] Draw `app_nibble` (a grid of byte cells with one highlighted). Done when: promoted or recorded. Cheaper substitute: binary digits as text.
-- [ ] Draw `app_compare` (two pages side by side with a change band). Done when: promoted or recorded. Cheaper substitute: one page with arrows.
-- [ ] Draw `app_charactermap` (a glyph grid with one enlarged character). Done when: promoted or recorded. Cheaper substitute: a font icon.
-- [ ] Commit: `icons: text and document app icons`
+- [ ] Check that `design/apps.json` lists every icon of this section. Done when: a missing one is reported naming it and the section waits for the session. Cheaper substitute: drawing the missing one here.
+- [ ] Wire `app_notepad` (session brief: a lined note page and pencil): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_wordpad` (session brief: a page with formatted text blocks and a pen nib): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_colophon` (session brief: a page with a Markdown heading mark and a preview pane): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_nibble` (session brief: a grid of byte cells with one highlighted): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_compare` (session brief: two pages side by side with a change band): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_charactermap` (session brief: a glyph grid with one enlarged character): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Commit: `icons: wire text and document app icons`
 
-**Test checkpoint:** `python3 tools/check.py` exits 0 and `python3 tools/icon_engine.py drafts --category app` lists none of these six without recorded failing points.
+**Test checkpoint:** `python3 tools/check.py` exits 0, the manifest lists these 6 icons as `hand-authored`, and `git diff <design commit> -- icons/src/app_*.svg` shows no change by the run.
 
 ## 6. App icons: pictures, sound and video
 
-Photos, Paint, IconEditor, ColorPicker, Stillframe (Screenshot), Magnifier, MediaPlayer, Music, SoundRecorder and Screensavers.
+Photos, Paint, IconEditor, ColorPicker, Stillframe (Screenshot), Magnifier, MediaPlayer, Music, SoundRecorder and Screensavers. The drawings are the session's (`design/apps.json`); this section wires them.
 
 **Phase:** 5
-**Needs:** none
+**Needs:** designs-apps
 **Surface:** no
 
 **Build order:**
 
-1. Draw each icon. Done when: each passes `validate`.
-2. Polish and promote each. Done when: none is an unrecorded draft.
+1. Validate and score each chosen source. Done when: each passes, or its failing rubric points are recorded on its App icons row for the operator.
+2. Render and list each. Done when: every size is in `icons/color/` and the manifest lists it as `hand-authored`.
 
-- [ ] Draw `app_photos` (a photo print with a landscape). Done when: promoted or its failing points recorded. Cheaper substitute: `file_image` reused.
-- [ ] Draw `app_paint` (a palette and brush). Done when: promoted or recorded. Cheaper substitute: a brush alone.
-- [ ] Draw `app_iconeditor` (a pixel grid with a pencil). Done when: promoted or recorded. Cheaper substitute: `app_paint` recoloured.
-- [ ] Draw `app_colorpicker` (an eyedropper over a colour swatch). Done when: promoted or recorded. Cheaper substitute: a rainbow circle.
-- [ ] Draw `app_stillframe` (a capture frame with corner marks over a window). Done when: promoted or recorded. Cheaper substitute: a camera.
-- [ ] Draw `app_magnifier` (a magnifying glass over a lens view). Done when: promoted or recorded. Cheaper substitute: a search glyph.
-- [ ] Draw `app_mediaplayer` (a film frame with a play mark). Done when: promoted or recorded. Cheaper substitute: a triangle.
-- [ ] Draw `app_music` (a note over a disc). Done when: promoted or recorded. Cheaper substitute: a note glyph.
-- [ ] Draw `app_soundrecorder` (a microphone with a level meter). Done when: promoted or recorded. Cheaper substitute: a microphone glyph.
-- [ ] Draw `app_screensavers` (a monitor with a starfield, on `parts/monitor.py`). Done when: promoted or recorded. Cheaper substitute: `computer` reused.
-- [ ] Commit: `icons: picture, sound and video app icons`
+- [ ] Check that `design/apps.json` lists every icon of this section. Done when: a missing one is reported naming it and the section waits for the session. Cheaper substitute: drawing the missing one here.
+- [ ] Wire `app_photos` (session brief: a photo print with a landscape): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_paint` (session brief: a palette and brush): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_iconeditor` (session brief: a pixel grid with a pencil): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_colorpicker` (session brief: an eyedropper over a colour swatch): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_stillframe` (session brief: a capture frame with corner marks over a window): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_magnifier` (session brief: a magnifying glass over a lens view): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_mediaplayer` (session brief: a film frame with a play mark): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_music` (session brief: a note over a disc): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_soundrecorder` (session brief: a microphone with a level meter): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_screensavers` (session brief: a monitor with a starfield, on `parts/monitor.py`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Commit: `icons: wire picture, sound and video app icons`
 
-**Test checkpoint:** `python3 tools/check.py` exits 0 and `python3 tools/icon_engine.py drafts --category app` lists none of these ten without recorded failing points.
+**Test checkpoint:** `python3 tools/check.py` exits 0, the manifest lists these 10 icons as `hand-authored`, and `git diff <design commit> -- icons/src/app_*.svg` shows no change by the run.
 
 ## 7. App icons: games
 
-Chess, Minesweeper, Solitaire, Sudoku and Perihelion (our own gravity puzzle: a probe steered around planets).
+Chess, Minesweeper, Solitaire, Sudoku and Perihelion (our own gravity puzzle: a probe steered around planets). The drawings are the session's (`design/apps.json`); this section wires them.
 
 **Phase:** 5
-**Needs:** none
+**Needs:** designs-apps
 **Surface:** no
 
 **Build order:**
 
-1. Draw each icon. Done when: each passes `validate`.
-2. Polish and promote each. Done when: none is an unrecorded draft.
+1. Validate and score each chosen source. Done when: each passes, or its failing rubric points are recorded on its App icons row for the operator.
+2. Render and list each. Done when: every size is in `icons/color/` and the manifest lists it as `hand-authored`.
 
-- [ ] Draw `app_chess` (a knight and a pawn). Done when: promoted or its failing points recorded. Cheaper substitute: a board pattern.
-- [ ] Draw `app_minesweeper` (a raised tile with a flag and one mine). Done when: promoted or recorded. Cheaper substitute: a bomb emoji.
-- [ ] Draw `app_solitaire` (two fanned cards). Done when: promoted or recorded. Cheaper substitute: one card.
-- [ ] Draw `app_sudoku` (a 3 by 3 block with filled cells). Done when: promoted or recorded. Cheaper substitute: digits as text.
-- [ ] Draw `app_perihelion` (a probe on a curved path around a planet). Done when: promoted or recorded. Cheaper substitute: a planet alone.
-- [ ] Commit: `icons: game app icons`
+- [ ] Check that `design/apps.json` lists every icon of this section. Done when: a missing one is reported naming it and the section waits for the session. Cheaper substitute: drawing the missing one here.
+- [ ] Wire `app_chess` (session brief: a knight and a pawn): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_minesweeper` (session brief: a raised tile with a flag and one mine): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_solitaire` (session brief: two fanned cards): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_sudoku` (session brief: a 3 by 3 block with filled cells): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_perihelion` (session brief: a probe on a curved path around a planet): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Commit: `icons: wire game app icons`
 
-**Test checkpoint:** `python3 tools/check.py` exits 0 and `python3 tools/icon_engine.py drafts --category app` lists none of these five without recorded failing points.
+**Test checkpoint:** `python3 tools/check.py` exits 0, the manifest lists these 5 icons as `hand-authored`, and `git diff <design commit> -- icons/src/app_*.svg` shows no change by the run.
 
 ## 8. App icons: internet and messages
 
-Browser, Mail, Chat, NewsReader, Weather, FTP, SSH, RemoteDesktop and Heliograph (messages and jobs between agent sessions).
+Browser, Mail, Chat, NewsReader, Weather, FTP, SSH, RemoteDesktop and Heliograph (messages and jobs between agent sessions). The drawings are the session's (`design/apps.json`); this section wires them.
 
 **Phase:** 5
-**Needs:** none
+**Needs:** designs-apps
 **Surface:** no
 
 **Build order:**
 
-1. Draw each icon. Done when: each passes `validate`.
-2. Polish and promote each. Done when: none is an unrecorded draft.
+1. Validate and score each chosen source. Done when: each passes, or its failing rubric points are recorded on its App icons row for the operator.
+2. Render and list each. Done when: every size is in `icons/color/` and the manifest lists it as `hand-authored`.
 
-- [ ] Draw `app_browser` (a globe with an orbit, in the logo blues). Done when: promoted or its failing points recorded. Cheaper substitute: a compass.
-- [ ] Draw `app_mail` (an envelope). Done when: promoted or recorded. Cheaper substitute: an at sign.
-- [ ] Draw `app_chat` (two overlapping speech bubbles). Done when: promoted or recorded. Cheaper substitute: one bubble.
-- [ ] Draw `app_newsreader` (a folded newspaper with a feed mark). Done when: promoted or recorded. Cheaper substitute: an RSS glyph.
-- [ ] Draw `app_weather` (a sun behind a cloud). Done when: promoted or recorded. Cheaper substitute: a sun alone.
-- [ ] Draw `app_ftp` (a folder with up and down arrows, on `parts/folder.py`). Done when: promoted or recorded. Cheaper substitute: `folder_closed` reused.
-- [ ] Draw `app_ssh` (a terminal window with a key, on the terminal's slate). Done when: promoted or recorded. Cheaper substitute: `terminal` reused.
-- [ ] Draw `app_remotedesktop` (a monitor showing a second monitor, on `parts/monitor.py`). Done when: promoted or recorded. Cheaper substitute: `network` reused.
-- [ ] Draw `app_heliograph` (a signalling mirror flashing a beam). Done when: promoted or recorded. Cheaper substitute: a lightning bolt.
-- [ ] Commit: `icons: internet and message app icons`
+- [ ] Check that `design/apps.json` lists every icon of this section. Done when: a missing one is reported naming it and the section waits for the session. Cheaper substitute: drawing the missing one here.
+- [ ] Wire `app_browser` (session brief: a globe with an orbit, in the logo blues): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_mail` (session brief: an envelope): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_chat` (session brief: two overlapping speech bubbles): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_newsreader` (session brief: a folded newspaper with a feed mark): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_weather` (session brief: a sun behind a cloud): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_ftp` (session brief: a folder with up and down arrows, on `parts/folder.py`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_ssh` (session brief: a terminal window with a key, on the terminal's slate): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_remotedesktop` (session brief: a monitor showing a second monitor, on `parts/monitor.py`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_heliograph` (session brief: a signalling mirror flashing a beam): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Commit: `icons: wire internet and message app icons`
 
-**Test checkpoint:** `python3 tools/check.py` exits 0 and `python3 tools/icon_engine.py drafts --category app` lists none of these nine without recorded failing points.
+**Test checkpoint:** `python3 tools/check.py` exits 0, the manifest lists these 9 icons as `hand-authored`, and `git diff <design commit> -- icons/src/app_*.svg` shows no change by the run.
 
 ## 9. App icons: desktop utilities and system tools
 
-Calculator, Calendar, Clock, StickyNotes, OnScreenKeyboard, Fonts, DiskMap, Rename, Zip, Imprint (Image Writer) and Command.
+Calculator, Calendar, Clock, StickyNotes, OnScreenKeyboard, Fonts, DiskMap, Rename, Zip, Imprint (Image Writer) and Command. The drawings are the session's (`design/apps.json`); this section wires them.
 
 **Phase:** 5
-**Needs:** none
+**Needs:** designs-apps
 **Surface:** no
 
 **Build order:**
 
-1. Draw each icon. Done when: each passes `validate`.
-2. Polish and promote each. Done when: none is an unrecorded draft.
+1. Validate and score each chosen source. Done when: each passes, or its failing rubric points are recorded on its App icons row for the operator.
+2. Render and list each. Done when: every size is in `icons/color/` and the manifest lists it as `hand-authored`.
 
-- [ ] Draw `app_calculator` (a calculator body with keys and a display). Done when: promoted or its failing points recorded. Cheaper substitute: a plus sign.
-- [ ] Draw `app_calendar` (a page calendar with a date block). Done when: promoted or recorded. Cheaper substitute: a grid.
-- [ ] Draw `app_clock` (a clock face with hands). Done when: promoted or recorded. Cheaper substitute: a circle.
-- [ ] Draw `app_stickynotes` (two stacked notes, one curled). Done when: promoted or recorded. Cheaper substitute: a yellow square.
-- [ ] Draw `app_onscreenkeyboard` (a keyboard with a pointer). Done when: promoted or recorded. Cheaper substitute: a key.
-- [ ] Draw `app_fonts` (a type specimen with a large letterform built from paths). Done when: promoted or recorded. Cheaper substitute: an SVG text element, which the profile forbids.
-- [ ] Draw `app_diskmap` (a drive with a coloured treemap face, on `parts/drive.py`). Done when: promoted or recorded. Cheaper substitute: a pie chart.
-- [ ] Draw `app_rename` (a file tag with an edit caret, on `parts/document.py`). Done when: promoted or recorded. Cheaper substitute: a pencil.
-- [ ] Draw `app_zip` (a folder with a zipper, on `parts/folder.py`). Done when: promoted or recorded. Cheaper substitute: `file_archive` reused.
-- [ ] Draw `app_imprint` (a USB stick receiving a disc image). Done when: promoted or recorded. Cheaper substitute: `drive_removable` reused.
-- [ ] Draw `app_command` (a console window with a prompt, distinct from `terminal`). Done when: promoted or recorded and its 16-pixel distance from `terminal` passes. Cheaper substitute: `terminal` reused.
-- [ ] Commit: `icons: utility and system app icons`
+- [ ] Check that `design/apps.json` lists every icon of this section. Done when: a missing one is reported naming it and the section waits for the session. Cheaper substitute: drawing the missing one here.
+- [ ] Wire `app_calculator` (session brief: a calculator body with keys and a display): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_calendar` (session brief: a page calendar with a date block): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_clock` (session brief: a clock face with hands): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_stickynotes` (session brief: two stacked notes, one curled): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_onscreenkeyboard` (session brief: a keyboard with a pointer): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_fonts` (session brief: a type specimen with a large letterform built from paths): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_diskmap` (session brief: a drive with a coloured treemap face, on `parts/drive.py`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_rename` (session brief: a file tag with an edit caret, on `parts/document.py`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_zip` (session brief: a folder with a zipper, on `parts/folder.py`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_imprint` (session brief: a USB stick receiving a disc image): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Wire `app_command` (session brief: a console window with a prompt, distinct from `terminal`): validate, score, render, status `hand-authored`, App icons row. Done when: it is in the manifest and unchanged by the run. Cheaper substitute: redrawing it here.
+- [ ] Commit: `icons: wire utility and system app icons`
 
-**Test checkpoint:** `python3 tools/check.py` exits 0 and `python3 tools/icon_engine.py drafts --category app` lists none of these eleven without recorded failing points.
+**Test checkpoint:** `python3 tools/check.py` exits 0, the manifest lists these 11 icons as `hand-authored`, and `git diff <design commit> -- icons/src/app_*.svg` shows no change by the run.
 
 ## 10. brand.json in every program
 
