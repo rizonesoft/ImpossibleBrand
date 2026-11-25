@@ -102,7 +102,7 @@ def test_diagonals_curves_and_gradients_pass(tmp_path, capsys):
     passes(tmp_path, capsys, small16=(
         '<path d="M6 6H42V42H6Z" fill="#E3E9F0"/><path d="M12 36L21 12H27L36 36Z" fill="#1450C8"/>'
         '<path d="M3 13.5L45 13.7V15H3Z" fill="#000"/><circle cx="24.7" cy="30.3" r="5.2" fill="#FFF"/>'
-        '<path d="M12 18C20 10 28 10 36 18" fill="none" stroke="#000" stroke-width="2.3"/>'))
+        '<path d="M12 18C20 10 28 10 36 18" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round"/>'))
 
 
 def test_main_drawing_is_not_held_to_pixels(tmp_path, capsys):
@@ -120,7 +120,7 @@ def test_empty_drawing_is_refused(tmp_path, capsys):
 
 
 def test_profile_allowlist(tmp_path, capsys):
-    refused(tmp_path, capsys, "profile: <animate> in demo.svg", main=CRISP + '<animate attributeName="x"/>')
+    refused(tmp_path, capsys, "profile: <animate> is not allowed in demo.svg", main=CRISP + '<animate attributeName="x"/>')
     refused(tmp_path, capsys, "profile: filter= on <path>", main='<path d="M6 6H42V42H6Z" fill="#000" filter="url(#f)"/>')
     passes(tmp_path, capsys, main='<clipPath id="demo-c"><rect width="48" height="48"/></clipPath>'
                                   '<path d="M6 6H42V42H6Z" fill="#000" clip-path="url(#demo-c)"/>')
@@ -147,6 +147,73 @@ def test_unknown_file_name_is_refused(tmp_path, capsys):
     (folder / "my-app.svg").write_text(svg(CRISP), encoding="utf-8")
     code, out = run(tmp_path, capsys)
     assert code == 1 and "name: icons/apps/my-app.svg" in out
+
+
+# ---- round 2 review: the small-drawing language and the geometry it can read --------------------------------------
+def test_small_drawing_language_refuses_what_hides_geometry(tmp_path, capsys):
+    refused(tmp_path, capsys, "<symbol> is not allowed in a small drawing",
+            small16=CRISP + '<symbol id="demo-16-s"><rect x="1" width="6" height="6"/></symbol><use href="#demo-16-s"/>')
+    refused(tmp_path, capsys, "rotate() is not allowed in a small drawing",
+            small16=CRISP + '<path d="M3 6H9" stroke="#000" stroke-width="3" transform="rotate(90 12 12)"/>')
+    refused(tmp_path, capsys, "clip-path= on <rect>", small24=CRISP + '<rect width="12" height="12" clip-path="url(#demo-24-g1)"/>')
+    refused(tmp_path, capsys, "<svg> is not allowed", small16=CRISP + '<svg x="1"><rect width="6" height="6"/></svg>')
+
+
+def test_main_drawing_may_use_symbols(tmp_path, capsys):
+    passes(tmp_path, capsys, main='<symbol id="demo-s"><rect x="1" width="6" height="6"/></symbol><use href="#demo-s"/>')
+    refused(tmp_path, capsys, "refers to #demo-missing", main=CRISP + '<use href="#demo-missing"/>')
+
+
+def test_invisible_drawings_are_empty(tmp_path, capsys):
+    refused(tmp_path, capsys, "empty: demo.16.svg", small16="<path/>")
+    refused(tmp_path, capsys, "empty: demo.24.svg", small24='<g opacity="0"><circle cx="24" cy="24" r="6"/></g>')
+
+
+def test_open_fill_closes_to_its_start(tmp_path, capsys):
+    refused(tmp_path, capsys, "a vertical edge at x=1", small16=CRISP + '<path d="M1 6L9 12L1 18" fill="#000"/>')
+
+
+def test_arcs(tmp_path, capsys):
+    passes(tmp_path, capsys, small16=CRISP + '<path d="M6 6A3 3 0 0112 12H18" fill="#000"/>')
+    refused(tmp_path, capsys, "a horizontal edge at y=1", small16=CRISP + '<path d="M6 1A0 2 0 0 1 12 1L9 9Z" fill="#000"/>')
+
+
+def test_curved_end_needs_a_round_cap(tmp_path, capsys):
+    refused(tmp_path, capsys, "cap: demo.16.svg", small16=CRISP + '<path d="M3 6Q6 6 9 12" fill="none" stroke="#000" stroke-width="3"/>')
+    passes(tmp_path, capsys, small16=CRISP + '<path d="M3 6Q6 6 9 12" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>')
+
+
+def test_rounded_rect_counts_only_its_straight_parts(tmp_path, capsys):
+    passes(tmp_path, capsys, small16=CRISP + '<rect x="1" y="1" width="6" height="6" rx="3" fill="#000"/>')
+    refused(tmp_path, capsys, "a horizontal edge at y=1", small16=CRISP + '<rect x="0" y="1" width="12" height="6" rx="3" fill="#000"/>')
+
+
+def test_malformed_input_is_a_problem_not_a_crash(tmp_path, capsys):
+    refused(tmp_path, capsys, "does not parse", main=CRISP + '<g transform="rotate()"><rect width="6" height="6"/></g>')
+    refused(tmp_path, capsys, "numbers after a closepath", main=CRISP + '<path d="M6 6L12 12Z 3"/>')
+    refused(tmp_path, capsys, "missing numbers", small16=CRISP + '<path d="M6 6L12"/>')
+
+
+def test_inherit_resolves_to_the_parent(tmp_path, capsys):
+    refused(tmp_path, capsys, "lands at 7.17 px", small16=CRISP + (
+        '<g stroke="#000" stroke-width="2"><path d="M12 22.5H36" stroke-width="inherit" stroke-linecap="round"/></g>'))
+
+
+def test_files_in_subfolders_are_refused(tmp_path, capsys):
+    folder = family(tmp_path)
+    (folder / "sub").mkdir()
+    (folder / "sub" / "demo.svg").write_text(svg(CRISP), encoding="utf-8")
+    code, out = run(tmp_path, capsys)
+    assert code == 1 and "name: icons/apps/sub/demo.svg" in out
+
+
+def test_staged_file_in_a_subfolder_is_refused(tmp_path, capsys):
+    folder = repo(tmp_path)
+    (folder / "sub").mkdir()
+    (folder / "sub" / "demo.svg").write_text(svg(CRISP), encoding="utf-8")
+    git(tmp_path, "add", "icons/apps/sub/demo.svg")
+    code, out = run(tmp_path, capsys, "--staged")
+    assert code == 1 and "name: icons/apps/sub/demo.svg" in out
 
 
 def test_repository_icons_pass(capsys):
