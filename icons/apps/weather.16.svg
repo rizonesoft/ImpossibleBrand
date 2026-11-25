@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="weather-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE680"/><stop offset="1" stop-color="#F5A623"/></linearGradient><linearGradient id="weather-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D3DEEA"/></linearGradient></defs>
+<path d="M10.600 19.500L8.000 19.500" stroke="#F0B429" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M25.793 13.207L27.632 11.368" stroke="#F0B429" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M28.400 19.500L31.000 19.500" stroke="#F0B429" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M25.793 25.793L27.632 27.632" stroke="#F0B429" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M19.500 28.400L19.500 31.000" stroke="#F0B429" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M13.207 25.793L11.368 27.632" stroke="#F0B429" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M13.0 19.5a6.5 6.5 0 1 0 13.0 0a6.5 6.5 0 1 0 -13.0 0Z" fill="url(#weather-16-g1)"/>
+<path d="M12.0 39.0H45.0A6.6000000000000005 6.6000000000000005 0 0 0 42.36 26.46A9.9 9.9 0 0 0 21.9 25.14A7.26 7.26 0 0 0 12.0 39.0Z" fill="url(#weather-16-g2)"/>
+<path d="M12.0 36.0H45.0V39.0H12.0Z" fill="#AFC0D2" fill-opacity="1.0"/>
+</svg>

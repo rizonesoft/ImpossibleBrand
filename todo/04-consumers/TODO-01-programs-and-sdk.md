@@ -11,7 +11,7 @@ depends_on: ["icon-engine"]
 
 > **Goal:** Every program repository and Impossible SDK pin the brand pack in `brand.json`, every program has its own app icon from the pack, requests from every consumer are collected here automatically, and Impossible SDK's identity images live here.
 
-> **Current state:** Measured 2026-11-25. 41 program repositories sit beside this one in `~/ImpossibleOS/`, each with an `app.json` and no app icon: Browser, Calculator, Calendar, CharacterMap, Chat, Chess, Clock, Colophon, ColorPicker, Command, Compare, DiskMap, FTP, Fonts, Heliograph, IconEditor, Imprint, Magnifier, Mail, MediaPlayer, Minesweeper, Music, NewsReader, Nibble, Notepad, OnScreenKeyboard, Paint, Perihelion, Photos, RemoteDesktop, Rename, SSH, Screensavers, Solitaire, SoundRecorder, StickyNotes, Stillframe, Sudoku, Weather, WordPad and Zip. Their unattended runs merge only pull requests from branches named `impossible-os/...` (the `PULLS` rule Impossible SDK's `tools/new_app.py` writes into each `docs/unattended-prompt.md`), so a pull request from this repository is not taken yet. Impossible SDK keeps its own identity in `brand/` (MIT) rendered by its `tools/brand.py`, and its own run is often live: it is never edited from here.
+> **Current state:** Measured 2026-11-25. 41 program repositories sit beside this one in `~/ImpossibleOS/`, each with an `app.json`; 40 have no app icon, and Heliograph keeps the one it already has (its own `brand/`, with 16, 20, 24 and 32 px drawings), which this repository records and does not redraw: Browser, Calculator, Calendar, CharacterMap, Chat, Chess, Clock, Colophon, ColorPicker, Command, Compare, DiskMap, FTP, Fonts, Heliograph, IconEditor, Imprint, Magnifier, Mail, MediaPlayer, Minesweeper, Music, NewsReader, Nibble, Notepad, OnScreenKeyboard, Paint, Perihelion, Photos, RemoteDesktop, Rename, SSH, Screensavers, Solitaire, SoundRecorder, StickyNotes, Stillframe, Sudoku, Weather, WordPad and Zip. Their unattended runs merge only pull requests from branches named `impossible-os/...` (the `PULLS` rule Impossible SDK's `tools/new_app.py` writes into each `docs/unattended-prompt.md`), so a pull request from this repository is not taken yet. Impossible SDK keeps its own identity in `brand/` (MIT) rendered by its `tools/brand.py`, and its own run is often live: it is never edited from here.
 
 **Corrected 2026-11-25:** this file had the run draw the 41 app icons. The operator moved the drawing into session (spec "Scope, 2026-11-25": three options each, chosen on comparison boards); §5 to §9 now wire the chosen sources from `design/apps.json` and never redraw them.
 
@@ -217,7 +217,7 @@ Chess, Minesweeper, Solitaire, Sudoku and Perihelion (our own gravity puzzle: a 
 
 ## 8. App icons: internet and messages
 
-Browser, Mail, Chat, NewsReader, Weather, FTP, SSH, RemoteDesktop and Heliograph (messages and jobs between agent sessions). The drawings are the session's (`design/apps.json`); this section wires them.
+Browser, Mail, Chat, NewsReader, Weather, FTP, SSH and RemoteDesktop. Heliograph keeps its own icon (operator, 2026-11-25). The drawings are the session's (`design/apps.json`); this section wires them.
 
 **Phase:** 5
 **Needs:** designs-apps

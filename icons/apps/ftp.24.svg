@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="ftp-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="ftp-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="ftp-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient></defs>
+<path d="M6.0 6.0H28.0a2.0 2.0 0 0 1 2.0 2.0V14.0a2.0 2.0 0 0 1-2.0 2.0H6.0a2.0 2.0 0 0 1-2.0-2.0V8.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#ftp-24-g1)"/>
+<path d="M5.0 7.0H29.0V15.0H5.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M8.0 10.0h2.0v2.0h-2.0Z" fill="#5FD38A" fill-opacity="1.0"/>
+<path d="M6.0 18.0H28.0a2.0 2.0 0 0 1 2.0 2.0V26.0a2.0 2.0 0 0 1-2.0 2.0H6.0a2.0 2.0 0 0 1-2.0-2.0V20.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#ftp-24-g2)"/>
+<path d="M5.0 19.0H29.0V27.0H5.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M8.0 22.0h2.0v2.0h-2.0Z" fill="#5FD38A" fill-opacity="1.0"/>
+<path d="M6.0 30.0H28.0a2.0 2.0 0 0 1 2.0 2.0V40.0a2.0 2.0 0 0 1-2.0 2.0H6.0a2.0 2.0 0 0 1-2.0-2.0V32.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#ftp-24-g3)"/>
+<path d="M5.0 31.0H29.0V41.0H5.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M8.0 36.0h2.0v2.0h-2.0Z" fill="#5FD38A" fill-opacity="1.0"/>
+<path d="M40.0 4.0L46.0 16.0H42.0V24.0H38.0V16.0H34.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M40.0 44.0L46.0 32.0H42.0V24.0H38.0V32.0H34.0Z" fill="#1E9E50" fill-opacity="1.0"/>
+</svg>

@@ -132,6 +132,15 @@ Every program repository gets an app icon, drawn here: a free-standing, full-col
 | Solitaire | Solitaire | Two fanned cards, the ace of spades in front (offset, not tilted, at 24 and 16 px) |
 | Sudoku | Sudoku | A number grid; at 24 and 16 px the filled cells are solid marks |
 | Perihelion | Perihelion | A golden planet in a tilted orbit, with the probe |
+| Browser | Browser | A blue globe with white meridians |
+| Mail | Mail | A white envelope with a blue flap |
+| Chat | Chat | A blue and a white speech bubble |
+| News Reader | NewsReader | A newspaper page with a headline, a picture and columns |
+| Weather | Weather | The sun behind a cloud |
+| FTP | FTP | A server stack with an up and a down arrow |
+| SSH | SSH | A terminal with a padlock |
+| Remote Desktop | RemoteDesktop | A monitor showing another monitor |
+| Heliograph | Heliograph | Keeps its own icon, in its repository's `brand/` (not redrawn here) |
 
 ## Adding or changing an icon
 

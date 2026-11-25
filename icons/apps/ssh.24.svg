@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="ssh-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="ssh-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDE73"/><stop offset="1" stop-color="#F0B429"/></linearGradient></defs>
+<path d="M4.0 6.0H38.0a2.0 2.0 0 0 1 2.0 2.0V34.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V8.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#ssh-24-g1)"/>
+<path d="M3.0 7.0H39.0V35.0H3.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M6.0 12.0L12.0 17.0L6.0 22.0" fill="none" stroke="#6BEBF8" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.0 20.0H22.0V22.0H14.0Z" fill="#6BEBF8" fill-opacity="1.0"/>
+<path d="M31.0 32.0V28.0A6.0 6.0 0 0 1 43.0 28.0V32.0" fill="none" stroke="#4A5768" stroke-width="2.0"/>
+<path d="M30.0 32.0H44.0a2.0 2.0 0 0 1 2.0 2.0V44.0a2.0 2.0 0 0 1-2.0 2.0H30.0a2.0 2.0 0 0 1-2.0-2.0V34.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#ssh-24-g2)"/>
+<path d="M36.0 34.0h2.0v4.0h-2.0Z" fill="#7A4A0A" fill-opacity="1.0"/>
+</svg>

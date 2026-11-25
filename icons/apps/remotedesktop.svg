@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="remotedesktop-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="remotedesktop-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B7CF0"/><stop offset="1" stop-color="#1B3F9E"/></linearGradient><linearGradient id="remotedesktop-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="remotedesktop-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="remotedesktop-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="remotedesktop-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="remotedesktop-g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="remotedesktop-g8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient></defs>
+<path d="M6.5 6H41.5a2.5 2.5 0 0 1 2.5 2.5V31.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V8.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M6.5 6H41.5a2.5 2.5 0 0 1 2.5 2.5V31.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V8.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#remotedesktop-g1)"/>
+<path d="M6.5 6H41.5a2.5 2.5 0 0 1 2.5 2.5V31.5a2.5 2.5 0 0 1-2.5 2.5H6.5a2.5 2.5 0 0 1-2.5-2.5V8.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M6.5 6.6H41.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<rect x="4.6" y="6.6" width="38.8" height="26.8" rx="2" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="1"/>
+<path d="M7.2 8H40.8a1.2 1.2 0 0 1 1.2 1.2V30.8a1.2 1.2 0 0 1-1.2 1.2H7.2a1.2 1.2 0 0 1-1.2-1.2V9.2a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#remotedesktop-g2)"/>
+<path d="M21.0 34H27.0L28.0 37.5H20.0Z" fill="url(#remotedesktop-g3)"/>
+<path d="M18.2 37.2H29.8a1.2 1.2 0 0 1 1.2 1.2V38.6a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V38.400000000000006a1.2 1.2 0 0 1 1.2-1.2Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M18.2 37.2H29.8a1.2 1.2 0 0 1 1.2 1.2V38.6a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V38.400000000000006a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#remotedesktop-g4)"/>
+<path d="M18.2 37.2H29.8a1.2 1.2 0 0 1 1.2 1.2V38.6a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V38.400000000000006a1.2 1.2 0 0 1 1.2-1.2Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M18.2 37.800000000000004H29.8" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M17.5 12H30.5a2.5 2.5 0 0 1 2.5 2.5V20.5a2.5 2.5 0 0 1-2.5 2.5H17.5a2.5 2.5 0 0 1-2.5-2.5V14.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M17.5 12H30.5a2.5 2.5 0 0 1 2.5 2.5V20.5a2.5 2.5 0 0 1-2.5 2.5H17.5a2.5 2.5 0 0 1-2.5-2.5V14.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#remotedesktop-g5)"/>
+<path d="M17.5 12H30.5a2.5 2.5 0 0 1 2.5 2.5V20.5a2.5 2.5 0 0 1-2.5 2.5H17.5a2.5 2.5 0 0 1-2.5-2.5V14.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M17.5 12.6H30.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<rect x="15.6" y="12.6" width="16.8" height="9.8" rx="2" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="1"/>
+<path d="M18.2 14H29.8a1.2 1.2 0 0 1 1.2 1.2V19.8a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V15.2a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#remotedesktop-g6)"/>
+<path d="M21.0 23H27.0L28.0 26.5H20.0Z" fill="url(#remotedesktop-g7)"/>
+<path d="M18.2 26.2H29.8a1.2 1.2 0 0 1 1.2 1.2V27.6a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V27.4a1.2 1.2 0 0 1 1.2-1.2Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M18.2 26.2H29.8a1.2 1.2 0 0 1 1.2 1.2V27.6a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V27.4a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#remotedesktop-g8)"/>
+<path d="M18.2 26.2H29.8a1.2 1.2 0 0 1 1.2 1.2V27.6a1.2 1.2 0 0 1-1.2 1.2H18.2a1.2 1.2 0 0 1-1.2-1.2V27.4a1.2 1.2 0 0 1 1.2-1.2Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M18.2 26.8H29.8" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+</svg>

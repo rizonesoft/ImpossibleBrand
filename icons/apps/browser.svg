@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="browser-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M5 24a19 19 0 1 0 38 0a19 19 0 1 0 -38 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M5 24a19 19 0 1 0 38 0a19 19 0 1 0 -38 0Z" fill="url(#browser-g1)"/>
+<path d="M5 24a19 19 0 1 0 38 0a19 19 0 1 0 -38 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<ellipse cx="24" cy="24" rx="8.55" ry="19" fill="none" stroke="#FFFFFF" stroke-opacity=".75" stroke-width="1.71"/>
+<path d="M24 5V43M5 24H43" stroke="#FFFFFF" stroke-opacity=".75" stroke-width="1.71"/>
+<path d="M8.131871565934437 13.549999999999999H39.86812843406556" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="1.4535"/>
+<path d="M8.131871565934437 34.45H39.86812843406556" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="1.4535"/>
+</svg>
