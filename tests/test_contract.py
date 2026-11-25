@@ -168,7 +168,7 @@ def test_shape_refusals_name_the_field(case):
     assert field in str(caught.value)
 
 
-@pytest.mark.parametrize("case", ["profile not object", "cursors not list", "attributes of no element", "provider"])
+@pytest.mark.parametrize("case", sorted(set(BAD) - {"not an object"}) + ["not an object"])
 def test_a_malformed_contract_on_main_is_refused_end_to_end_and_keeps_the_pin(os_world, case):
     root = os_world["brand"]
     assert cli(root, "pull", os_world["tip"])[0] == 0
@@ -208,7 +208,7 @@ def interrupt(monkeypatch, step):
         return real_rename(a, b)
 
     def rmtree(path, *args, **kwargs):
-        if step == "rmtree" and Path(path).name == "contract.old":
+        if step == "rmtree" and Path(path).name == "contract.prev":
             raise Stop
         return real_rmtree(path, *args, **kwargs)
 
@@ -223,30 +223,27 @@ def interrupt(monkeypatch, step):
 
 
 @pytest.mark.parametrize("step, committed", [("write", False), ("rename1", False), ("rename2", False),
-                                              ("rename3", False), ("rmtree", True)])
+                                              ("rmtree", True)])
 def test_an_interrupted_pull_leaves_one_whole_pair(os_world, monkeypatch, step, committed):
-    """Before the commit point (renaming contract.prev to contract.old) the previous pair survives byte for byte;
-    after it the new pair does, byte for byte as a clean pull writes it."""
+    """Before the commit point (renaming contract.tmp to contract) the previous pair survives byte for byte; after it
+    the new pair does, byte for byte as an uninterrupted pull writes it."""
     root = os_world["brand"]
+    at = datetime.datetime(2026, 11, 25, 12, 0, 0, tzinfo=datetime.UTC)
+    contract.pull(os_world["older"], root, now=at)
+    older_pair = pair(root)
     clean = root.parent / "clean-pull"
     shutil.copytree(root, clean)
-    contract.pull(os_world["tip"], clean)
-    new_os = (clean / "contract" / "os.json").read_bytes()
-    contract.pull(os_world["older"], root)
-    older_pair = pair(root)
+    contract.pull(os_world["tip"], clean, now=at)
+    new_pair = pair(clean)
     interrupt(monkeypatch, step)
     with pytest.raises(Stop):
-        contract.pull(os_world["tip"], root)
+        contract.pull(os_world["tip"], root, now=at)
     monkeypatch.undo()
     code, out = cli(root, "show")  # a fresh process recovers and reads
     assert code == 0, out
-    if committed:
-        assert out.splitlines()[0] == f"commit {os_world['tip']}"
-        assert pair(root)[0] == new_os
-        assert json.loads(pair(root)[1])["previous"] == os_world["older"]
-    else:
-        assert out.splitlines()[0] == f"commit {os_world['older']}"
-        assert pair(root) == older_pair
+    expected, commit = (new_pair, os_world["tip"]) if committed else (older_pair, os_world["older"])
+    assert out.splitlines()[0] == f"commit {commit}"
+    assert pair(root) == expected
     for leftover in ("contract.tmp", "contract.prev", "contract.old"):
         assert not (root / leftover).exists()
 

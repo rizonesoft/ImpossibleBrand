@@ -57,6 +57,31 @@ def test_locate_reads_a_quoted_origin_with_a_comment(world):
     assert run_probe(world["brand"], "locate") == (0, str(world["os"]))
 
 
+def test_locate_reads_a_continued_origin(world):
+    config = world["os"] / ".git" / "config"
+    url = git(world["os"], "config", "--get", "remote.origin.url").strip()
+    half = len(url) // 2
+    config.write_text(config.read_text().replace(f"url = {url}", f'url = "{url[:half]}\\\n{url[half:]}" # the OS'))
+    assert git(world["os"], "config", "--get", "remote.origin.url").strip() == url  # git joins it the same way
+    assert run_probe(world["brand"], "locate") == (0, str(world["os"]))
+
+
+def test_fetch_fails_when_the_head_tree_cannot_be_read(world, monkeypatch, capsys):
+    import os_probe
+    real = os_probe.run_git
+
+    def broken_tree(args, cwd, limit, clock=None, offline=True):
+        if args[:1] == ["ls-tree"]:
+            return 128, b""
+        if args[:1] == ["fetch"]:
+            return 0, b""
+        return real(args, cwd, limit, clock, offline)
+
+    monkeypatch.setattr(os_probe, "run_git", broken_tree)
+    assert os_probe.fetch(world["brand"]) == 1
+    assert "cannot read this repository's HEAD tree" in capsys.readouterr().out
+
+
 def test_locate_refuses_unreadable_settings_and_config(world):
     settings = world["brand"] / ".conclave" / "local.toml"
     settings.parent.mkdir()
@@ -82,7 +107,7 @@ def test_a_blocking_read_cannot_hold_the_probe_past_its_deadline(world):
     start = time.monotonic()
     code, out = run_probe(world["brand"], "locate", timeout=20)
     assert code == 1 and "deadline" in out
-    assert time.monotonic() - start < 10
+    assert time.monotonic() - start < 8.6  # the 8-second watchdog plus interpreter start
 
 
 def test_locate_refuses_a_configured_checkout_of_another_repository(world):

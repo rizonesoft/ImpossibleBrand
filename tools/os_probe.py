@@ -39,7 +39,8 @@ CONTRACT = "docs/design/brand-contract.json"
 PROMPT = "docs/unattended-prompt.md"
 RULE = "Take only branches named"
 BRAND_PREFIX = "impossible-brand/"
-DEADLINE_SECONDS = 8.0
+DEADLINE_SECONDS = 7.5  # the probe's own clock; the watchdog in main() ends the process at WATCHDOG_SECONDS
+WATCHDOG_SECONDS = 8.0
 CALL_SECONDS = 3.0
 FETCH_SECONDS = 20.0
 MAIN_REFSPEC = "+refs/heads/main:refs/remotes/origin/main"
@@ -137,13 +138,28 @@ def config_value(raw):
     return "".join(out[:kept]).strip() if not quoted else "".join(out[:kept])
 
 
+def logical_lines(text):
+    """Config lines with git's continuations joined: a line ending in an unescaped backslash continues on the next."""
+    lines, pending = [], ""
+    for physical in text.splitlines():
+        trailing = len(physical) - len(physical.rstrip("\\"))
+        if trailing % 2 == 1:
+            pending += physical[:-1]
+            continue
+        lines.append(pending + physical)
+        pending = ""
+    if pending:
+        lines.append(pending)
+    return lines
+
+
 def origin_url(checkout):
     """The `url` of `[remote "origin"]`, read as text (no git call), or None; OSError when the config is unreadable."""
     config = git_config_path(checkout)
     if config is None or not config.is_file():
         return None
     section = None
-    for raw in config.read_text(encoding="utf-8", errors="replace").splitlines():
+    for raw in logical_lines(config.read_text(encoding="utf-8", errors="replace")):
         line = raw.strip()
         if not line or line[0] in "#;":
             continue
@@ -286,7 +302,9 @@ def committed_consumers(root, clock):
     """consumers.json as committed on HEAD (D04 T01 §1), never the working copy another session may be editing."""
     commit = head_commit(root, clock)
     code, out = run_git(["ls-tree", "-z", commit, "--", "consumers.json"], root, CALL_SECONDS, clock)
-    if code != 0 or not out.strip(b"\0"):  # the tree entry, read without needing the blob
+    if code != 0:
+        raise NotMet("cannot read this repository's HEAD tree to find consumers.json")
+    if not out.strip(b"\0"):  # the tree entry, read without needing the blob
         raise NotCommitted("consumers.json is not committed (D04 T01 §1)")
     raw = show(root, f"{commit}:consumers.json", clock)
     if raw is None:
@@ -442,14 +460,14 @@ def main(argv=None):
         sub.add_parser(name, parents=[common])
     sub.add_parser("designs", parents=[common]).add_argument("set")
     args = parser.parse_args(argv)
-    root = getattr(args, "root", ROOT).resolve()
     if args.command == "fetch":
-        return fetch(root)
+        return fetch(getattr(args, "root", ROOT).resolve())
     clock = Clock(DEADLINE_SECONDS)
     result = {}
 
     def probe():
         try:
+            root = getattr(args, "root", ROOT).resolve()  # even resolving the path runs under the watchdog
             if args.command == "locate":
                 result["line"] = str(locate(root, clock))
             elif args.command == "contract":
@@ -466,9 +484,10 @@ def main(argv=None):
         except OSError as error:
             result["line"], result["code"] = f"cannot read: {error}", 1
 
+    started = time.monotonic()
     worker = threading.Thread(target=probe, daemon=True)
     worker.start()
-    worker.join(DEADLINE_SECONDS + 0.5)
+    worker.join(WATCHDOG_SECONDS - (time.monotonic() - started))
     if worker.is_alive():  # a read that blocks below git (a hung mount, a pipe) cannot be timed out in place
         print("deadline: the probe ran out of time")
         sys.stdout.flush()

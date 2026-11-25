@@ -9,10 +9,11 @@ The commit is a full 40-character hash of a commit on the OS origin/main (it may
 a working tree or a commit only on another branch. The OS is found as tools/os_probe.py locate finds it.
 
 The pair is published as one folder: written to contract.tmp/, then contract/ becomes contract.prev/, contract.tmp/
-becomes contract/, and contract.prev/ becomes contract.old/, which is the commit point: one atomic rename. Until it,
-an interrupted pull is undone and the previous pair (or, on a first pull, no pair) is what every later command sees;
-after it the new pair stands and contract.old/ is only removed. Every command holds build/contract.lock while it
-works and first recovers a pull that stopped part way. A pin whose two files do not belong together is refused, never silently replaced: `pull --replace-damaged`
+becomes contract/, and contract.prev/ is removed. Renaming contract.tmp/ to contract/ is the commit point, one
+atomic rename: a pull stopped before it is undone, and every later command sees the previous pair byte for byte (or,
+on a first pull, none); a pull stopped after it has published, and only removing contract.prev/ is left, which the
+next command finishes. Every command holds build/contract.lock while it works and first recovers a pull that
+stopped part way. A pin whose two files do not belong together is refused, never silently replaced: `pull --replace-damaged`
 replaces it and records why. Other tools read the pin with load(), which returns (contract, source).
 """
 import argparse
@@ -52,6 +53,7 @@ def folders(root):
 
 
 def old_folder(root):
+    """Left by a development version of this tool (a later commit point), never written now: removed on recovery."""
     return Path(root) / "contract.old"
 
 
@@ -80,13 +82,12 @@ def locked(root):
 def recover(root):
     """Undo a pull that stopped before its commit point, or finish one that stopped after it. Call under lock."""
     live, tmp, prev = folders(root)
-    old = old_folder(root)
-    if prev.exists():  # stopped before the commit point: the previous pair comes back
-        if live.exists():
-            shutil.rmtree(live)
+    if prev.exists() and not live.exists():  # stopped before the commit point: the previous pair comes back
         os.rename(prev, live)
-    if old.exists():  # stopped after the commit point: the new pair stands, the old one goes
-        shutil.rmtree(old)
+    if prev.exists():  # stopped after the commit point: contract/ is the new pair, the old one goes
+        shutil.rmtree(prev)
+    if old_folder(root).exists():
+        shutil.rmtree(old_folder(root))
     if tmp.exists():  # stopped while writing: the new pair was never published
         shutil.rmtree(tmp)
 
@@ -287,7 +288,6 @@ def show(root=ROOT):
 
 def _publish(root, raw, source):
     live, tmp, prev = folders(root)
-    old = old_folder(root)
     installed = False
     try:
         tmp.mkdir()
@@ -296,13 +296,11 @@ def _publish(root, raw, source):
         _sync_dir(tmp)
         if live.exists():
             os.rename(live, prev)
-        os.rename(tmp, live)
-        if prev.exists():
-            os.rename(prev, old)  # the commit point
+        os.rename(tmp, live)  # the commit point
         installed = True
         _sync_dir(root)
-        if old.exists():
-            shutil.rmtree(old)
+        if prev.exists():
+            shutil.rmtree(prev)
     except OSError as error:
         if installed:
             raise ContractError(f"the new pin is installed, but cleanup failed: {error}; the next command finishes it") from None
