@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="stickynotes-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE680"/><stop offset="1" stop-color="#F5C02E"/></linearGradient></defs>
+<path d="M6.0 6.0H42.0V30.0L30.0 42.0H6.0Z" fill="url(#stickynotes-16-g1)"/>
+<path d="M42.0 30.0L30.0 42.0V30.0Z" fill="#C98A0E" fill-opacity=".55"/>
+<path d="M12.0 15.0H36.0V18.0H12.0Z" fill="#B47A0C" fill-opacity="0.6"/>
+<path d="M12.0 24.0H27.0V27.0H12.0Z" fill="#B47A0C" fill-opacity="0.6"/>
+</svg>

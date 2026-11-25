@@ -141,6 +141,17 @@ Every program repository gets an app icon, drawn here: a free-standing, full-col
 | SSH | SSH | A terminal with a padlock |
 | Remote Desktop | RemoteDesktop | A monitor showing another monitor |
 | Heliograph | Heliograph | Keeps its own icon, in its repository's `brand/` (not redrawn here) |
+| Calculator | Calculator | A slate calculator with a cyan display and an orange equals key |
+| Calendar | Calendar | A month page with a blue header, binder rings and a highlighted day |
+| Clock | Clock | A white clock face in a blue ring |
+| Sticky Notes | StickyNotes | A yellow note with a curled corner and lines |
+| On-Screen Keyboard | OnScreenKeyboard | A keyboard shown on a monitor |
+| Fonts | Fonts | A specimen page with a large A and sample lines |
+| Disk Map | DiskMap | A drive under a treemap of coloured blocks |
+| Rename | Rename | A blue name tag with a text caret |
+| Zip | Zip | A folder closed by a zipper: a fine column of teeth down the front, slider and tab near the top |
+| Image Writer | Imprint | A USB stick with a green arrow into it |
+| Command | Command | A red toolbox with a command prompt |
 
 ## Adding or changing an icon
 
