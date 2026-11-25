@@ -366,7 +366,7 @@ An icon that passes every rubric point becomes `generated` (or stays `hand-autho
 
 ## 15. Pinned resolution and consumer sync
 
-A consumer runs the engine and reads the pack at its pinned commit, never at whatever `../ImpossibleBrand` is on, and `icon_engine.py sync <commit>` moves the pin and retires the drafts the new pack replaces, in one consumer commit (design "Resolving a pin" and step 5).
+A consumer runs the engine and reads the pack at its pinned commit, never at whatever `../Brand` is on, and `icon_engine.py sync <commit>` moves the pin and retires the drafts the new pack replaces, in one consumer commit (design "Resolving a pin" and step 5).
 
 **Phase:** 3
 **Needs:** none

@@ -8,7 +8,7 @@ The art of Impossible OS and its programs: icons, cursors, the logo, banners and
 
 ## This repository
 
-- The repository lives in WSL, in `~/impossible/ImpossibleBrand`, and is written there only, like its siblings. Windows design tools reach it through `\\wsl.localhost\Ubuntu`.
+- The repository lives in WSL, in `~/impossible/Brand`, and is written there only, like its siblings. Windows design tools reach it through `\\wsl.localhost\Ubuntu`.
 - The design is `docs/specs/2026-11-25-brand-split-design.md`: what stays in Impossible OS (the interface: names, the system SVG profile, token names, sizes, rendering) and what lives here (the art, the engine, the pack). Read it before adding a tool or changing a path.
 - The art rules are `docs/icons.md`. Every icon follows them, and a new icon gets its row in The set first.
 - `icons/color/SOURCES.sha256` fingerprints every icon source (paths from `icons/`) and every render (paths from `icons/color/`). It is regenerated with the renders, never edited by hand; a source whose fingerprint no longer matches has stale renders. Until the engine lands here (phase 3 of the design) this repository has no renderer: the OS's `scripts/convert-icons.sh` writes only the OS tree, so an icon change before then is made in the OS and carried here by the phase 4 reconciliation.
