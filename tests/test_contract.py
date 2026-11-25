@@ -168,16 +168,41 @@ def test_shape_refusals_name_the_field(case):
     assert field in str(caught.value)
 
 
-@pytest.mark.parametrize("case", sorted(set(BAD) - {"not an object"}) + ["not an object"])
-def test_a_malformed_contract_on_main_is_refused_end_to_end_and_keeps_the_pin(os_world, case):
+def required_field_matrix():
+    """Every required field missing and of the wrong type, nested fields included, with the field the refusal names."""
+    cases = []
+    for key, wrong in (("profile", 7), ("tokens", "accent"), ("sizes", 16), ("icons", {}), ("cursors", "default")):
+        cases.append((f"{key} missing", {k: v for k, v in BASE.items() if k != key}, f"{key} is missing"))
+        cases.append((f"{key} wrong type", {**BASE, key: wrong}, key))
+    for key, wrong in (("elements", "path"), ("attributes", "d")):
+        profile = dict(BASE["profile"])
+        cases.append((f"profile.{key} missing", {**BASE, "profile": {k: v for k, v in profile.items() if k != key}},
+                      f"profile.{key}"))
+        cases.append((f"profile.{key} wrong type", {**BASE, "profile": {**profile, key: wrong}}, f"profile.{key}"))
+    icon = BASE["icons"][0]
+    for key, wrong in (("name", 3), ("provider", None), ("used_for", ["x"])):
+        cases.append((f"icon {key} missing", {**BASE, "icons": [{k: v for k, v in icon.items() if k != key}]},
+                      f"icons[0].{key}"))
+        cases.append((f"icon {key} wrong type", {**BASE, "icons": [{**icon, key: wrong}]}, f"icons[0].{key}"))
+    cases.append(("icon wrong type", {**BASE, "icons": ["computer"]}, "icons[0] must be an object"))
+    cases.append(("cursor wrong type", {**BASE, "cursors": [5]}, "cursors[0]"))
+    cases.append(("cursor object without name", {**BASE, "cursors": [{}]}, "cursors[0]"))
+    return cases
+
+
+MATRIX = required_field_matrix()
+
+
+@pytest.mark.parametrize("label, data, field", MATRIX, ids=[c[0] for c in MATRIX])
+def test_the_required_field_matrix_is_refused_end_to_end_and_keeps_the_pin(os_world, label, data, field):
     root = os_world["brand"]
     assert cli(root, "pull", os_world["tip"])[0] == 0
     before = pair(root)
-    commit_files(os_world["os_work"], {PATH: json.dumps(BAD[case][0])}, case)
+    commit_files(os_world["os_work"], {PATH: json.dumps(data)}, label)
     git(os_world["os_work"], "push", "-q", "origin", "main")
     git(os_world["os"], "fetch", "-q", "origin", "main")
     code, out = cli(root, "pull", git(os_world["os"], "rev-parse", "origin/main").strip())
-    assert code == 1 and BAD[case][1] in out
+    assert code == 1 and field in out, out
     assert pair(root) == before
 
 
@@ -357,6 +382,82 @@ def test_removals_are_stored_and_shown(os_world):
                                  "cursors": {"added": [], "removed": ["wait"]}}
     code, out = cli(root, "show")
     assert code == 0 and out.splitlines()[3:] == ["- icon printer (colour)", "- cursor wait"]
+
+
+def test_a_provider_handover_is_a_removal_and_an_addition(os_world):
+    root = os_world["brand"]
+    for icons in ((("printer", "glyph"),), (("printer", "colour"),)):
+        commit_files(os_world["os_work"], {PATH: make_contract(icons=icons)}, str(icons))
+        git(os_world["os_work"], "push", "-q", "origin", "main")
+        git(os_world["os"], "fetch", "-q", "origin", "main")
+        assert cli(root, "pull", git(os_world["os"], "rev-parse", "origin/main").strip())[0] == 0
+    source = json.loads((root / "contract" / "source.json").read_text())
+    assert source["changes"]["icons"] == {"added": [{"name": "printer", "provider": "colour"}],
+                                          "removed": [{"name": "printer", "provider": "glyph"}]}
+    out = cli(root, "show")[1].splitlines()
+    assert "+ icon printer (colour)" in out and "- icon printer (glyph)" in out
+
+
+def test_the_stored_digest_is_the_sha256_of_the_os_blob(os_world):
+    import hashlib
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["older"])[0] == 0
+    expected = hashlib.sha256(V1.encode()).hexdigest()  # computed here, from the fixture blob's bytes
+    assert json.loads((root / "contract" / "source.json").read_text())["sha256"] == expected
+
+
+def test_a_lock_held_past_the_wait_is_refused_and_keeps_the_pin(os_world, monkeypatch):
+    import fcntl
+    root = os_world["brand"]
+    contract.pull(os_world["older"], root)
+    before = pair(root)
+    monkeypatch.setattr(contract, "LOCK_SECONDS", 0.5)
+    with open(root / "build" / "contract.lock", "a+") as held:
+        fcntl.flock(held.fileno(), fcntl.LOCK_EX)
+        with pytest.raises(contract.ContractError) as caught:
+            contract.pull(os_world["tip"], root)
+        assert "another contract pull holds build/contract.lock" in str(caught.value)
+        assert pair(root) == before
+        fcntl.flock(held.fileno(), fcntl.LOCK_UN)
+    assert contract.pull(os_world["tip"], root)["commit"] == os_world["tip"]
+
+
+def test_a_failed_folder_sync_says_the_pin_is_in_place_but_unconfirmed(os_world, monkeypatch):
+    root = os_world["brand"]
+    contract.pull(os_world["older"], root)
+    real_sync = contract._sync_dir
+
+    def sync(folder):
+        if Path(folder) == root:
+            raise OSError("fsync failed")
+        real_sync(folder)
+
+    monkeypatch.setattr(contract, "_sync_dir", sync)
+    with pytest.raises(contract.ContractError) as caught:
+        contract.pull(os_world["tip"], root)
+    assert "the new pin is in place but not confirmed on disk" in str(caught.value)
+    monkeypatch.undo()
+    assert cli(root, "show")[1].splitlines()[0] == f"commit {os_world['tip']}"
+
+
+def test_a_failed_cleanup_reports_the_new_pin_with_cleanup_pending(os_world, monkeypatch):
+    root = os_world["brand"]
+    contract.pull(os_world["older"], root)
+    real_rmtree = contract.shutil.rmtree
+
+    def rmtree(folder, *args, **kwargs):
+        if Path(folder).name == "contract.prev":
+            raise OSError("busy")
+        return real_rmtree(folder, *args, **kwargs)
+
+    monkeypatch.setattr(contract.shutil, "rmtree", rmtree)
+    notes = []
+    source = contract.pull(os_world["tip"], root, notes=notes)
+    assert source["commit"] == os_world["tip"] and notes and notes[0].startswith("cleanup pending")
+    monkeypatch.undo()
+    code, out = cli(root, "show")  # the next command finishes the cleanup
+    assert code == 0 and out.splitlines()[0] == f"commit {os_world['tip']}"
+    assert not (root / "contract.prev").exists()
 
 
 def test_show_reads_source_json_alone(os_world):

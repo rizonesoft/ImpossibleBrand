@@ -12,8 +12,10 @@ The pair is published as one folder: written to contract.tmp/, then contract/ be
 becomes contract/, and contract.prev/ is removed. Renaming contract.tmp/ to contract/ is the commit point, one
 atomic rename: a pull stopped before it is undone, and every later command sees the previous pair byte for byte (or,
 on a first pull, none); a pull stopped after it has published, and only removing contract.prev/ is left, which the
-next command finishes. Every command holds build/contract.lock while it works and first recovers a pull that
-stopped part way. A pin whose two files do not belong together is refused, never silently replaced: `pull --replace-damaged`
+next command finishes. The commit point survives a host crash once the repository folder is synced after it: a
+failed sync is reported as a new pin in place but not confirmed on disk, and a failed removal of contract.prev/ as
+a published pull with its cleanup pending (exit 0). Every command holds build/contract.lock while it works (waiting
+at most 30 seconds for another) and first recovers a pull that stopped part way. A pin whose two files do not belong together is refused, never silently replaced: `pull --replace-damaged`
 replaces it and records why. Other tools read the pin with load(), which returns (contract, source).
 """
 import argparse
@@ -287,8 +289,9 @@ def show(root=ROOT):
 
 
 def _publish(root, raw, source):
+    """Publish the pair; returns the notes of a published pull (cleanup pending). Before the commit point a failure
+    is a refusal with the previous pin kept; a failed sync after it is a refusal that says the new pin is in place."""
     live, tmp, prev = folders(root)
-    installed = False
     try:
         tmp.mkdir()
         _write(tmp / "os.json", raw)
@@ -297,20 +300,26 @@ def _publish(root, raw, source):
         if live.exists():
             os.rename(live, prev)
         os.rename(tmp, live)  # the commit point
-        installed = True
-        _sync_dir(root)
-        if prev.exists():
-            shutil.rmtree(prev)
     except OSError as error:
-        if installed:
-            raise ContractError(f"the new pin is installed, but cleanup failed: {error}; the next command finishes it") from None
         with contextlib.suppress(OSError):  # best effort: recover() on the next command finishes what is left
             recover(root)
         raise ContractError(f"the pull failed before publishing ({error}); the previous pin is unchanged") from None
+    try:
+        _sync_dir(root)  # from here the commit point survives a host crash
+    except OSError as error:
+        raise ContractError(f"the new pin is in place but not confirmed on disk ({error}); "
+                            "run show to check it, and pull again to confirm it") from None
+    if prev.exists():
+        try:
+            shutil.rmtree(prev)
+        except OSError as error:
+            return [f"cleanup pending: contract.prev/ could not be removed ({error}); the next command finishes it"]
+    return []
 
 
-def pull(commit, root=ROOT, now=None, replace_damaged=False):
-    """Publish the contract at an OS commit; on any refusal before publishing nothing changes."""
+def pull(commit, root=ROOT, now=None, replace_damaged=False, notes=None):
+    """Publish the contract at an OS commit; on any refusal before publishing nothing changes. Notes of a published
+    pull (a cleanup still pending) are appended to `notes` when a list is given."""
     root = Path(root)
     with locked(root):
         recover(root)
@@ -334,7 +343,9 @@ def pull(commit, root=ROOT, now=None, replace_damaged=False):
         }
         if damaged:
             source["replaced_damaged"] = damaged
-        _publish(root, raw, source)
+        pending = _publish(root, raw, source)
+    if notes is not None:
+        notes.extend(pending)
     return source
 
 
@@ -371,7 +382,10 @@ def main(argv=None):
     root = getattr(args, "root", ROOT).resolve()
     try:
         if args.command == "pull":
-            print(report(pull(args.commit, root, replace_damaged=args.replace_damaged)))
+            notes = []
+            print(report(pull(args.commit, root, replace_damaged=args.replace_damaged, notes=notes)))
+            for note in notes:
+                print(note)
         else:
             print(report(show(root)))
     except ContractError as error:
