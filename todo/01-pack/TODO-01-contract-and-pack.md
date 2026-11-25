@@ -40,6 +40,7 @@ title: "TODO-01 -- Contract, Palette and Pack"
 | 6 | §6 | Brand check | §4, §5, §8 | [ ] |
 | 7 | §7 | Check wired into commits and runs | §6 | [ ] |
 | 8 | §8 | First contract pull | §2 | [ ] |
+| 9 | §9 | Replacement-ref regression independent of the caller | §2 | [ ] |
 
 ## 1. OS locator and Need probes
 
@@ -246,6 +247,23 @@ The first real pull of the OS contract, once Impossible OS publishes `docs/desig
 - [ ] Commit: `contract: first pull of the OS contract`
 
 **Test checkpoint:** `python3 tools/contract.py show` exits 0 and prints the pulled OS commit, and `git -C <os> merge-base --is-ancestor <that commit> origin/main` exits 0.
+
+## 9. Replacement-ref regression independent of the caller
+
+`tests/test_contract.py::test_a_replacement_ref_never_changes_what_a_pinned_hash_means` first shows that ordinary git follows a replacement, through the fixture git helper, which inherits the caller's environment. Run where `GIT_NO_REPLACE_OBJECTS=1` is already exported, that control assertion fails before `pull` is exercised. Filed from D01 T01 §2's reconciliation (`docs/reviews/01-pack/D01-T01-s2.md`, finding 4, P3).
+
+**Phase:** 2
+**Needs:** none
+**Surface:** no
+
+**Build order:**
+
+1. Clear the variable for the test's own git calls. Done when: the test passes with `GIT_NO_REPLACE_OBJECTS=1` exported.
+
+- [ ] Clear `GIT_NO_REPLACE_OBJECTS` with `monkeypatch.delenv("GIT_NO_REPLACE_OBJECTS", raising=False)` before the test installs the replacement. Done when: `GIT_NO_REPLACE_OBJECTS=1 python3 -m pytest tests/test_contract.py -q -k replacement` passes. Cheaper substitute: a skip when the variable is set.
+- [ ] Commit: `tests: the replacement regression holds whatever the caller exports`
+
+**Test checkpoint:** `GIT_NO_REPLACE_OBJECTS=1 python3 -m pytest tests/test_contract.py -q -k replacement` exits 0, and so does the same command without the variable.
 
 ## Verification
 
