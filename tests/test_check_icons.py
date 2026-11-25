@@ -1,42 +1,34 @@
-"""tools/check_icons.py: each refusal fires on its own fixture, and a crisp, complete icon passes."""
+"""tools/check_icons.py: each refusal fires on its own fixture, each allowance holds, and the staged mode reads the
+index, not the working tree. No renderer is involved, so no child process outlives a test."""
 import importlib.util
-import shutil
 import subprocess
-import sys
 from pathlib import Path
-
-import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("check_icons", ROOT / "tools" / "check_icons.py")
+assert spec and spec.loader
 check_icons = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(check_icons)
 
-pytestmark = pytest.mark.skipif(not shutil.which("rsvg-convert"), reason="rsvg-convert is not installed")
 
-
-def svg(body, ident="", view="0 0 48 48"):
+def svg(body, ident=None):
     defs = f'<defs><linearGradient id="{ident}"><stop offset="0" stop-color="#FFF"/></linearGradient></defs>' if ident else ""
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}" width="48" height="48">{defs}{body}</svg>'
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">{defs}{body}</svg>'
 
 
-# Edges on whole pixels at both small sizes: every coordinate is a multiple of 6 units, which is a whole pixel at
-# 16 px (3 units a pixel) and at 24 px (2 units a pixel), so nothing falls inside a pixel.
+# Every straight edge on a multiple of 6 units: a whole pixel at 16 px (3 units) and at 24 px (2 units).
 CRISP = '<path d="M6 6H42V42H6Z" fill="#1B74E2"/><path d="M12 18H36V24H12Z" fill="#FFFFFF"/>'
-# Straight edges half a pixel off at both sizes (odd halves of units): every horizontal and vertical edge cuts a pixel.
-BLURRY = ('<path d="M7.5 7.5H40.5V40.5H7.5Z" fill="#1B74E2"/>'
-          + "".join(f'<path d="M10.5 {y}H37.5V{y + 2.5}H10.5Z" fill="#FFFFFF"/>' for y in (12.5, 19.5, 26.5, 33.5)))
-# Smooth diagonals and a curve, with every straight edge on a whole pixel: anti-aliased by design, so it passes.
-SMOOTH = ('<path d="M6 6H42V42H6Z" fill="#E3E9F0"/><path d="M12 36L21 12H27L36 36Z" fill="#1450C8"/>'
-          '<circle cx="24" cy="30" r="5" fill="#FFFFFF"/>')
 
 
-def icon(tmp_path, name="demo", main=CRISP, small16=CRISP, small24=CRISP, ids=True):
+def family(tmp_path, name="demo", main=CRISP, small16=CRISP, small24=CRISP):
     folder = tmp_path / "icons" / "apps"
     folder.mkdir(parents=True, exist_ok=True)
     for suffix, body, owner in (("", main, name), (".16", small16, f"{name}-16"), (".24", small24, f"{name}-24")):
-        if body is not None:
-            (folder / f"{name}{suffix}.svg").write_text(svg(body, f"{owner}-g1" if ids else ""), encoding="utf-8")
+        path = folder / f"{name}{suffix}.svg"
+        if body is None:
+            path.unlink(missing_ok=True)
+        else:
+            path.write_text(svg(body, f"{owner}-g1"), encoding="utf-8")
     return folder
 
 
@@ -45,70 +37,171 @@ def run(tmp_path, capsys, *extra):
     return code, capsys.readouterr().out
 
 
-def test_crisp_complete_icon_passes(tmp_path, capsys):
-    icon(tmp_path)
+def refused(tmp_path, capsys, needle, **drawings):
+    family(tmp_path, **drawings)
     code, out = run(tmp_path, capsys)
-    assert code == 0, out
-    assert "1 app icons, 0 problems" in out
+    assert code == 1, out
+    assert needle in out, out
 
 
-def test_blurry_small_drawing_is_refused(tmp_path, capsys):
-    icon(tmp_path, small16=BLURRY)
-    code, out = run(tmp_path, capsys)
-    assert code == 1
-    assert "blur: demo.16.svg" in out
-    assert "blur: demo.24.svg" not in out
-
-
-def test_smooth_diagonals_and_curves_pass(tmp_path, capsys):
-    icon(tmp_path, small16=SMOOTH, small24=SMOOTH)
+def passes(tmp_path, capsys, **drawings):
+    family(tmp_path, **drawings)
     code, out = run(tmp_path, capsys)
     assert code == 0, out
 
 
-def test_missing_small_drawing_is_refused(tmp_path, capsys):
-    icon(tmp_path, small24=None)
+# ---- edges ------------------------------------------------------------------------------------------------------
+def test_crisp_family_passes(tmp_path, capsys):
+    passes(tmp_path, capsys)
+
+
+def test_horizontal_edge_off_the_pixel_is_refused(tmp_path, capsys):
+    refused(tmp_path, capsys, "a horizontal edge at y=19.5 lands at 6.50 px at 16 px",
+            small16='<path d="M6 6H42V42H6Z" fill="#1B74E2"/><path d="M12 19.5H36V24H12Z" fill="#FFF"/>')
+
+
+def test_vertical_edge_off_the_pixel_is_refused(tmp_path, capsys):
+    refused(tmp_path, capsys, "a vertical edge at x=13 lands at 6.50 px at 24 px",
+            small24='<path d="M6 6H42V42H6Z" fill="#1B74E2"/><path d="M13 18H36V24H13Z" fill="#FFF"/>')
+
+
+def test_low_contrast_edge_is_still_refused(tmp_path, capsys):
+    refused(tmp_path, capsys, "edge: demo.16.svg",
+            small16='<path d="M6 6H42V42H6Z" fill="#888888"/><path d="M10.5 10.5H37.5V37.5H10.5Z" fill="#999999"/>')
+
+
+def test_stroke_sides_are_checked(tmp_path, capsys):
+    # centred on a pixel at 16 px (y=22.5) but 2 units wide: its sides land at 7.17 and 7.83 px
+    refused(tmp_path, capsys, "lands at 7.17 px at 16 px",
+            small16=CRISP + '<path d="M12 22.5H36" stroke="#000" stroke-width="2" stroke-linecap="round"/>')
+
+
+def test_round_capped_line_on_the_pixel_passes(tmp_path, capsys):
+    passes(tmp_path, capsys, small16=CRISP + '<path d="M13 22.5H35" stroke="#000" stroke-width="3" stroke-linecap="round"/>')
+
+
+def test_butt_cap_ends_are_edges(tmp_path, capsys):
+    refused(tmp_path, capsys, "a vertical edge at x=13",
+            small16=CRISP + '<path d="M13 22.5H36" stroke="#000" stroke-width="3" stroke-linecap="butt"/>')
+
+
+def test_closed_rounded_outline_has_no_cap_edges(tmp_path, capsys):
+    # The one-pixel inside outline every small drawing uses: a closed path whose straight sides meet rounded corners
+    # at off-grid points (10.5, 37.5). Those joins are not ends, so only the sides (6 and 9, 39 and 42) are edges.
+    passes(tmp_path, capsys, small16=CRISP + (
+        '<path d="M10.5 7.5H37.5a3 3 0 0 1 3 3V37.5a3 3 0 0 1-3 3H10.5a3 3 0 0 1-3-3V10.5a3 3 0 0 1 3-3Z" '
+        'fill="none" stroke="#33465F" stroke-width="3"/>'))
+
+
+def test_transforms_are_applied(tmp_path, capsys):
+    refused(tmp_path, capsys, "a horizontal edge at y=7.5",
+            small16=CRISP + '<g transform="translate(0 1.5)"><rect x="12" y="6" width="12" height="6" fill="#000"/></g>')
+
+
+def test_diagonals_curves_and_gradients_pass(tmp_path, capsys):
+    passes(tmp_path, capsys, small16=(
+        '<path d="M6 6H42V42H6Z" fill="#E3E9F0"/><path d="M12 36L21 12H27L36 36Z" fill="#1450C8"/>'
+        '<path d="M3 13.5L45 13.7V15H3Z" fill="#000"/><circle cx="24.7" cy="30.3" r="5.2" fill="#FFF"/>'
+        '<path d="M12 18C20 10 28 10 36 18" fill="none" stroke="#000" stroke-width="2.3"/>'))
+
+
+def test_main_drawing_is_not_held_to_pixels(tmp_path, capsys):
+    passes(tmp_path, capsys, main='<path d="M7.3 7.3H40.1V40.1H7.3Z" fill="#000"/>')
+
+
+# ---- the rest -----------------------------------------------------------------------------------------------------
+def test_missing_drawings_are_refused(tmp_path, capsys):
+    refused(tmp_path, capsys, "missing: demo.24.svg", small24=None)
+    refused(tmp_path, capsys, "missing: demo.svg", main=None, small24=CRISP)
+
+
+def test_empty_drawing_is_refused(tmp_path, capsys):
+    refused(tmp_path, capsys, "empty: demo.16.svg paints nothing", small16='<path d="M6 6H42V42H6Z" fill="none"/>')
+
+
+def test_profile_allowlist(tmp_path, capsys):
+    refused(tmp_path, capsys, "profile: <animate> in demo.svg", main=CRISP + '<animate attributeName="x"/>')
+    refused(tmp_path, capsys, "profile: filter= on <path>", main='<path d="M6 6H42V42H6Z" fill="#000" filter="url(#f)"/>')
+    passes(tmp_path, capsys, main='<clipPath id="demo-c"><rect width="48" height="48"/></clipPath>'
+                                  '<path d="M6 6H42V42H6Z" fill="#000" clip-path="url(#demo-c)"/>')
+
+
+def test_non_svg_root_is_refused(tmp_path, capsys):
+    folder = family(tmp_path)
+    (folder / "demo.svg").write_text('<html viewBox="0 0 48 48"/>', encoding="utf-8")
+    code, out = run(tmp_path, capsys)
+    assert code == 1 and "not an SVG <svg>" in out
+
+
+def test_ids_belong_to_their_drawing(tmp_path, capsys):
+    folder = family(tmp_path)
+    (folder / "demo.svg").write_text(svg(CRISP, "demo-16-g1"), encoding="utf-8")
     code, out = run(tmp_path, capsys)
     assert code == 1
-    assert "missing: demo.24.svg" in out
+    assert "id: 'demo-16-g1' in demo.svg" in out
+    assert "is in both" in out
 
 
-def test_small_drawing_without_main_is_refused(tmp_path, capsys):
-    icon(tmp_path, main=None)
+def test_unknown_file_name_is_refused(tmp_path, capsys):
+    folder = family(tmp_path)
+    (folder / "my-app.svg").write_text(svg(CRISP), encoding="utf-8")
     code, out = run(tmp_path, capsys)
+    assert code == 1 and "name: icons/apps/my-app.svg" in out
+
+
+def test_repository_icons_pass(capsys):
+    code, out = run(ROOT, capsys)
+    assert code == 0, out
+
+
+# ---- staged mode reads the index ---------------------------------------------------------------------------------
+def git(tmp_path, *args):
+    subprocess.run(["git", "-C", str(tmp_path), "-c", "user.name=t", "-c", "user.email=t@t", *args],
+                   check=True, capture_output=True, timeout=30)
+
+
+def repo(tmp_path):
+    family(tmp_path)
+    git(tmp_path, "init", "-q")
+    git(tmp_path, "add", "-A")
+    git(tmp_path, "commit", "-qm", "base")
+    return tmp_path / "icons" / "apps"
+
+
+def test_staged_bad_drawing_fixed_only_in_working_tree_is_refused(tmp_path, capsys):
+    folder = repo(tmp_path)
+    (folder / "demo.16.svg").write_text(svg('<path d="M7.5 7.5H40.5V40.5H7.5Z" fill="#000"/>', "demo-16-g1"), encoding="utf-8")
+    git(tmp_path, "add", "icons/apps/demo.16.svg")
+    (folder / "demo.16.svg").write_text(svg(CRISP, "demo-16-g1"), encoding="utf-8")
+    code, out = run(tmp_path, capsys, "--staged")
+    assert code == 1 and "edge: demo.16.svg" in out
+
+
+def test_staged_deletion_of_one_drawing_is_refused(tmp_path, capsys):
+    repo(tmp_path)
+    git(tmp_path, "rm", "-q", "icons/apps/demo.24.svg")
+    code, out = run(tmp_path, capsys, "--staged")
+    assert code == 1 and "missing: demo.24.svg" in out
+
+
+def test_staged_partial_rename_is_refused(tmp_path, capsys):
+    repo(tmp_path)
+    git(tmp_path, "mv", "icons/apps/demo.16.svg", "icons/apps/other.16.svg")
+    code, out = run(tmp_path, capsys, "--staged")
     assert code == 1
-    assert "missing: demo.svg" in out
+    assert "missing: demo.16.svg" in out and "missing: other.svg" in out
 
 
-def test_unprefixed_id_is_refused(tmp_path, capsys):
-    folder = icon(tmp_path)
-    (folder / "demo.16.svg").write_text(svg(CRISP, "other-g1"), encoding="utf-8")
-    code, out = run(tmp_path, capsys)
-    assert code == 1
-    assert "id: 'other-g1' in demo.16.svg" in out
-
-
-def test_profile_and_grid_are_enforced(tmp_path, capsys):
-    folder = icon(tmp_path)
-    (folder / "demo.svg").write_text(svg('<filter id="demo-f"/>' + CRISP, view="0 0 32 32"), encoding="utf-8")
-    code, out = run(tmp_path, capsys)
-    assert code == 1
-    assert "profile: <filter> in demo.svg" in out
-    assert "grid: demo.svg has viewBox '0 0 32 32'" in out
-
-
-def test_staged_checks_only_staged_icons(tmp_path, capsys):
-    icon(tmp_path, name="good")
-    icon(tmp_path, name="bad", small16=BLURRY)
-    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, timeout=30)
-    subprocess.run(["git", "-C", str(tmp_path), "add", "icons/apps/good.svg", "icons/apps/good.16.svg",
-                    "icons/apps/good.24.svg"], check=True, timeout=30)
+def test_staged_removal_of_a_whole_family_passes(tmp_path, capsys):
+    repo(tmp_path)
+    git(tmp_path, "rm", "-q", "icons/apps/demo.svg", "icons/apps/demo.16.svg", "icons/apps/demo.24.svg")
     code, out = run(tmp_path, capsys, "--staged")
     assert code == 0, out
-    assert "1 app icons" in out
 
 
-def test_repository_icons_pass():
-    """The committed icons themselves meet every rule."""
-    result = subprocess.run([sys.executable, str(ROOT / "tools" / "check_icons.py")], capture_output=True, text=True, timeout=300)
-    assert result.returncode == 0, result.stdout + result.stderr
+def test_staged_unrelated_commit_checks_nothing(tmp_path, capsys):
+    repo(tmp_path)
+    (tmp_path / "README.md").write_text("x", encoding="utf-8")
+    git(tmp_path, "add", "README.md")
+    code, out = run(tmp_path, capsys, "--staged")
+    assert code == 0 and "0 app icons" in out
