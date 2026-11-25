@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.jpg binary
+cursors/** binary
+
+# The agent kits are not this project's art: GitHub leaves them out of its statistics.
+scripts/** linguist-vendored
+.agents/** linguist-vendored
+.claude/** linguist-vendored
+.codex/** linguist-vendored
