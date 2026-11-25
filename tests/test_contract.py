@@ -187,6 +187,7 @@ def required_field_matrix():
     cases.append(("icon wrong type", {**BASE, "icons": ["computer"]}, "icons[0] must be an object"))
     cases.append(("cursor wrong type", {**BASE, "cursors": [5]}, "cursors[0]"))
     cases.append(("cursor object without name", {**BASE, "cursors": [{}]}, "cursors[0]"))
+    cases.append(("cursor name wrong type", {**BASE, "cursors": [{"name": 5}]}, "cursors[0]"))
     return cases
 
 
@@ -422,25 +423,31 @@ def test_a_lock_held_past_the_wait_is_refused_and_keeps_the_pin(os_world, monkey
     assert contract.pull(os_world["tip"], root)["commit"] == os_world["tip"]
 
 
-def test_a_failed_folder_sync_says_the_pin_is_in_place_but_unconfirmed(os_world, monkeypatch):
+def test_a_failed_folder_sync_says_the_pin_is_in_place_and_the_next_command_confirms_it(os_world, monkeypatch, capsys):
     root = os_world["brand"]
     contract.pull(os_world["older"], root)
+    synced = []
     real_sync = contract._sync_dir
 
     def sync(folder):
         if Path(folder) == root:
-            raise OSError("fsync failed")
+            synced.append(1)
+            if len(synced) == 2:  # the sync right after the commit point fails
+                raise OSError("fsync failed")
         real_sync(folder)
 
     monkeypatch.setattr(contract, "_sync_dir", sync)
-    with pytest.raises(contract.ContractError) as caught:
-        contract.pull(os_world["tip"], root)
-    assert "the new pin is in place but not confirmed on disk" in str(caught.value)
-    monkeypatch.undo()
-    assert cli(root, "show")[1].splitlines()[0] == f"commit {os_world['tip']}"
+    assert contract.main(["pull", "--root", str(root), os_world["tip"]]) == 1
+    out = capsys.readouterr().out
+    assert "the new pin is in place but not confirmed on disk" in out and "do not pull again" in out
+    assert contract.main(["show", "--root", str(root)]) == 0  # its recovery syncs the folder
+    out = capsys.readouterr().out
+    assert out.splitlines()[0] == f"commit {os_world['tip']}" and f"previous {os_world['older']}" in out
+    assert "+ icon printer (colour)" in out  # the change report of the installed pull is intact
+    assert len(synced) >= 3
 
 
-def test_a_failed_cleanup_reports_the_new_pin_with_cleanup_pending(os_world, monkeypatch):
+def test_a_failed_cleanup_reports_the_new_pin_and_never_blocks_reading(os_world, monkeypatch, capsys):
     root = os_world["brand"]
     contract.pull(os_world["older"], root)
     real_rmtree = contract.shutil.rmtree
@@ -451,12 +458,17 @@ def test_a_failed_cleanup_reports_the_new_pin_with_cleanup_pending(os_world, mon
         return real_rmtree(folder, *args, **kwargs)
 
     monkeypatch.setattr(contract.shutil, "rmtree", rmtree)
-    notes = []
-    source = contract.pull(os_world["tip"], root, notes=notes)
-    assert source["commit"] == os_world["tip"] and notes and notes[0].startswith("cleanup pending")
+    assert contract.main(["pull", "--root", str(root), os_world["tip"]]) == 0
+    out = capsys.readouterr().out
+    assert out.splitlines()[0] == f"commit {os_world['tip']}" and "cleanup pending" in out
+    assert contract.main(["show", "--root", str(root)]) == 0  # the cleanup still fails: reading goes on
+    out = capsys.readouterr().out
+    assert out.splitlines()[0] == f"commit {os_world['tip']}" and "cleanup pending: contract.prev/" in out
+    data, source = contract.load(root)
+    assert source["commit"] == os_world["tip"] and data["icons"][1]["name"] == "printer"
     monkeypatch.undo()
-    code, out = cli(root, "show")  # the next command finishes the cleanup
-    assert code == 0 and out.splitlines()[0] == f"commit {os_world['tip']}"
+    code, out = cli(root, "show")  # once the cause is gone, the next command finishes the cleanup
+    assert code == 0 and "cleanup pending" not in out
     assert not (root / "contract.prev").exists()
 
 

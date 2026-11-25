@@ -82,16 +82,24 @@ def locked(root):
 
 
 def recover(root):
-    """Undo a pull that stopped before its commit point, or finish one that stopped after it. Call under lock."""
+    """Undo a pull that stopped before its commit point, or finish one that stopped after it, and confirm the
+    published pair on disk. Returns notes for what is still pending; never fails a read over leftover cleanup.
+    Call under lock."""
     live, tmp, prev = folders(root)
+    notes = []
     if prev.exists() and not live.exists():  # stopped before the commit point: the previous pair comes back
         os.rename(prev, live)
-    if prev.exists():  # stopped after the commit point: contract/ is the new pair, the old one goes
-        shutil.rmtree(prev)
-    if old_folder(root).exists():
-        shutil.rmtree(old_folder(root))
-    if tmp.exists():  # stopped while writing: the new pair was never published
-        shutil.rmtree(tmp)
+    for leftover, why in ((prev, "after the commit point: contract/ is the new pair"),
+                          (old_folder(root), "left by an earlier version of this tool"),
+                          (tmp, "while writing: the new pair was never published")):
+        if leftover.exists():
+            try:
+                shutil.rmtree(leftover)
+            except OSError as error:  # the pin itself is whole: report the leftover, keep reading
+                notes.append(f"cleanup pending: {leftover.name}/ ({why}) could not be removed ({error})")
+    if live.exists():
+        _sync_dir(root)  # every command confirms the commit point on disk, so a failed sync never needs a re-pull
+    return notes
 
 
 def _refuse_constant(name):
@@ -278,11 +286,13 @@ def load(root=ROOT):
     return pin[0], pin[1]
 
 
-def show(root=ROOT):
-    """The report of the last successful pull, from contract/source.json alone."""
+def show(root=ROOT, notes=None):
+    """The report of the last successful pull, from contract/source.json alone; pending cleanup goes to `notes`."""
     with locked(root):
-        recover(root)
+        pending = recover(root)
         source = _read_source(root)
+    if notes is not None:
+        notes.extend(pending)
     if source is None:
         raise ContractError("no contract pulled yet")
     return source
@@ -308,7 +318,7 @@ def _publish(root, raw, source):
         _sync_dir(root)  # from here the commit point survives a host crash
     except OSError as error:
         raise ContractError(f"the new pin is in place but not confirmed on disk ({error}); "
-                            "run show to check it, and pull again to confirm it") from None
+                            "the next command confirms it (run show): do not pull again") from None
     if prev.exists():
         try:
             shutil.rmtree(prev)
@@ -387,7 +397,10 @@ def main(argv=None):
             for note in notes:
                 print(note)
         else:
-            print(report(show(root)))
+            notes = []
+            print(report(show(root, notes)))
+            for note in notes:
+                print(note)
     except ContractError as error:
         print(error)
         return 1
