@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_personalization-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="settings_personalization-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#3B6CF0"/></linearGradient><linearGradient id="settings_personalization-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C98B"/><stop offset="1" stop-color="#C08040"/></linearGradient></defs>
+<path d="M6.0 6.0H36.0a3.0 3.0 0 0 1 3.0 3.0V30.0a3.0 3.0 0 0 1-3.0 3.0H6.0a3.0 3.0 0 0 1-3.0-3.0V9.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="url(#settings_personalization-16-g1)"/>
+<path d="M4.5 7.5H37.5V31.5H4.5Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="3.0"/>
+<path d="M7.5 9.0H34.5a1.5 1.5 0 0 1 1.5 1.5V28.5a1.5 1.5 0 0 1-1.5 1.5H7.5a1.5 1.5 0 0 1-1.5-1.5V10.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="url(#settings_personalization-16-g2)"/>
+<path d="M18.0 33.0H24.0V36.0H18.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M12.0 36.0H30.0V39.0H12.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M6.0 22.8C15.0 10.8 24.0 18.0 36.0 19.2V30.0H6.0Z" fill="#F58FB0" fill-opacity="0.9"/>
+<path d="M45 5L33 17" stroke="url(#settings_personalization-16-g3)" stroke-width="4.199999999999999" stroke-linecap="round"/>
+<path d="M33.6 16.4L29.4 20.6" stroke="#9AA8B8" stroke-width="5.699999999999999"/>
+<path d="M30.9 16.3L33.7 19.1Q29.5 25.5 22 31Q24.5 23.5 30.9 16.3Z" fill="#22B4E8"/>
+</svg>

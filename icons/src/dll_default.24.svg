@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="dll_default-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="dll_default-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="dll_default-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M12.0 2.0H30.0L38.0 10.0V44.0a2.0 2.0 0 0 1-2.0 2.0H12.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#dll_default-24-g1)"/>
+<path d="M13.0 3.0H29.6L37.0 10.4V43.0a2.0 2.0 0 0 1-2.0 2.0H13.0a2.0 2.0 0 0 1-2.0-2.0V5.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0" stroke-linejoin="round"/>
+<path d="M30.0 2.0V10.0H38.0Z" fill="#C3CEDA"/>
+<path d="M32.0 24.0H36.0V28.0H32.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M27.960 29.960L31.354 33.354" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M22.0 34.0H26.0V38.0H22.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M20.040 29.960L16.646 33.354" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M12.0 24.0H16.0V28.0H12.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M20.040 22.040L16.646 18.646" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M22.0 14.0H26.0V18.0H22.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M27.960 22.040L31.354 18.646" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M16.0 26.0a8.0 8.0 0 1 0 16.0 0a8.0 8.0 0 1 0 -16.0 0Z" fill="url(#dll_default-24-g2)"/>
+<path d="M20.4 26.0a3.6 3.6 0 1 0 7.2 0a3.6 3.6 0 1 0 -7.2 0Z" fill="url(#dll_default-24-g3)"/>
+</svg>

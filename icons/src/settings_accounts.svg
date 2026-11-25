@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_accounts-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_accounts-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M16.2 13.8a7.800000000000001 7.800000000000001 0 1 0 15.600000000000001 0a7.800000000000001 7.800000000000001 0 1 0 -15.600000000000001 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M16.2 13.8a7.800000000000001 7.800000000000001 0 1 0 15.600000000000001 0a7.800000000000001 7.800000000000001 0 1 0 -15.600000000000001 0Z" fill="url(#settings_accounts-g1)"/>
+<path d="M16.2 13.8a7.800000000000001 7.800000000000001 0 1 0 15.600000000000001 0a7.800000000000001 7.800000000000001 0 1 0 -15.600000000000001 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M9.7 41.1C9.7 29.400000000000002 16.2 24.85 24 24.85C31.8 24.85 38.3 29.400000000000002 38.3 41.1Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M9.7 41.1C9.7 29.400000000000002 16.2 24.85 24 24.85C31.8 24.85 38.3 29.400000000000002 38.3 41.1Z" fill="url(#settings_accounts-g2)"/>
+<path d="M9.7 41.1C9.7 29.400000000000002 16.2 24.85 24 24.85C31.8 24.85 38.3 29.400000000000002 38.3 41.1Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+</svg>

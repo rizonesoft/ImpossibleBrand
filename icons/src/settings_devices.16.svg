@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_devices-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_devices-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_devices-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient></defs>
+<path d="M4.5 21.0V18.0A13.5 13.5 0 0 1 31.5 18.0V21.0" fill="none" stroke="#4A5768" stroke-width="3.0"/>
+<path d="M6.0 21.0H9.0a3.0 3.0 0 0 1 3.0 3.0V33.0a3.0 3.0 0 0 1-3.0 3.0H6.0a3.0 3.0 0 0 1-3.0-3.0V24.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="url(#settings_devices-16-g1)"/>
+<path d="M27.0 21.0H30.0a3.0 3.0 0 0 1 3.0 3.0V33.0a3.0 3.0 0 0 1-3.0 3.0H27.0a3.0 3.0 0 0 1-3.0-3.0V24.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="url(#settings_devices-16-g2)"/>
+<path d="M39.0 18.0H39.0a6.0 6.0 0 0 1 6.0 6.0V36.0a6.0 6.0 0 0 1-6.0 6.0H39.0a6.0 6.0 0 0 1-6.0-6.0V24.0a6.0 6.0 0 0 1 6.0-6.0Z" fill="url(#settings_devices-16-g3)"/>
+<path d="M39.0 19.5H39.0a4.5 4.5 0 0 1 4.5 4.5V36.0a4.5 4.5 0 0 1-4.5 4.5H39.0a4.5 4.5 0 0 1-4.5-4.5V24.0a4.5 4.5 0 0 1 4.5-4.5Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="3.0"/>
+<path d="M36.0 21.0H39.0V27.0H36.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+</svg>

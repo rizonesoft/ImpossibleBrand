@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="control_panel-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="control_panel-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="control_panel-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="control_panel-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M4.0 6.0H44.0a2.0 2.0 0 0 1 2.0 2.0V40.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V8.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#control_panel-24-g1)"/>
+<path d="M4.0 7.0H44.0a1.0 1.0 0 0 1 1.0 1.0V40.0a1.0 1.0 0 0 1-1.0 1.0H4.0a1.0 1.0 0 0 1-1.0-1.0V8.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M6.0 12.0H42.0V14.0H6.0Z" fill="#5D6B7C" fill-opacity="0.5"/>
+<path d="M34.0 10.0H36.0a2.0 2.0 0 0 1 2.0 2.0V14.0a2.0 2.0 0 0 1-2.0 2.0H34.0a2.0 2.0 0 0 1-2.0-2.0V12.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#control_panel-24-g2)"/>
+<path d="M6.0 24.0H42.0V26.0H6.0Z" fill="#5D6B7C" fill-opacity="0.5"/>
+<path d="M16.0 22.0H18.0a2.0 2.0 0 0 1 2.0 2.0V26.0a2.0 2.0 0 0 1-2.0 2.0H16.0a2.0 2.0 0 0 1-2.0-2.0V24.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#control_panel-24-g3)"/>
+<path d="M6.0 36.0H42.0V38.0H6.0Z" fill="#5D6B7C" fill-opacity="0.5"/>
+<path d="M26.0 34.0H28.0a2.0 2.0 0 0 1 2.0 2.0V38.0a2.0 2.0 0 0 1-2.0 2.0H26.0a2.0 2.0 0 0 1-2.0-2.0V36.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#control_panel-24-g4)"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_network-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_network-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M9.180 26.220A19 19 0 0 1 38.820 26.220" fill="none" stroke="url(#settings_network-24-g1)" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M14.250 30.250A12.5 12.5 0 0 1 33.750 30.250" fill="none" stroke="url(#settings_network-24-g1)" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M18.930 33.970A6.5 6.5 0 0 1 29.070 33.970" fill="none" stroke="url(#settings_network-24-g1)" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M21.2 37.5a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0Z" fill="url(#settings_network-24-g2)"/>
+</svg>

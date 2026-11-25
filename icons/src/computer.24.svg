@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="computer-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="computer-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B4FC8"/></linearGradient></defs>
+<path d="M6.0 6.0H42.0a2.0 2.0 0 0 1 2.0 2.0V32.0a2.0 2.0 0 0 1-2.0 2.0H6.0a2.0 2.0 0 0 1-2.0-2.0V8.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#computer-24-g1)"/>
+<path d="M5.0 7.0H43.0V33.0H5.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M7.0 8.0H41.0a1.0 1.0 0 0 1 1.0 1.0V31.0a1.0 1.0 0 0 1-1.0 1.0H7.0a1.0 1.0 0 0 1-1.0-1.0V9.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#computer-24-g2)"/>
+<path d="M6.0 23.6C20.0 14.4 32.0 20.0 42.0 19.4V32.0H6.0Z" fill="#8FE3FA" fill-opacity="0.45"/>
+<path d="M20.0 34.0H28.0V36.0H20.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M14.0 36.0H34.0V38.0H14.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+</svg>

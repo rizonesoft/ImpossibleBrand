@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="folder_downloads-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B429"/><stop offset="1" stop-color="#D9920F"/></linearGradient><linearGradient id="folder_downloads-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient></defs>
+<path d="M3.0 9.0H18.0L21.0 12.0H45.0V39.0H3.0Z" fill="url(#folder_downloads-16-g1)"/>
+<path d="M6.0 12.0H42.0V18.0H6.0Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M4.5 18.0H43.5a1.5 1.5 0 0 1 1.5 1.5V37.5a1.5 1.5 0 0 1-1.5 1.5H4.5a1.5 1.5 0 0 1-1.5-1.5V19.5a1.5 1.5 0 0 1 1.5-1.5Z" fill="url(#folder_downloads-16-g2)"/>
+<path d="M3.0 18.0H45.0V21.0H3.0Z" fill="#FFE79A" fill-opacity="1.0"/>
+<path d="M21.0 21.0H24.0V30.0H21.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+<path d="M15.0 24.0H30.0L22.5 33.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+<path d="M18.0 33.0H30.0V36.0H18.0Z" fill="#1B64D8" fill-opacity="1.0"/>
+</svg>

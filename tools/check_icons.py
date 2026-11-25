@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Check the app icons: python3 tools/check_icons.py [--staged] [--root <repo>]
+"""Check the icons: python3 tools/check_icons.py [--staged] [--root <repo>]
 
-Every program's icon is three drawings in icons/apps/: <program>.svg (the main drawing, 48 grid), <program>.24.svg
-(drawn for 24 px, used at 24 and 32) and <program>.16.svg (drawn for 16 px, used at 16 and 20). A small drawing is
+Every icon, an app icon in icons/apps/ or a system icon in icons/src/, is three drawings: <name>.svg (the main
+drawing, 48 grid), <name>.24.svg (drawn for 24 px, used at 24 and 32) and <name>.16.svg (drawn for 16 px, used at
+16 and 20). A small drawing is
 redrawn for its size, as Windows 11 does, not the main drawing shrunk. This refuses:
 
-  name       a file in icons/apps that is not <program>.svg, <program>.24.svg or <program>.16.svg (no subfolders)
+  name       a file in either folder that is not <name>.svg, <name>.24.svg or <name>.16.svg (no subfolders)
   missing    a program without all three drawings
   profile    a root that is not SVG; an element, attribute or transform outside the profile; path data or a
              transform that does not parse; a reference to an id that is not there
@@ -38,7 +39,8 @@ from xml.etree import ElementTree
 SMALL = (16, 24)
 SVG = "{http://www.w3.org/2000/svg}"
 XLINK = "{http://www.w3.org/1999/xlink}"
-NAME = re.compile(r"([a-z0-9]+)(?:\.(16|24))?\.svg")
+NAME = re.compile(r"([a-z0-9]+(?:_[a-z0-9]+)*)(?:\.(16|24))?\.svg")
+FOLDERS = ("icons/apps", "icons/src")  # the app icons and the system icons
 TOLERANCE = 0.01  # of a pixel
 # The system SVG profile (Impossible OS docs/design/icons.md): paths and basic shapes, fills and strokes, linear and
 # radial gradients, opacity, transforms, defs, use, symbol and clipPath. No masks, filters, text or CSS.
@@ -399,8 +401,8 @@ def git(root, *args):
     return subprocess.run(["git", "-C", str(root), *args], capture_output=True, check=True, timeout=60).stdout
 
 
-def from_tree(root):
-    folder = root / "icons" / "apps"
+def from_tree(root, where):
+    folder = root / where
     files = sorted(p.relative_to(folder).as_posix() for p in folder.rglob("*") if p.is_file()) if folder.is_dir() else []
 
     def read(f):
@@ -409,11 +411,11 @@ def from_tree(root):
     return files, read, None
 
 
-def from_index(root):
-    prefix = "icons/apps/"
-    listed = git(root, "ls-files", "--cached", "-z", "--", "icons/apps").decode().split("\0")
+def from_index(root, where):
+    prefix = where + "/"
+    listed = git(root, "ls-files", "--cached", "-z", "--", where).decode().split("\0")
     files = sorted(p[len(prefix):] for p in listed if p.startswith(prefix))
-    changed = git(root, "diff", "--cached", "--no-renames", "--name-only", "-z", "--", "icons/apps").decode().split("\0")
+    changed = git(root, "diff", "--cached", "--no-renames", "--name-only", "-z", "--", where).decode().split("\0")
     touched = {p[len(prefix):] for p in changed if p.startswith(prefix)}
 
     def read(f):
@@ -426,25 +428,27 @@ def main(argv=None):
     parser.add_argument("--staged", action="store_true")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args(argv)
-    files, read, touched = from_index(args.root) if args.staged else from_tree(args.root)
-    problems, programs = [], set()
-    for f in sorted(touched if touched is not None else files):
-        match = NAME.fullmatch(f)
-        if not match:
-            if f in files:
-                problems.append(f"name: icons/apps/{f} is not <program>.svg, <program>.24.svg or <program>.16.svg")
-            continue
-        programs.add(match[1])
-    present = {m[1] for m in map(NAME.fullmatch, files) if m}
-    for program in sorted(programs):
-        if program not in present:
-            continue  # the whole family was removed in this commit
-        problems += check_family(program, read)
+    problems, counts = [], {}
+    for where in FOLDERS:
+        files, read, touched = from_index(args.root, where) if args.staged else from_tree(args.root, where)
+        icons = set()
+        for f in sorted(touched if touched is not None else files):
+            match = NAME.fullmatch(f)
+            if not match:
+                if f in files:
+                    problems.append(f"name: {where}/{f} is not <name>.svg, <name>.24.svg or <name>.16.svg")
+                continue
+            icons.add(match[1])
+        present = {m[1] for m in map(NAME.fullmatch, files) if m}
+        for icon in sorted(icons):
+            if icon in present:  # otherwise the whole family was removed in this commit
+                problems += check_family(icon, read)
+        counts[where] = len(icons)
     for problem in problems:
         print(problem)
-    print(f"check_icons: {len(programs)} app icons, {len(problems)} problems")
+    detail = ", ".join(f"{n} in {where}" for where, n in counts.items())
+    print(f"check_icons: {sum(counts.values())} icons ({detail}), {len(problems)} problems")
     return 1 if problems else 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_accounts-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_accounts-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M16.5 12.0a7.5 7.5 0 1 0 15.0 0a7.5 7.5 0 1 0 -15.0 0Z" fill="url(#settings_accounts-16-g1)"/>
+<path d="M6.0 42.0C6.0 30.0 15.0 24.0 24 24.0C33.0 24.0 42.0 30.0 42.0 42.0Z" fill="url(#settings_accounts-16-g2)"/>
+</svg>

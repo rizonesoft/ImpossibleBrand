@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_time_language-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_time_language-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="settings_time_language-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient></defs>
+<path d="M4.5 20a14.5 14.5 0 1 0 29.0 0a14.5 14.5 0 1 0 -29.0 0Z" fill="url(#settings_time_language-24-g1)"/>
+<path d="M7.5 20a11.5 11.5 0 1 0 23.0 0a11.5 11.5 0 1 0 -23.0 0Z" fill="url(#settings_time_language-24-g2)"/>
+<path d="M18.0 12.0H20.0V20.0H18.0Z" fill="#1E252E" fill-opacity="1.0"/>
+<path d="M19.0 20L25.0 24" stroke="#1E252E" stroke-width="2.0" stroke-linecap="round"/>
+<path d="M26.0 24.0H44.0a2.0 2.0 0 0 1 2.0 2.0V44.0a2.0 2.0 0 0 1-2.0 2.0H26.0a2.0 2.0 0 0 1-2.0-2.0V26.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#settings_time_language-24-g3)"/>
+<path d="M28.520 42.0L33.560 28.0H36.440L41.480 42.0Z" fill="#FFFFFF"/>
+<path d="M32.0 36.0H38.0V38.0H32.0Z" fill="#6E4FE0"/>
+</svg>

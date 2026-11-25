@@ -288,4 +288,16 @@ def test_staged_unrelated_commit_checks_nothing(tmp_path, capsys):
     (tmp_path / "README.md").write_text("x", encoding="utf-8")
     git(tmp_path, "add", "README.md")
     code, out = run(tmp_path, capsys, "--staged")
-    assert code == 0 and "0 app icons" in out
+    assert code == 0 and "check_icons: 0 icons" in out
+
+def test_system_icons_are_held_to_the_same_rules(tmp_path, capsys):
+    folder = tmp_path / "icons" / "src"
+    folder.mkdir(parents=True)
+    for suffix, owner in (("", "settings_apps"), (".16", "settings_apps-16"), (".24", "settings_apps-24")):
+        (folder / f"settings_apps{suffix}.svg").write_text(svg(CRISP, f"{owner}-g1"), encoding="utf-8")
+    code, out = run(tmp_path, capsys)
+    assert code == 0, out
+    assert "1 icons (0 in icons/apps, 1 in icons/src)" in out
+    (folder / "settings_apps.16.svg").unlink()
+    code, out = run(tmp_path, capsys)
+    assert code == 1 and "missing: settings_apps.16.svg" in out

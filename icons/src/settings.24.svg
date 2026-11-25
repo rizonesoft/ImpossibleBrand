@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="settings-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M38.0 22.0H42.0V26.0H38.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M30.930 30.930L35.597 35.597" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M22.0 38.0H26.0V42.0H22.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M17.070 30.930L12.403 35.597" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M6.0 22.0H10.0V26.0H6.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M17.070 17.070L12.403 12.403" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M22.0 6.0H26.0V10.0H22.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M30.930 17.070L35.597 12.403" stroke="#4A5768" stroke-width="4.0" stroke-linecap="round"/>
+<path d="M10.0 24a14.0 14.0 0 1 0 28.0 0a14.0 14.0 0 1 0 -28.0 0Z" fill="url(#settings-24-g1)"/>
+<path d="M17.7 24a6.3 6.3 0 1 0 12.6 0a6.3 6.3 0 1 0 -12.6 0Z" fill="url(#settings-24-g2)"/>
+</svg>

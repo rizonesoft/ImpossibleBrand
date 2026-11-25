@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="recycle_bin_full-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4F0FB"/><stop offset="1" stop-color="#93B0D0"/></linearGradient><linearGradient id="recycle_bin_full-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="recycle_bin_full-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="recycle_bin_full-16-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="recycle_bin_full-16-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="recycle_bin_full-16-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient></defs>
+<path d="M6.0 9.0H42.0L36.0 42.0H12.0Z" fill="url(#recycle_bin_full-16-g1)"/>
+<path d="M7.5 10.5H40.5L34.5 40.5H13.5Z" fill="none" stroke="#7D93AD" stroke-width="3.0" stroke-linejoin="round"/>
+<path d="M6.0 9.0H42.0V12.0H6.0Z" fill="#7D93AD" fill-opacity="1.0"/>
+<path d="M14.400000000000002 21.6a4.800000000000001 4.800000000000001 0 1 0 9.600000000000001 0a4.800000000000001 4.800000000000001 0 1 0 -9.600000000000001 0Z" fill="url(#recycle_bin_full-16-g2)"/>
+<path d="M24.479999999999997 20.16a4.32 4.32 0 1 0 8.64 0a4.32 4.32 0 1 0 -8.64 0Z" fill="url(#recycle_bin_full-16-g3)"/>
+<path d="M18.72 29.759999999999998a5.28 5.28 0 1 0 10.56 0a5.28 5.28 0 1 0 -10.56 0Z" fill="url(#recycle_bin_full-16-g4)"/>
+<path d="M13.440000000000001 33.599999999999994a3.84 3.84 0 1 0 7.68 0a3.84 3.84 0 1 0 -7.68 0Z" fill="url(#recycle_bin_full-16-g5)"/>
+<path d="M26.88 32.64a3.84 3.84 0 1 0 7.68 0a3.84 3.84 0 1 0 -7.68 0Z" fill="url(#recycle_bin_full-16-g6)"/>
+</svg>

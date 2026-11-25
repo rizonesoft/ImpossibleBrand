@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="recycle_bin_empty-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4F0FB"/><stop offset="1" stop-color="#93B0D0"/></linearGradient></defs>
+<path d="M6.0 9.0H42.0L36.0 42.0H12.0Z" fill="url(#recycle_bin_empty-16-g1)"/>
+<path d="M7.5 10.5H40.5L34.5 40.5H13.5Z" fill="none" stroke="#7D93AD" stroke-width="3.0" stroke-linejoin="round"/>
+<path d="M6.0 9.0H42.0V12.0H6.0Z" fill="#7D93AD" fill-opacity="1.0"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="drive_removable-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="drive_removable-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient></defs>
+<path d="M4.0 16.0H34.0a2.0 2.0 0 0 1 2.0 2.0V30.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V18.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#drive_removable-24-g1)"/>
+<path d="M37.0 18.0H45.0a1.0 1.0 0 0 1 1.0 1.0V29.0a1.0 1.0 0 0 1-1.0 1.0H37.0a1.0 1.0 0 0 1-1.0-1.0V19.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#drive_removable-24-g2)"/>
+<path d="M38.0 20.0H40.0V22.0H38.0Z" fill="#5D6B7C" fill-opacity="1.0"/>
+<path d="M6.0 22.0H8.0V24.0H6.0Z" fill="#FFFFFF" fill-opacity="1.0"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="drive_system-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#9AA8B8"/></linearGradient><linearGradient id="drive_system-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1450C8"/></linearGradient></defs>
+<path d="M4.0 16.0H44.0a2.0 2.0 0 0 1 2.0 2.0V30.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V18.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#drive_system-24-g1)"/>
+<path d="M4.0 17.0H44.0a1.0 1.0 0 0 1 1.0 1.0V30.0a1.0 1.0 0 0 1-1.0 1.0H4.0a1.0 1.0 0 0 1-1.0-1.0V18.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M6.0 26.0H38.0V28.0H6.0Z" fill="#5D6B7C" fill-opacity="0.7"/>
+<path d="M40.0 26.0H42.0V28.0H40.0Z" fill="#1E9E50" fill-opacity="1.0"/>
+<path d="M7.0 18.0H13.0a1.0 1.0 0 0 1 1.0 1.0V25.0a1.0 1.0 0 0 1-1.0 1.0H7.0a1.0 1.0 0 0 1-1.0-1.0V19.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#drive_system-24-g2)"/>
+</svg>

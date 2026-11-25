@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_gaming-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C8A9C"/><stop offset="1" stop-color="#3F4A58"/></linearGradient><linearGradient id="settings_gaming-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5FD38A"/><stop offset="1" stop-color="#5FD38A"/></linearGradient><linearGradient id="settings_gaming-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE680"/><stop offset="1" stop-color="#FFE680"/></linearGradient><linearGradient id="settings_gaming-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A80"/><stop offset="1" stop-color="#FF8A80"/></linearGradient><linearGradient id="settings_gaming-24-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#6BD3FA"/></linearGradient></defs>
+<path d="M12.0 12.0H36.0C40.0 12.0 44.0 18.0 44.0 22.0L46.0 32.0C48.0 38.0 42.0 40.0 38.0 36.0L34.0 32.0H14.0L10.0 36.0C6.0 40.0 0.0 38.0 2.0 32.0L4.0 22.0C4.0 18.0 8.0 12.0 12.0 12.0Z" fill="url(#settings_gaming-24-g1)"/>
+<path d="M8.0 20.0H18.0V22.0H8.0Z" fill="#E6EBF1" fill-opacity="1.0"/>
+<path d="M12.0 16.0H14.0V26.0H12.0Z" fill="#E6EBF1" fill-opacity="1.0"/>
+<path d="M33.1 19.8a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#settings_gaming-24-g2)"/>
+<path d="M33.1 24.2a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#settings_gaming-24-g3)"/>
+<path d="M35.7 22.0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#settings_gaming-24-g4)"/>
+<path d="M30.5 22.0a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#settings_gaming-24-g5)"/>
+</svg>

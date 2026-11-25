@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_personalization-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="settings_personalization-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#3B6CF0"/></linearGradient><linearGradient id="settings_personalization-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C98B"/><stop offset="1" stop-color="#C08040"/></linearGradient></defs>
+<path d="M4.0 4.0H36.0a2.0 2.0 0 0 1 2.0 2.0V30.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V6.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#settings_personalization-24-g1)"/>
+<path d="M3.0 5.0H37.0V31.0H3.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M5.0 6.0H35.0a1.0 1.0 0 0 1 1.0 1.0V29.0a1.0 1.0 0 0 1-1.0 1.0H5.0a1.0 1.0 0 0 1-1.0-1.0V7.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#settings_personalization-24-g2)"/>
+<path d="M16.0 32.0H24.0V34.0H16.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M12.0 34.0H28.0V36.0H12.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M4.0 22.2C13.6 9.2 23.2 17.0 36.0 18.299999999999997V30.0H4.0Z" fill="#F58FB0" fill-opacity="0.9"/>
+<path d="M45 5L33 17" stroke="url(#settings_personalization-24-g3)" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M33.6 16.4L29.4 20.6" stroke="#9AA8B8" stroke-width="3.8"/>
+<path d="M30.9 16.3L33.7 19.1Q29.5 25.5 22 31Q24.5 23.5 30.9 16.3Z" fill="#22B4E8"/>
+</svg>

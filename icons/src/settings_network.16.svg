@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_network-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_network-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M9.180 26.220A19 19 0 0 1 38.820 26.220" fill="none" stroke="url(#settings_network-16-g1)" stroke-width="4.800000000000001" stroke-linecap="round"/>
+<path d="M15.030 30.870A11.5 11.5 0 0 1 32.970 30.870" fill="none" stroke="url(#settings_network-16-g1)" stroke-width="4.800000000000001" stroke-linecap="round"/>
+<path d="M19.8 37.5a4.199999999999999 4.199999999999999 0 1 0 8.399999999999999 0a4.199999999999999 4.199999999999999 0 1 0 -8.399999999999999 0Z" fill="url(#settings_network-16-g2)"/>
+</svg>

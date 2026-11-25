@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_system-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="settings_system-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B7CF0"/><stop offset="1" stop-color="#1B3F9E"/></linearGradient></defs>
+<path d="M6.0 4.0H42.0a2.0 2.0 0 0 1 2.0 2.0V34.0a2.0 2.0 0 0 1-2.0 2.0H6.0a2.0 2.0 0 0 1-2.0-2.0V6.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#settings_system-24-g1)"/>
+<path d="M5.0 5.0H43.0V35.0H5.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M7.0 6.0H41.0a1.0 1.0 0 0 1 1.0 1.0V33.0a1.0 1.0 0 0 1-1.0 1.0H7.0a1.0 1.0 0 0 1-1.0-1.0V7.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#settings_system-24-g2)"/>
+<path d="M20.0 36.0H28.0V38.0H20.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M16.0 38.0H32.0V40.0H16.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M6.0 27.4C16.799999999999997 14.5 27.599999999999998 17.5 42.0 22.0V34.0H6.0Z" fill="#6BD3FA" fill-opacity="0.85"/>
+</svg>

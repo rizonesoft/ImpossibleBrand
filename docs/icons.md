@@ -64,6 +64,19 @@ Every icon is checked at 16 and 24 px on `#202020` and `#F3F3F3` before it lands
 | Application | `exe_default.svg` | `.exe` files with no embedded icon |
 | Library | `dll_default.svg` | `.dll` and `.sys` files |
 | Start | `start.svg` | The Start button on the taskbar |
+| System | `settings_system.svg` | Settings category: System (a desktop monitor) |
+| Bluetooth and devices | `settings_devices.svg` | Settings category: devices (headphones and a mouse) |
+| Network and internet | `settings_network.svg` | Settings category: network (a Wi-Fi fan) |
+| Personalisation | `settings_personalization.svg` | Settings category: personalisation (a painted screen and a brush) |
+| Apps | `settings_apps.svg` | Settings category: apps (a window listing apps) |
+| Accounts | `settings_accounts.svg` | Settings category: accounts (a person) |
+| Time and language | `settings_time_language.svg` | Settings category: time and language (a clock and a letter) |
+| Gaming | `settings_gaming.svg` | Settings category: gaming (a controller) |
+| Accessibility | `settings_accessibility.svg` | Settings category: accessibility (a person within a circle) |
+| Privacy and security | `settings_privacy_security.svg` | Settings category: privacy and security (a shield with a check) |
+| Update | `settings_update.svg` | Settings category: update (circular arrows) |
+
+Every icon in the set, like every app icon, has a hand-drawn 24 px drawing (`<name>.24.svg`) and 16 px drawing (`<name>.16.svg`) beside its main drawing, held to the rules under App icons; `tools/check_icons.py` checks `icons/src/` and `icons/apps/` alike.
 
 ## The logo and the Start button
 

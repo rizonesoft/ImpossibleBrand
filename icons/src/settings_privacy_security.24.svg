@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_privacy_security-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1450C8"/></linearGradient></defs>
+<path d="M24 4.0L40.0 10.0V22.0C40.0 32.0 32.0 40.0 24 44.0C16.0 40.0 8.0 32.0 8.0 22.0V10.0Z" fill="url(#settings_privacy_security-24-g1)"/>
+<path d="M16.0 24.0L22.0 30.0L32.0 18.0" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

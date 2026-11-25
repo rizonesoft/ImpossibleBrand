@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_network-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="settings_network-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M9.18 26.22A19 19 0 0 1 38.82 26.22" fill="none" stroke="url(#settings_network-g1)" stroke-width="4.4" stroke-linecap="round"/>
+<path d="M13.86 29.94A13 13 0 0 1 34.14 29.94" fill="none" stroke="url(#settings_network-g1)" stroke-width="4.4" stroke-linecap="round"/>
+<path d="M18.54 33.66A7 7 0 0 1 29.46 33.66" fill="none" stroke="url(#settings_network-g1)" stroke-width="4.4" stroke-linecap="round"/>
+<path d="M20.8 37.5a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M20.8 37.5a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0Z" fill="url(#settings_network-g2)"/>
+<path d="M20.8 37.5a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+</svg>

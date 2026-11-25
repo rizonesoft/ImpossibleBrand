@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_image-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="file_image-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FE3FA"/><stop offset="1" stop-color="#3AA0F5"/></linearGradient></defs>
+<path d="M12.0 2.0H30.0L38.0 10.0V44.0a2.0 2.0 0 0 1-2.0 2.0H12.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#file_image-24-g1)"/>
+<path d="M13.0 3.0H29.6L37.0 10.4V43.0a2.0 2.0 0 0 1-2.0 2.0H13.0a2.0 2.0 0 0 1-2.0-2.0V5.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0" stroke-linejoin="round"/>
+<path d="M30.0 2.0V10.0H38.0Z" fill="#C3CEDA"/>
+<path d="M15.0 18.0H33.0a1.0 1.0 0 0 1 1.0 1.0V41.0a1.0 1.0 0 0 1-1.0 1.0H15.0a1.0 1.0 0 0 1-1.0-1.0V19.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#file_image-24-g2)"/>
+<path d="M14.0 42.0L22.0 27.6L26.4 34.8L29.6 31.200000000000003L34.0 42.0Z" fill="#1E9E50" fill-opacity="1.0"/>
+</svg>

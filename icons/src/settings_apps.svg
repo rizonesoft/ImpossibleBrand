@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="settings_apps-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#D6DEE8"/></linearGradient><linearGradient id="settings_apps-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="settings_apps-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="settings_apps-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient><linearGradient id="settings_apps-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB46B"/><stop offset="1" stop-color="#F07A1A"/></linearGradient><linearGradient id="settings_apps-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient></defs>
+<path d="M8 6H40a3 3 0 0 1 3 3V39a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M8 6H40a3 3 0 0 1 3 3V39a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="url(#settings_apps-g1)"/>
+<path d="M8 6H40a3 3 0 0 1 3 3V39a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M8 6.6H40" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M8 6H40a3 3 0 0 1 3 3V10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Z" fill="url(#settings_apps-g2)"/>
+<path d="M5 10.5H43V13H5Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M10.2 16.5H12.8a1.2 1.2 0 0 1 1.2 1.2V19.900000000000002a1.2 1.2 0 0 1-1.2 1.2H10.2a1.2 1.2 0 0 1-1.2-1.2V17.7a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#settings_apps-g3)"/>
+<path d="M17 18.0L33 18.0" stroke="#1450C8" stroke-opacity="0.8" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M17 20.1L27 20.1" stroke="#9FB0C4" stroke-opacity="0.8" stroke-width="1.2" stroke-linecap="round"/>
+<path d="M10.2 22.8H12.8a1.2 1.2 0 0 1 1.2 1.2V26.2a1.2 1.2 0 0 1-1.2 1.2H10.2a1.2 1.2 0 0 1-1.2-1.2V24.0a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#settings_apps-g4)"/>
+<path d="M17 24.3L28 24.3" stroke="#1450C8" stroke-opacity="0.8" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M17 26.400000000000002L27 26.400000000000002" stroke="#9FB0C4" stroke-opacity="0.8" stroke-width="1.2" stroke-linecap="round"/>
+<path d="M10.2 29.1H12.8a1.2 1.2 0 0 1 1.2 1.2V32.5a1.2 1.2 0 0 1-1.2 1.2H10.2a1.2 1.2 0 0 1-1.2-1.2V30.3a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#settings_apps-g5)"/>
+<path d="M17 30.6L33 30.6" stroke="#1450C8" stroke-opacity="0.8" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M17 32.7L27 32.7" stroke="#9FB0C4" stroke-opacity="0.8" stroke-width="1.2" stroke-linecap="round"/>
+<path d="M10.2 35.4H12.8a1.2 1.2 0 0 1 1.2 1.2V38.8a1.2 1.2 0 0 1-1.2 1.2H10.2a1.2 1.2 0 0 1-1.2-1.2V36.6a1.2 1.2 0 0 1 1.2-1.2Z" fill="url(#settings_apps-g6)"/>
+<path d="M17 36.9L28 36.9" stroke="#1450C8" stroke-opacity="0.8" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M17 39.0L27 39.0" stroke="#9FB0C4" stroke-opacity="0.8" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
