@@ -17,7 +17,7 @@ title: "TODO-01 -- Contract, Palette and Pack"
 - `docs/specs/2026-11-25-brand-split-design.md`, sections "What is the contract this repository validates against?" and "What is the brand pack?": the governing design for every section here.
 - `docs/icons.md`: the palette values (manila, logo blues, grey ramp, recycle bin glass, terminal slate) that `palette.json` records.
 - Impossible OS (`rizonesoft/impossible-os`): the contract it generates as `docs/design/brand-contract.json` on its `main` (OS TODO-01 §11), holding `profile`, `tokens`, `sizes`, `icons` and `cursors` with a provider per icon. Built by the OS roadmap, never here; this file reads it only through `tools/os_probe.py` and `tools/contract.py`.
-- Sibling checkouts in `~/ImpossibleOS/` (the program repositories and Impossible SDK): read only, through their `origin/main` refs.
+- Sibling checkouts in `~/impossible/` (the program repositories and Impossible SDK): read only, through their `origin/main` refs.
 
 ## Outcome
 
