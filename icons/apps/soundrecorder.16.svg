@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="soundrecorder-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="soundrecorder-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A80"/><stop offset="1" stop-color="#D93A30"/></linearGradient></defs>
+<path d="M24.0 3.0H24.0a9.0 9.0 0 0 1 9.0 9.0V18.0a9.0 9.0 0 0 1-9.0 9.0H24.0a9.0 9.0 0 0 1-9.0-9.0V12.0a9.0 9.0 0 0 1 9.0-9.0Z" fill="url(#soundrecorder-16-g1)"/>
+<path d="M24.0 4.5H24.0a7.5 7.5 0 0 1 7.5 7.5V18.0a7.5 7.5 0 0 1-7.5 7.5H24.0a7.5 7.5 0 0 1-7.5-7.5V12.0a7.5 7.5 0 0 1 7.5-7.5Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="3.0"/>
+<path d="M21.0 9.0H27.0V12.0H21.0Z" fill="#7F91A6" fill-opacity="1.0"/>
+<path d="M21.0 15.0H27.0V18.0H21.0Z" fill="#7F91A6" fill-opacity="1.0"/>
+<path d="M21.0 21.0H27.0V24.0H21.0Z" fill="#7F91A6" fill-opacity="1.0"/>
+<path d="M13.5 18.0V21.0A10.5 10.5 0 0 0 34.5 21.0V18.0" fill="none" stroke="#4A5768" stroke-width="3.0" stroke-linecap="round"/>
+<path d="M21.0 36.0H27.0V42.0H21.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M15.0 42.0H33.0V45.0H15.0Z" fill="#4A5768" fill-opacity="1.0"/>
+<path d="M34.2 6.0a4.800000000000001 4.800000000000001 0 1 0 9.600000000000001 0a4.800000000000001 4.800000000000001 0 1 0 -9.600000000000001 0Z" fill="url(#soundrecorder-16-g2)"/>
+</svg>

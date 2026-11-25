@@ -131,7 +131,7 @@ def parse_path(d):
         up, rel = cmd.upper(), cmd.islower()
         if up == "Z":
             if current is not None:
-                if (x, y) != (sx, sy):
+                if math.dist((x, y), (sx, sy)) > 1e-6:  # float noise from relative arcs is not a closing line
                     current["parts"].append(("line", (x, y), (sx, sy)))
                 current["closed"] = True
                 current = None
@@ -245,7 +245,7 @@ def edge_problems(subpaths, m, paint, size, name):
 
 
 def straight_edges(kind, a, b, offsets, unit, size, name):
-    if kind != "line" or a == b:
+    if kind != "line" or math.dist(a, b) <= 1e-6:
         return []
     out = []
     for axis in (0, 1):  # axis 0: a vertical part (x fixed); axis 1: a horizontal part (y fixed)

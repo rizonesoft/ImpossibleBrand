@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="iconeditor-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="iconeditor-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="iconeditor-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDE73"/><stop offset="1" stop-color="#F0B429"/></linearGradient></defs>
+<path d="M8 4H40a4 4 0 0 1 4 4V40a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M8 4H40a4 4 0 0 1 4 4V40a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="url(#iconeditor-g1)"/>
+<path d="M8 4H40a4 4 0 0 1 4 4V40a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M8 4.6H40" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M17 12H31a5 5 0 0 1 5 5V31a5 5 0 0 1-5 5H17a5 5 0 0 1-5-5V17a5 5 0 0 1 5-5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M17 12H31a5 5 0 0 1 5 5V31a5 5 0 0 1-5 5H17a5 5 0 0 1-5-5V17a5 5 0 0 1 5-5Z" fill="url(#iconeditor-g2)"/>
+<path d="M17 12H31a5 5 0 0 1 5 5V31a5 5 0 0 1-5 5H17a5 5 0 0 1-5-5V17a5 5 0 0 1 5-5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M17 12.6H31" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M17 28L22 21L26 26L29 23L33 28V31H17Z" fill="#FFFFFF" fill-opacity="0.9"/>
+<path d="M26.6 17.5a2.4 2.4 0 1 0 4.8 0a2.4 2.4 0 1 0 -4.8 0Z" fill="url(#iconeditor-g3)"/>
+<path d="M10.8 10H13.2a0.8 0.8 0 0 1 0.8 0.8V13.2a0.8 0.8 0 0 1-0.8 0.8H10.8a0.8 0.8 0 0 1-0.8-0.8V10.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M10.8 10H13.2a0.8 0.8 0 0 1 0.8 0.8V13.2a0.8 0.8 0 0 1-0.8 0.8H10.8a0.8 0.8 0 0 1-0.8-0.8V10.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="none" stroke="#1450C8" stroke-width="1"/>
+<path d="M34.8 10H37.2a0.8 0.8 0 0 1 0.8 0.8V13.2a0.8 0.8 0 0 1-0.8 0.8H34.8a0.8 0.8 0 0 1-0.8-0.8V10.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M34.8 10H37.2a0.8 0.8 0 0 1 0.8 0.8V13.2a0.8 0.8 0 0 1-0.8 0.8H34.8a0.8 0.8 0 0 1-0.8-0.8V10.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="none" stroke="#1450C8" stroke-width="1"/>
+<path d="M10.8 34H13.2a0.8 0.8 0 0 1 0.8 0.8V37.2a0.8 0.8 0 0 1-0.8 0.8H10.8a0.8 0.8 0 0 1-0.8-0.8V34.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M10.8 34H13.2a0.8 0.8 0 0 1 0.8 0.8V37.2a0.8 0.8 0 0 1-0.8 0.8H10.8a0.8 0.8 0 0 1-0.8-0.8V34.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="none" stroke="#1450C8" stroke-width="1"/>
+<path d="M34.8 34H37.2a0.8 0.8 0 0 1 0.8 0.8V37.2a0.8 0.8 0 0 1-0.8 0.8H34.8a0.8 0.8 0 0 1-0.8-0.8V34.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M34.8 34H37.2a0.8 0.8 0 0 1 0.8 0.8V37.2a0.8 0.8 0 0 1-0.8 0.8H34.8a0.8 0.8 0 0 1-0.8-0.8V34.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="none" stroke="#1450C8" stroke-width="1"/>
+</svg>

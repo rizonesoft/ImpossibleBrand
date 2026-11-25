@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="music-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="music-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient><linearGradient id="music-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M3 24a21 21 0 1 0 42 0a21 21 0 1 0 -42 0Z" fill="url(#music-16-g1)"/>
+<circle cx="24" cy="24" r="19.0" fill="none" stroke="#8A98AA" stroke-opacity=".8" stroke-width="2.0999999999999996"/>
+<path d="M15 24a9 9 0 1 0 18 0a9 9 0 1 0 -18 0Z" fill="url(#music-16-g2)"/>
+<path d="M21.6 24a2.4000000000000004 2.4000000000000004 0 1 0 4.800000000000001 0a2.4000000000000004 2.4000000000000004 0 1 0 -4.800000000000001 0Z" fill="url(#music-16-g3)"/>
+</svg>

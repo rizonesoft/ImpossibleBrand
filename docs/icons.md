@@ -117,6 +117,16 @@ Every program repository gets an app icon, drawn here: a free-standing, full-col
 | Hex Editor | Nibble | A dark panel of byte cells, three of them lit in the brand colours |
 | Compare | Compare | Two overlapping pages, one line removed in red and one added in green |
 | Character Map | CharacterMap | A large A on a card, in front of a character grid |
+| Photos | Photos | A landscape print: hills, sun and sky in a white border |
+| Paint | Paint | A paintbrush over a wooden palette with red, yellow and green paint |
+| Icon Editor | IconEditor | A blue icon tile with selection handles at its corners |
+| Color Picker | ColorPicker | A hue wheel with a picked centre |
+| Screenshot | Stillframe | A window framed by four capture corners |
+| Magnifier | Magnifier | A magnifying glass with a plus |
+| Media Player | MediaPlayer | A blue disc with a white play triangle |
+| Music | Music | A record with a blue-to-violet label and a light rim |
+| Sound Recorder | SoundRecorder | A studio microphone with a red record light |
+| Screensavers | Screensavers | A monitor showing a crescent moon and stars (no stars in the 24 and 16 px drawings) |
 
 ## Adding or changing an icon
 

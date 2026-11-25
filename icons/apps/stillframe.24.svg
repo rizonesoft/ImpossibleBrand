@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="stillframe-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="stillframe-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="stillframe-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FE3FA"/><stop offset="1" stop-color="#3AA0F5"/></linearGradient></defs>
+<path d="M2.0 2.0H10.0V4.0H4.0V10.0H2.0Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M46.0 2.0H38.0V4.0H44.0V10.0H46.0Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M2.0 46.0H10.0V44.0H4.0V38.0H2.0Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M46.0 46.0H38.0V44.0H44.0V38.0H46.0Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M12.0 12.0H36.0a2.0 2.0 0 0 1 2.0 2.0V34.0a2.0 2.0 0 0 1-2.0 2.0H12.0a2.0 2.0 0 0 1-2.0-2.0V14.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#stillframe-24-g1)"/>
+<path d="M12.0 13.0H36.0a1.0 1.0 0 0 1 1.0 1.0V34.0a1.0 1.0 0 0 1-1.0 1.0H12.0a1.0 1.0 0 0 1-1.0-1.0V14.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M12.0 12.0H36.0a2.0 2.0 0 0 1 2.0 2.0V14.0a2.0 2.0 0 0 1-2.0 2.0H12.0a2.0 2.0 0 0 1-2.0-2.0V14.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#stillframe-24-g2)"/>
+<path d="M13.0 18.0H35.0a1.0 1.0 0 0 1 1.0 1.0V33.0a1.0 1.0 0 0 1-1.0 1.0H13.0a1.0 1.0 0 0 1-1.0-1.0V19.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#stillframe-24-g3)"/>
+<path d="M12.0 27.6C21.6 18.0 26.4 27.6 36.0 26.0V34.0H12.0Z" fill="#1E9E50" fill-opacity="1.0"/>
+</svg>

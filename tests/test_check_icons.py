@@ -178,6 +178,14 @@ def test_arcs(tmp_path, capsys):
     refused(tmp_path, capsys, "a horizontal edge at y=1", small16=CRISP + '<path d="M6 1A0 2 0 0 1 12 1L9 9Z" fill="#000"/>')
 
 
+def test_circle_with_float_noise_has_no_edges(tmp_path, capsys):
+    # Two relative arcs return to the start only within float error (24.900000000000002 against 24.9): that closing
+    # step is not a line, so the circle's start point is not an edge.
+    passes(tmp_path, capsys, small16=CRISP + (
+        '<path d="M24.9 18.72a3.9000000000000004 3.9000000000000004 0 1 0 7.800000000000001 0'
+        'a3.9000000000000004 3.9000000000000004 0 1 0 -7.800000000000001 0Z" fill="#000"/>'))
+
+
 def test_curved_end_needs_a_round_cap(tmp_path, capsys):
     refused(tmp_path, capsys, "cap: demo.16.svg", small16=CRISP + '<path d="M3 6Q6 6 9 12" fill="none" stroke="#000" stroke-width="3"/>')
     passes(tmp_path, capsys, small16=CRISP + '<path d="M3 6Q6 6 9 12" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>')

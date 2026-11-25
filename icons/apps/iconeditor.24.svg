@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="iconeditor-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="iconeditor-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="iconeditor-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDE73"/><stop offset="1" stop-color="#F0B429"/></linearGradient></defs>
+<path d="M8.0 4.0H40.0a4.0 4.0 0 0 1 4.0 4.0V40.0a4.0 4.0 0 0 1-4.0 4.0H8.0a4.0 4.0 0 0 1-4.0-4.0V8.0a4.0 4.0 0 0 1 4.0-4.0Z" fill="url(#iconeditor-24-g1)"/>
+<path d="M8.0 5.0H40.0a3.0 3.0 0 0 1 3.0 3.0V40.0a3.0 3.0 0 0 1-3.0 3.0H8.0a3.0 3.0 0 0 1-3.0-3.0V8.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M16.0 12.0H32.0a4.0 4.0 0 0 1 4.0 4.0V32.0a4.0 4.0 0 0 1-4.0 4.0H16.0a4.0 4.0 0 0 1-4.0-4.0V16.0a4.0 4.0 0 0 1 4.0-4.0Z" fill="url(#iconeditor-24-g2)"/>
+<path d="M16.0 32.0L21.12 21.6L25.919999999999998 26.88L28.799999999999997 24.48L32.0 32.0Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M26.199999999999996 18.72a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0 -5.2 0Z" fill="url(#iconeditor-24-g3)"/>
+<path d="M10.6 10.0H13.4a0.6 0.6 0 0 1 0.6 0.6V13.4a0.6 0.6 0 0 1-0.6 0.6H10.6a0.6 0.6 0 0 1-0.6-0.6V10.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M34.6 10.0H37.4a0.6 0.6 0 0 1 0.6 0.6V13.4a0.6 0.6 0 0 1-0.6 0.6H34.6a0.6 0.6 0 0 1-0.6-0.6V10.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M10.6 34.0H13.4a0.6 0.6 0 0 1 0.6 0.6V37.4a0.6 0.6 0 0 1-0.6 0.6H10.6a0.6 0.6 0 0 1-0.6-0.6V34.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M34.6 34.0H37.4a0.6 0.6 0 0 1 0.6 0.6V37.4a0.6 0.6 0 0 1-0.6 0.6H34.6a0.6 0.6 0 0 1-0.6-0.6V34.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="#1450C8" fill-opacity="1.0"/>
+</svg>
