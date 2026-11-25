@@ -15,6 +15,8 @@ redrawn for its size, as Windows 11 does, not the main drawing shrunk. This refu
   id         an id without its drawing's prefix (<program>-, <program>-24-, <program>-16-), or used twice in a family
   edge       in a small drawing, a horizontal or vertical edge that does not land on a whole pixel at its size
   cap        in a small drawing, an open stroke with a butt or square cap that ends in a curve
+  space      in a main drawing, art outside the live area 4 to 44 (faint shadows and glows aside; the Start mark
+             has the 2 to 46 the art rules give it)
 
 The main drawing may use the whole system SVG profile. A small drawing uses a smaller language, so that its edges
 can be read exactly from its geometry: plain paths, rectangles, circles, ellipses, lines, polylines and polygons,
@@ -43,6 +45,11 @@ XLINK = "{http://www.w3.org/1999/xlink}"
 NAME = re.compile(r"([a-z0-9]+(?:_[a-z0-9]+)*)(?:\.(16|24))?\.svg")
 FOLDERS = ("icons/apps", "icons/src")  # the app icons and the system icons
 TOLERANCE = 0.01  # of a pixel
+LIVE = (4, 44)  # the live area of the 48 grid (docs/icons.md: 2 px outer padding)
+SPACE_TOLERANCE = 0.5  # units: anti-aliasing and rounded joins may reach this far past it
+MARKS = {"start"}  # the Start button is the logo inside 2-unit padding (docs/icons.md), not the 4 to 44 live area
+MARK_AREA = (2, 46)
+FAINT = 0.3  # a fill or stroke this transparent or less is a shadow or glow, not art the live area must hold
 # The system SVG profile (Impossible OS docs/design/icons.md): paths and basic shapes, fills and strokes, linear and
 # radial gradients, opacity, transforms, defs, use, symbol and clipPath. No masks, filters, text or CSS.
 ELEMENTS = {"svg", "g", "defs", "path", "rect", "circle", "ellipse", "line", "polyline", "polygon", "linearGradient",
@@ -110,6 +117,51 @@ def apply(m, p):
     return (m[0] * p[0] + m[2] * p[1] + m[4], m[1] * p[0] + m[3] * p[1] + m[5])
 
 
+def bezier(p0, c1, c2, p1, steps=16):
+    """Points along a cubic Bezier curve, for bounds."""
+    out = []
+    for i in range(1, steps + 1):
+        t = i / steps
+        a, b, c, d = (1 - t) ** 3, 3 * (1 - t) ** 2 * t, 3 * (1 - t) * t * t, t ** 3
+        out.append((a * p0[0] + b * c1[0] + c * c2[0] + d * p1[0], a * p0[1] + b * c1[1] + c * c2[1] + d * p1[1]))
+    return out
+
+
+def arc(p0, rx, ry, rotation, large, sweep, p1, steps=24):
+    """Points along an elliptical arc, from its endpoint form (SVG 1.1 appendix F.6.5), for bounds."""
+    rx, ry = abs(rx), abs(ry)
+    phi = math.radians(rotation)
+    cos, sin = math.cos(phi), math.sin(phi)
+    dx, dy = (p0[0] - p1[0]) / 2, (p0[1] - p1[1]) / 2
+    x1, y1 = cos * dx + sin * dy, -sin * dx + cos * dy
+    scale = (x1 * x1) / (rx * rx) + (y1 * y1) / (ry * ry)
+    if scale > 1:
+        rx, ry = rx * math.sqrt(scale), ry * math.sqrt(scale)
+    num = rx * rx * ry * ry - rx * rx * y1 * y1 - ry * ry * x1 * x1
+    den = rx * rx * y1 * y1 + ry * ry * x1 * x1
+    k = math.sqrt(max(num / den, 0)) if den else 0.0
+    if large == sweep:
+        k = -k
+    cx1, cy1 = k * rx * y1 / ry, -k * ry * x1 / rx
+    cx = cos * cx1 - sin * cy1 + (p0[0] + p1[0]) / 2
+    cy = sin * cx1 + cos * cy1 + (p0[1] + p1[1]) / 2
+
+    def angle(ux, uy, vx, vy):
+        return math.atan2(ux * vy - uy * vx, ux * vx + uy * vy)
+
+    start = angle(1, 0, (x1 - cx1) / rx, (y1 - cy1) / ry)
+    delta = angle((x1 - cx1) / rx, (y1 - cy1) / ry, (-x1 - cx1) / rx, (-y1 - cy1) / ry)
+    if not sweep and delta > 0:
+        delta -= 2 * math.pi
+    elif sweep and delta < 0:
+        delta += 2 * math.pi
+    out = []
+    for i in range(1, steps + 1):
+        a = start + delta * i / steps
+        out.append((cx + rx * math.cos(a) * cos - ry * math.sin(a) * sin, cy + rx * math.cos(a) * sin + ry * math.sin(a) * cos))
+    return out
+
+
 def parse_path(d):
     """Subpaths of SVG path data: each {"parts": [("line", a, b) or ("curve", a, b)], "closed": bool}.
 
@@ -117,6 +169,7 @@ def parse_path(d):
     is a straight line, as SVG draws it."""
     arity = {"M": 2, "L": 2, "H": 1, "V": 1, "C": 6, "S": 4, "Q": 4, "T": 2, "A": 7, "Z": 0}
     subpaths, current, x, y, sx, sy, pos, cmd = [], None, 0.0, 0.0, 0.0, 0.0, 0, None
+    last_c, last_q = None, None  # the previous control points, which S and T reflect
     d = d.strip()
     while pos < len(d):
         letter = re.match(r"[\s,]*([MmLlHhVvZzCcSsQqTtAa])", d[pos:])
@@ -156,16 +209,31 @@ def parse_path(d):
             if rel:
                 nx, ny = x + nx, y + ny
         if up == "M":
-            current = {"parts": [], "closed": False}
+            current = {"parts": [], "closed": False, "points": [(nx, ny)]}
             subpaths.append(current)
             sx, sy = nx, ny
             cmd = "l" if rel else "L"  # further pairs after a moveto are linetos
         else:
             if current is None:  # drawing on after a closepath starts a new subpath at its start point
-                current = {"parts": [], "closed": False}
+                current = {"parts": [], "closed": False, "points": [(x, y)]}
                 subpaths.append(current)
             straight = up in "LHV" or (up == "A" and (args[0] == 0 or args[1] == 0))
             current["parts"].append(("line" if straight else "curve", (x, y), (nx, ny)))
+            ox, oy = (x, y) if rel else (0.0, 0.0)
+            if up in "CS":
+                c2 = (args[-4] + ox, args[-3] + oy)
+                c1 = (args[0] + ox, args[1] + oy) if up == "C" else ((2 * x - last_c[0], 2 * y - last_c[1]) if last_c else (x, y))
+                current["points"] += bezier((x, y), c1, c2, (nx, ny))
+                last_c, last_q = c2, None
+            elif up in "QT":
+                q = (args[0] + ox, args[1] + oy) if up == "Q" else ((2 * x - last_q[0], 2 * y - last_q[1]) if last_q else (x, y))
+                current["points"] += bezier((x, y), ((x + 2 * q[0]) / 3, (y + 2 * q[1]) / 3), ((nx + 2 * q[0]) / 3, (ny + 2 * q[1]) / 3), (nx, ny))
+                last_q, last_c = q, None
+            else:
+                if up == "A" and not straight:
+                    current["points"] += arc((x, y), args[0], args[1], args[2], args[3], args[4], (nx, ny))
+                current["points"].append((nx, ny))
+                last_c = last_q = None
         x, y = nx, ny
     return subpaths
 
@@ -215,6 +283,23 @@ def outline(element):
 
 
 # ---- edges --------------------------------------------------------------------------------------------------------
+def shape_points(element, subpaths):
+    """Points that bound a shape, in its own coordinates: every path sample, rectangle corner, line end, and a ring of
+    points around a circle or ellipse."""
+    tag = element.tag.replace(SVG, "")
+    if tag in ("circle", "ellipse"):
+        cx, cy = float(element.get("cx", 0)), float(element.get("cy", 0))
+        rx = float(element.get("r", 0) if tag == "circle" else element.get("rx", 0))
+        ry = float(element.get("r", 0) if tag == "circle" else element.get("ry", 0))
+        return [(cx + rx * math.cos(a / 24 * 2 * math.pi), cy + ry * math.sin(a / 24 * 2 * math.pi)) for a in range(24)]
+    points = []
+    for sub in subpaths:
+        points += sub.get("points") or []
+        for part in sub["parts"]:
+            points += [part[1], part[2]]
+    return points
+
+
 def edge_problems(subpaths, m, paint, size, name):
     """Each straight horizontal or vertical edge that does not land on a whole pixel at `size`, and each cap that
     cannot be checked. Small drawings only translate, so lengths in the drawing are lengths on screen."""
@@ -368,10 +453,29 @@ def check_drawing(text, name, owner, size, others):
                 painted = True
                 if size:
                     problems.extend(edge_problems(subpaths, m, paint, size, name))
+                else:
+                    solid_fill = paint["fill"] and alpha * opacity(style.get("fill-opacity", 1)) > FAINT
+                    solid_stroke = paint["stroke"] and alpha * opacity(style.get("stroke-opacity", 1)) > FAINT
+                    # A faint shadow or glow is not the art the live area holds, and a clipped shape is bounded by its
+                    # clip, which is art of its own.
+                    if (solid_fill or solid_stroke) and not element.get("clip-path"):
+                        grow = stroke_width / 2 * math.sqrt(abs(m[0] * m[3] - m[1] * m[2])) if solid_stroke else 0.0
+                        for point in shape_points(element, subpaths):
+                            x, y = apply(m, point)
+                            extent[0], extent[1] = min(extent[0], x - grow), min(extent[1], y - grow)
+                            extent[2], extent[3] = max(extent[2], x + grow), max(extent[3], y + grow)
         for child in element:
             walk(child, m, style, alpha, in_defs, depth + 1)
 
+    extent = [math.inf, math.inf, -math.inf, -math.inf]
     walk(root, IDENTITY, {}, 1.0, False, 0)
+    if size is None and extent[0] < math.inf:
+        area = MARK_AREA if owner in MARKS else LIVE
+        lo, hi = area[0] - SPACE_TOLERANCE, area[1] + SPACE_TOLERANCE
+        x0, y0, x1, y1 = extent
+        if x0 < lo or y0 < lo or x1 > hi or y1 > hi:
+            problems.append(f"space: {name}: the art spans x {x0:.1f} to {x1:.1f}, y {y0:.1f} to {y1:.1f}; "
+                            f"it must stay inside the live area {area[0]} to {area[1]}")
     if not painted:
         problems.append(f"empty: {name} paints nothing visible")
     return problems, ids

@@ -305,3 +305,16 @@ def test_system_icons_are_held_to_the_same_rules(tmp_path, capsys):
 def test_polygons_are_part_of_the_small_language(tmp_path, capsys):
     passes(tmp_path, capsys, small16=CRISP + '<polygon points="6,6 18,6 12,15" fill="#000"/>')
     refused(tmp_path, capsys, "a horizontal edge at y=7", small16=CRISP + '<polygon points="6,7 18,7 12,15" fill="#000"/>')
+
+def test_main_art_stays_inside_the_live_area(tmp_path, capsys):
+    refused(tmp_path, capsys, "space: demo.svg", main='<path d="M2 6H42V42H2Z" fill="#000"/>')
+    refused(tmp_path, capsys, "space: demo.svg", main='<circle cx="24" cy="24" r="21" fill="#000"/>')
+    refused(tmp_path, capsys, "space: demo.svg", main='<path d="M6 24C6 -10 42 -10 42 24Z" fill="#000"/>')  # peaks at y -1.5
+    refused(tmp_path, capsys, "space: demo.svg", main='<path d="M6 24H40" stroke="#000" stroke-width="8" stroke-linecap="round"/>')
+    passes(tmp_path, capsys, main='<path d="M6 6H42V42H6Z" fill="#000"/><path d="M1 1H47V47H1Z" fill="#000" fill-opacity=".2"/>')
+    passes(tmp_path, capsys, main='<circle cx="24" cy="24" r="20" fill="#000"/>')
+
+
+def test_a_clipped_shape_is_bounded_by_its_clip(tmp_path, capsys):
+    passes(tmp_path, capsys, main='<defs><clipPath id="demo-c"><rect x="8" y="8" width="32" height="32"/></clipPath></defs>'
+                                  '<rect width="48" height="48" fill="#000" clip-path="url(#demo-c)"/><rect x="8" y="8" width="32" height="32" fill="#000"/>')

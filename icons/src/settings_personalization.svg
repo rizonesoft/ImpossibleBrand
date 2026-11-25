@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
 <defs><linearGradient id="settings_personalization-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="settings_personalization-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#3B6CF0"/></linearGradient><linearGradient id="settings_personalization-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="settings_personalization-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="settings_personalization-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB46B"/><stop offset="1" stop-color="#F05AC8"/></linearGradient><linearGradient id="settings_personalization-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C98B"/><stop offset="1" stop-color="#C08040"/></linearGradient><linearGradient id="settings_personalization-g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6DEE8"/><stop offset="1" stop-color="#8A98AA"/></linearGradient><linearGradient id="settings_personalization-g8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient></defs>
-<path d="M6 5H36a3 3 0 0 1 3 3V28a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<g transform="translate(23.257 24.000) scale(0.8980) translate(-24.0 -24.0)"><path d="M6 5H36a3 3 0 0 1 3 3V28a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
 <path d="M6 5H36a3 3 0 0 1 3 3V28a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" fill="url(#settings_personalization-g1)"/>
 <path d="M6 5H36a3 3 0 0 1 3 3V28a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
 <path d="M6 5.6H36" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
@@ -14,5 +14,5 @@
 <path d="M5.5 22C11 15 18 14 24 18S33 23 36.5 20V28.5H5.5Z" fill="url(#settings_personalization-g5)" opacity=".9"/>
 <path d="M45 5L32.35 18.75" stroke="url(#settings_personalization-g6)" stroke-width="4.2" stroke-linecap="round"/>
 <path d="M30.29 16.85L26.84 20.60L30.96 24.40L34.41 20.65Z" fill="url(#settings_personalization-g7)"/>
-<path d="M26.84 20.60Q22.50 23.99 22 30Q27.94 29.01 30.96 24.40Z" fill="url(#settings_personalization-g8)"/>
+<path d="M26.84 20.60Q22.50 23.99 22 30Q27.94 29.01 30.96 24.40Z" fill="url(#settings_personalization-g8)"/></g>
 </svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
 <defs><linearGradient id="settings_gaming-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="settings_gaming-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5FD38A"/><stop offset="1" stop-color="#5FD38A"/></linearGradient><linearGradient id="settings_gaming-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A80"/><stop offset="1" stop-color="#FF8A80"/></linearGradient><linearGradient id="settings_gaming-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BD3FA"/><stop offset="1" stop-color="#6BD3FA"/></linearGradient><linearGradient id="settings_gaming-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE680"/><stop offset="1" stop-color="#FFE680"/></linearGradient></defs>
-<path d="M13 13H35C40.5 13 43 17 44 22L46 32C47 37.5 41.5 40 38.5 36.5L34.5 31.5H13.5L9.5 36.5C6.5 40 1 37.5 2 32L4 22C5 17 7.5 13 13 13Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<g transform="translate(24.000 24.000) scale(0.8761) translate(-24.0 -24.0)"><path d="M13 13H35C40.5 13 43 17 44 22L46 32C47 37.5 41.5 40 38.5 36.5L34.5 31.5H13.5L9.5 36.5C6.5 40 1 37.5 2 32L4 22C5 17 7.5 13 13 13Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
 <path d="M13 13H35C40.5 13 43 17 44 22L46 32C47 37.5 41.5 40 38.5 36.5L34.5 31.5H13.5L9.5 36.5C6.5 40 1 37.5 2 32L4 22C5 17 7.5 13 13 13Z" fill="url(#settings_gaming-g1)"/>
 <path d="M13 13H35C40.5 13 43 17 44 22L46 32C47 37.5 41.5 40 38.5 36.5L34.5 31.5H13.5L9.5 36.5C6.5 40 1 37.5 2 32L4 22C5 17 7.5 13 13 13Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
 <path d="M13 13.6H35" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
@@ -9,5 +9,5 @@
 <path d="M32.1 19a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z" fill="url(#settings_gaming-g2)"/>
 <path d="M36.1 22.5a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z" fill="url(#settings_gaming-g3)"/>
 <path d="M28.1 22.5a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z" fill="url(#settings_gaming-g4)"/>
-<path d="M32.1 26a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z" fill="url(#settings_gaming-g5)"/>
+<path d="M32.1 26a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z" fill="url(#settings_gaming-g5)"/></g>
 </svg>
