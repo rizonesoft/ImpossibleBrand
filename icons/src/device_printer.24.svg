@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="device_printer-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="device_printer-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#9AA8B8"/></linearGradient><linearGradient id="device_printer-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M13.0 4.0H35.0a1.0 1.0 0 0 1 1.0 1.0V15.0a1.0 1.0 0 0 1-1.0 1.0H13.0a1.0 1.0 0 0 1-1.0-1.0V5.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#device_printer-24-g1)"/>
+<path d="M13.5 5.0H34.5a0.5 0.5 0 0 1 0.5 0.5V14.5a0.5 0.5 0 0 1-0.5 0.5H13.5a0.5 0.5 0 0 1-0.5-0.5V5.5a0.5 0.5 0 0 1 0.5-0.5Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M7.0 14.0H41.0a3.0 3.0 0 0 1 3.0 3.0V29.0a3.0 3.0 0 0 1-3.0 3.0H7.0a3.0 3.0 0 0 1-3.0-3.0V17.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="url(#device_printer-24-g2)"/>
+<path d="M7.0 15.0H41.0a2.0 2.0 0 0 1 2.0 2.0V29.0a2.0 2.0 0 0 1-2.0 2.0H7.0a2.0 2.0 0 0 1-2.0-2.0V17.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M8.0 26.0H40.0V28.0H8.0Z" fill="#3A4452" fill-opacity="0.8"/>
+<path d="M38.0 18.0H40.0V20.0H38.0Z" fill="#1E9E50" fill-opacity="1.0"/>
+<path d="M13.6 26.0H34.4a1.6 1.6 0 0 1 1.6 1.6V42.4a1.6 1.6 0 0 1-1.6 1.6H13.6a1.6 1.6 0 0 1-1.6-1.6V27.6a1.6 1.6 0 0 1 1.6-1.6Z" fill="url(#device_printer-24-g3)"/>
+<path d="M13.6 27.0H34.4a0.6000000000000001 0.6000000000000001 0 0 1 0.6000000000000001 0.6000000000000001V42.4a0.6000000000000001 0.6000000000000001 0 0 1-0.6000000000000001 0.6000000000000001H13.6a0.6000000000000001 0.6000000000000001 0 0 1-0.6000000000000001-0.6000000000000001V27.6a0.6000000000000001 0.6000000000000001 0 0 1 0.6000000000000001-0.6000000000000001Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M16.0 32.0H32.0V34.0H16.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M16.0 38.0H26.0V40.0H16.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+</svg>

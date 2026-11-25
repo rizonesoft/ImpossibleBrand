@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="device_mouse-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#AEBCCB"/></linearGradient></defs>
+<path d="M24.0 12.0H24.0a12.0 12.0 0 0 1 12.0 12.0V33.0a12.0 12.0 0 0 1-12.0 12.0H24.0a12.0 12.0 0 0 1-12.0-12.0V24.0a12.0 12.0 0 0 1 12.0-12.0Z" fill="url(#device_mouse-16-g1)"/>
+<path d="M24.0 13.5H24.0a10.5 10.5 0 0 1 10.5 10.5V33.0a10.5 10.5 0 0 1-10.5 10.5H24.0a10.5 10.5 0 0 1-10.5-10.5V24.0a10.5 10.5 0 0 1 10.5-10.5Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="3.0"/>
+<path d="M24.0 15.0H27.0V24.0H24.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M25.5 12.0C25.5 6.0 30.0 3.0 36.0 3.0" fill="none" stroke="#4A5768" stroke-width="3.0" stroke-linecap="round"/>
+</svg>

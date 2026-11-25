@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="cloud_files-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FD0FB"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M11 36H36a8 8 0 0 0 1.4-15.9A11 11 0 0 0 16.4 17.4 9.5 9.5 0 0 0 11 36Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M11 36H36a8 8 0 0 0 1.4-15.9A11 11 0 0 0 16.4 17.4 9.5 9.5 0 0 0 11 36Z" fill="url(#cloud_files-g1)"/>
+<path d="M11 36H36a8 8 0 0 0 1.4-15.9A11 11 0 0 0 16.4 17.4 9.5 9.5 0 0 0 11 36Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M15 21.5a7 7 0 0 1 6-3.6" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

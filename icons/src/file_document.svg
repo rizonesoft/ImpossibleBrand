@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_document-file_default-page" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9EDF2"/></linearGradient></defs>
+<path d="M12 4h16.2L38 13.8V42c0 1.1-.9 2-2 2H12c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="url(#file_document-file_default-page)"/>
+<path d="M12 4.5h16L37.5 14V42c0 .8-.7 1.5-1.5 1.5H12c-.8 0-1.5-.7-1.5-1.5V6c0-.8.7-1.5 1.5-1.5z" fill="none" stroke="#5C6B7A" stroke-opacity=".35"/>
+<path d="M28.2 4v8c0 1 .8 1.8 1.8 1.8h8z" fill="#D5DBE3"/>
+<path d="M14 18L27 18" stroke="#1450C8" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round"/>
+<path d="M14 24.0L34 24.0" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M14 27.8L34 27.8" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M14 31.6L30 31.6" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M14 35.4L34 35.4" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M14 39.2L26 39.2" stroke="#1B74E2" stroke-opacity="0.85" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

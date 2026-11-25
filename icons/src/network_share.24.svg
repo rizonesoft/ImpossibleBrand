@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="network_share-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B429"/><stop offset="1" stop-color="#D9920F"/></linearGradient><linearGradient id="network_share-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient><linearGradient id="network_share-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="network_share-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient><linearGradient id="network_share-24-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M2.0 2.0H18.0L20.0 4.0H46.0V28.0H2.0Z" fill="url(#network_share-24-g1)"/>
+<path d="M4.0 4.0H44.0V8.0H4.0Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M3.0 10.0H45.0a1.0 1.0 0 0 1 1.0 1.0V27.0a1.0 1.0 0 0 1-1.0 1.0H3.0a1.0 1.0 0 0 1-1.0-1.0V11.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#network_share-24-g2)"/>
+<path d="M24.0 28.0H26.0V32.0H24.0Z" fill="#5D6B7C" fill-opacity="1.0"/>
+<path d="M6.0 32.0H42.0V34.0H6.0Z" fill="#5D6B7C" fill-opacity="1.0"/>
+<path d="M6.6 34.0H11.4a0.6 0.6 0 0 1 0.6 0.6V37.4a0.6 0.6 0 0 1-0.6 0.6H6.6a0.6 0.6 0 0 1-0.6-0.6V34.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="url(#network_share-24-g3)"/>
+<path d="M22.6 34.0H27.4a0.6 0.6 0 0 1 0.6 0.6V37.4a0.6 0.6 0 0 1-0.6 0.6H22.6a0.6 0.6 0 0 1-0.6-0.6V34.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="url(#network_share-24-g4)"/>
+<path d="M36.6 34.0H41.4a0.6 0.6 0 0 1 0.6 0.6V37.4a0.6 0.6 0 0 1-0.6 0.6H36.6a0.6 0.6 0 0 1-0.6-0.6V34.6a0.6 0.6 0 0 1 0.6-0.6Z" fill="url(#network_share-24-g5)"/>
+</svg>

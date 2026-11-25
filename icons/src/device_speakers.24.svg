@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="device_speakers-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="device_speakers-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5D6B7C"/><stop offset="1" stop-color="#5D6B7C"/></linearGradient><linearGradient id="device_speakers-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5D6B7C"/><stop offset="1" stop-color="#3A4452"/></linearGradient><linearGradient id="device_speakers-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9AA8B8"/><stop offset="1" stop-color="#9AA8B8"/></linearGradient></defs>
+<path d="M14.0 2.0H34.0a2.0 2.0 0 0 1 2.0 2.0V44.0a2.0 2.0 0 0 1-2.0 2.0H14.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#device_speakers-24-g1)"/>
+<path d="M13.0 3.0H35.0V45.0H13.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M20.0 11.0a4.0 4.0 0 1 0 8.0 0a4.0 4.0 0 1 0 -8.0 0Z" fill="url(#device_speakers-24-g2)"/>
+<path d="M15.2 30.0a8.8 8.8 0 1 0 17.6 0a8.8 8.8 0 1 0 -17.6 0Z" fill="url(#device_speakers-24-g3)"/>
+<path d="M20.4 30.0a3.6 3.6 0 1 0 7.2 0a3.6 3.6 0 1 0 -7.2 0Z" fill="url(#device_speakers-24-g4)"/>
+</svg>

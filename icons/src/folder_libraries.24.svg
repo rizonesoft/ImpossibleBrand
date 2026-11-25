@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="folder_libraries-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B429"/><stop offset="1" stop-color="#D9920F"/></linearGradient><linearGradient id="folder_libraries-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD75E"/><stop offset="1" stop-color="#F5B82E"/></linearGradient></defs>
+<path d="M2.0 6.0H18.0L20.0 8.0H46.0V44.0H2.0Z" fill="url(#folder_libraries-24-g1)"/>
+<path d="M4.0 8.0H44.0V12.0H4.0Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M3.0 14.0H45.0a1.0 1.0 0 0 1 1.0 1.0V43.0a1.0 1.0 0 0 1-1.0 1.0H3.0a1.0 1.0 0 0 1-1.0-1.0V15.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#folder_libraries-24-g2)"/>
+<path d="M10.0 20.0H14.0V42.0H10.0Z" fill="#1B74E2" fill-opacity="1.0"/>
+<path d="M16.0 22.0H20.0V42.0H16.0Z" fill="#6E4FE0" fill-opacity="1.0"/>
+<path d="M22.0 20.0H26.0V42.0H22.0Z" fill="#22B4E8" fill-opacity="1.0"/>
+<path d="M29.000 22.000L33.000 20.800L37.000 40.000L33.000 41.200Z" fill="#F07A1A" fill-opacity="1.0"/>
+</svg>

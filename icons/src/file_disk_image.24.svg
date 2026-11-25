@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_disk_image-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient><linearGradient id="file_disk_image-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2E8EF"/><stop offset="1" stop-color="#8A98AA"/></linearGradient><linearGradient id="file_disk_image-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE6F8"/><stop offset="1" stop-color="#6FB6E0"/></linearGradient><linearGradient id="file_disk_image-24-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="file_disk_image-24-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5D6B7C"/><stop offset="1" stop-color="#5D6B7C"/></linearGradient></defs>
+<path d="M10.0 2.0H32.0L40.0 10.0V44.0a2.0 2.0 0 0 1-2.0 2.0H10.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#file_disk_image-24-g1)"/>
+<path d="M11.0 3.0H31.6L39.0 10.4V43.0a2.0 2.0 0 0 1-2.0 2.0H11.0a2.0 2.0 0 0 1-2.0-2.0V5.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0" stroke-linejoin="round"/>
+<path d="M32.0 2.0V10.0H40.0Z" fill="#C3CEDA"/>
+<path d="M14.8 30.0a9.2 9.2 0 1 0 18.4 0a9.2 9.2 0 1 0 -18.4 0Z" fill="url(#file_disk_image-24-g2)"/>
+<path d="M18.296 30.0a5.704 5.704 0 1 0 11.408 0a5.704 5.704 0 1 0 -11.408 0Z" fill="url(#file_disk_image-24-g3)"/>
+<path d="M21.056 30.0a2.944 2.944 0 1 0 5.888 0a2.944 2.944 0 1 0 -5.888 0Z" fill="url(#file_disk_image-24-g4)"/>
+<path d="M22.804 30.0a1.196 1.196 0 1 0 2.392 0a1.196 1.196 0 1 0 -2.392 0Z" fill="url(#file_disk_image-24-g5)"/>
+</svg>

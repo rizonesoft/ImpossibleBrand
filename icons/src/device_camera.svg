@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="device_camera-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A98AA"/><stop offset="1" stop-color="#4A5768"/></linearGradient><linearGradient id="device_camera-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6EBF1"/><stop offset="1" stop-color="#A9B7C7"/></linearGradient><linearGradient id="device_camera-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="device_camera-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6DEE8"/><stop offset="1" stop-color="#8A98AA"/></linearGradient><linearGradient id="device_camera-g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B7CF0"/><stop offset="1" stop-color="#0F2A6E"/></linearGradient><linearGradient id="device_camera-g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient><linearGradient id="device_camera-g7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FD98F"/><stop offset="1" stop-color="#1E9E50"/></linearGradient></defs>
+<path d="M23 27H25a1 1 0 0 1 1 1V37a1 1 0 0 1-1 1H23a1 1 0 0 1-1-1V28a1 1 0 0 1 1-1Z" fill="url(#device_camera-g1)"/>
+<path d="M23 27H25a1 1 0 0 1 1 1V37a1 1 0 0 1-1 1H23a1 1 0 0 1-1-1V28a1 1 0 0 1 1-1Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M23 27.6H25" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M16 42H32L30 36.5H18Z" fill="url(#device_camera-g2)"/>
+<path d="M11 18a13 13 0 1 0 26 0a13 13 0 1 0 -26 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M11 18a13 13 0 1 0 26 0a13 13 0 1 0 -26 0Z" fill="url(#device_camera-g3)"/>
+<path d="M11 18a13 13 0 1 0 26 0a13 13 0 1 0 -26 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<circle cx="24" cy="18" r="12.4" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="1"/>
+<path d="M17 18a7 7 0 1 0 14 0a7 7 0 1 0 -14 0Z" fill="url(#device_camera-g4)"/>
+<path d="M17 18a7 7 0 1 0 14 0a7 7 0 1 0 -14 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M19 18a5 5 0 1 0 10 0a5 5 0 1 0 -10 0Z" fill="url(#device_camera-g5)"/>
+<path d="M20.7 16.2a1.5 1.5 0 1 0 3.0 0a1.5 1.5 0 1 0 -3.0 0Z" fill="url(#device_camera-g6)"/>
+<path d="M30.9 11.5a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0Z" fill="url(#device_camera-g7)"/>
+</svg>

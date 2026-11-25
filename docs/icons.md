@@ -97,6 +97,35 @@ Every icon is checked at 16 and 24 px on `#202020` and `#F3F3F3` before it lands
 | Live Captions | `live_captions.svg` | Live captions: a caption bar with a CC mark |
 | Store | `store.svg` | Store: a shopping bag carrying the logo in white |
 | Installer | `installer.svg` | The installer: a box, a download arrow and the logo |
+| Fixed drive | `drive_fixed.svg` | A data drive: the system drive without the OS badge |
+| Optical drive | `drive_optical.svg` | A CD, DVD or Blu-ray drive: a disc behind the drive |
+| Network drive | `drive_network.svg` | A mapped network drive: the drive with a cable to network nodes |
+| Printer | `device_printer.svg` | A printer: paper in, a printed sheet out |
+| Scanner | `device_scanner.svg` | A flatbed scanner with its light bar |
+| Webcam | `device_camera.svg` | A webcam or other imaging device: a camera head on a stand |
+| Keyboard | `device_keyboard.svg` | A keyboard in device lists |
+| Mouse | `device_mouse.svg` | A mouse or pointing device |
+| Speakers | `device_speakers.svg` | Speakers, headphones or another audio device |
+| Other device | `device_generic.svg` | A device with no class icon: a USB plug |
+| Audio file | `file_audio.svg` | `.mp3`, `.wav`, `.ogg`, `.flac`: a page with a note |
+| Video file | `file_video.svg` | `.mp4`, `.avi`, `.mpg`: a page with a play screen |
+| PDF | `file_pdf.svg` | `.pdf`: a page with a red PDF banner |
+| Document | `file_document.svg` | `.rtf`, `.doc`: a page with a heading and text |
+| Font file | `file_font.svg` | `.ttf`: a page with a large A |
+| Package | `file_package.svg` | `.ipkg`: a page with a box and a download arrow |
+| Mail message | `file_email.svg` | `.eml`: a page with an envelope |
+| Calendar file | `file_calendar.svg` | `.ics`: a page with a month |
+| Source file | `file_code.svg` | `.c`, `.h`, `.asm`: a page with code brackets |
+| Disk image | `file_disk_image.svg` | `.iso`, `.vhd`: a page with a disc |
+| Home | `home.svg` | Explorer Home: a house |
+| Gallery | `gallery.svg` | Explorer Gallery: two photo prints |
+| Cloud Files | `cloud_files.svg` | The cloud sync location: a cloud |
+| Network computer | `network_computer.svg` | A machine found on the network: a monitor with a cable to one node |
+| Network share | `network_share.svg` | A shared folder on another machine: a folder with a cable to network nodes |
+| Screenshots | `folder_screenshots.svg` | The Screenshots folder: a folder with capture corners |
+| Libraries | `folder_libraries.svg` | Libraries: a folder with books |
+| Account picture | `user_avatar_default.svg` | The default account picture: a person in a circle |
+| Widgets | `widgets.svg` | Widgets: three widget cards |
 
 Where an icon shows the Impossible OS logo, it is the logo from `identity/logo.svg`, embedded and never redrawn; its 24 and 16 px drawings snap the logo's own key coordinates to whole pixels, as the Start button's do.
 

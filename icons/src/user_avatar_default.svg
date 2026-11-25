@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="user_avatar_default-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6E6F7"/><stop offset="1" stop-color="#9FBEDF"/></linearGradient><clipPath id="user_avatar_default-c"><circle cx="24" cy="24" r="20"/></clipPath><linearGradient id="user_avatar_default-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="user_avatar_default-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M4 24a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M4 24a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z" fill="url(#user_avatar_default-g1)"/>
+<path d="M4 24a20 20 0 1 0 40 0a20 20 0 1 0 -40 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M17 18.5a7 7 0 1 0 14 0a7 7 0 1 0 -14 0Z" fill="url(#user_avatar_default-g2)"/>
+<path d="M9 44C9 34 15.5 29 24 29S39 34 39 44Z" fill="url(#user_avatar_default-g3)" clip-path="url(#user_avatar_default-c)"/>
+</svg>

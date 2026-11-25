@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="drive_optical-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F5F9"/><stop offset="1" stop-color="#AEBCCB"/></linearGradient><linearGradient id="drive_optical-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCE3EB"/><stop offset="1" stop-color="#9AA8B8"/></linearGradient><linearGradient id="drive_optical-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient><linearGradient id="drive_optical-drive_system-body" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#C9D1DB"/><stop offset="1" stop-color="#8C97A4"/></linearGradient><linearGradient id="drive_optical-drive_system-face" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#5E6A78"/><stop offset="1" stop-color="#3D4753"/></linearGradient><linearGradient id="drive_optical-drive_system-bt" x1="0" y1="0" x2="0" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5CE6F7"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="drive_optical-drive_system-br" x1="0" y1="64" x2="0" y2="362" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#35A6F2"/><stop offset="1" stop-color="#1B6FE0"/></linearGradient><linearGradient id="drive_optical-drive_system-bb" x1="304" y1="0" x2="5" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1558D6"/><stop offset="1" stop-color="#1E7BE4"/></linearGradient><linearGradient id="drive_optical-drive_system-bl" x1="0" y1="304" x2="0" y2="5" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1D79E4"/><stop offset="1" stop-color="#2A9AEE"/></linearGradient></defs>
+<path d="M13 15a11 11 0 1 0 22 0a11 11 0 1 0 -22 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M13 15a11 11 0 1 0 22 0a11 11 0 1 0 -22 0Z" fill="url(#drive_optical-g1)"/>
+<path d="M13 15a11 11 0 1 0 22 0a11 11 0 1 0 -22 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<circle cx="24" cy="15" r="7.699999999999999" fill="none" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="1.3199999999999998"/>
+<path d="M16.3 12.8A7.92 7.92 0 0 1 22.9 7.300000000000001" fill="none" stroke="#8FD8F5" stroke-opacity=".8" stroke-width="1.54" stroke-linecap="round"/>
+<path d="M20.92 15a3.08 3.08 0 1 0 6.16 0a3.08 3.08 0 1 0 -6.16 0Z" fill="url(#drive_optical-g2)"/>
+<path d="M20.92 15a3.08 3.08 0 1 0 6.16 0a3.08 3.08 0 1 0 -6.16 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M22.79 15a1.21 1.21 0 1 0 2.42 0a1.21 1.21 0 1 0 -2.42 0Z" fill="url(#drive_optical-g3)"/>
+<g transform="translate(0 4)"><rect x="4" y="14" width="40" height="24" rx="3" fill="url(#drive_optical-drive_system-body)"/>
+<rect x="4.5" y="14.5" width="39" height="23" rx="2.5" fill="none" stroke="#FFFFFF" stroke-opacity=".5"/>
+<rect x="8" y="31" width="32" height="3.6" rx="1.8" fill="url(#drive_optical-drive_system-face)"/>
+<circle cx="37" cy="32.8" r="1.1" fill="#4CE08A"/></g>
+<path d="M9.8 23.5H38.2a0.8 0.8 0 0 1 0.8 0.8V24.3a0.8 0.8 0 0 1-0.8 0.8H9.8a0.8 0.8 0 0 1-0.8-0.8V24.3a0.8 0.8 0 0 1 0.8-0.8Z" fill="#5D6B7C" fill-opacity="0.7"/>
+</svg>

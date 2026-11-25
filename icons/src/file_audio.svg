@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_audio-file_default-page" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9EDF2"/></linearGradient><linearGradient id="file_audio-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient><linearGradient id="file_audio-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient><linearGradient id="file_audio-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B49CFF"/><stop offset="1" stop-color="#6E4FE0"/></linearGradient></defs>
+<path d="M12 4h16.2L38 13.8V42c0 1.1-.9 2-2 2H12c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="url(#file_audio-file_default-page)"/>
+<path d="M12 4.5h16L37.5 14V42c0 .8-.7 1.5-1.5 1.5H12c-.8 0-1.5-.7-1.5-1.5V6c0-.8.7-1.5 1.5-1.5z" fill="none" stroke="#5C6B7A" stroke-opacity=".35"/>
+<path d="M28.2 4v8c0 1 .8 1.8 1.8 1.8h8z" fill="#D5DBE3"/>
+<path d="M20 22L31 19V32" fill="none" stroke="url(#file_audio-g1)" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 22V35" stroke="url(#file_audio-g1)" stroke-width="2.4"/>
+<path d="M14.400000000000002 35.5a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0Z" fill="url(#file_audio-g2)"/>
+<path d="M25.400000000000002 32.5a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0 -6.4 0Z" fill="url(#file_audio-g3)"/>
+</svg>

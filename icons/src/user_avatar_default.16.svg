@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="user_avatar_default-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6E6F7"/><stop offset="1" stop-color="#9FBEDF"/></linearGradient><linearGradient id="user_avatar_default-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient><linearGradient id="user_avatar_default-16-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AB8FA"/><stop offset="1" stop-color="#1B64D8"/></linearGradient></defs>
+<path d="M3.0 24.0a21.0 21.0 0 1 0 42.0 0a21.0 21.0 0 1 0 -42.0 0Z" fill="url(#user_avatar_default-16-g1)"/>
+<path d="M16.65 18.240000000000002a7.35 7.35 0 1 0 14.7 0a7.35 7.35 0 1 0 -14.7 0Z" fill="url(#user_avatar_default-16-g2)"/>
+<path d="M7.620 37.141C7.620 28.260 15.810 26.760 24.0 26.759999999999998C32.190 26.760 40.380 28.260 40.380 37.141A21.0 21.0 0 0 1 7.620 37.141Z" fill="url(#user_avatar_default-16-g3)"/>
+</svg>

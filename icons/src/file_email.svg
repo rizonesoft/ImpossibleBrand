@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_email-file_default-page" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9EDF2"/></linearGradient><linearGradient id="file_email-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M12 4h16.2L38 13.8V42c0 1.1-.9 2-2 2H12c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="url(#file_email-file_default-page)"/>
+<path d="M12 4.5h16L37.5 14V42c0 .8-.7 1.5-1.5 1.5H12c-.8 0-1.5-.7-1.5-1.5V6c0-.8.7-1.5 1.5-1.5z" fill="none" stroke="#5C6B7A" stroke-opacity=".35"/>
+<path d="M28.2 4v8c0 1 .8 1.8 1.8 1.8h8z" fill="#D5DBE3"/>
+<path d="M15 22H33a2 2 0 0 1 2 2V35a2 2 0 0 1-2 2H15a2 2 0 0 1-2-2V24a2 2 0 0 1 2-2Z" fill="url(#file_email-g1)"/>
+<path d="M15 22H33a2 2 0 0 1 2 2V35a2 2 0 0 1-2 2H15a2 2 0 0 1-2-2V24a2 2 0 0 1 2-2Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M15 22.6H33" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M13.5 23L24 31L34.5 23Z" fill="#1B74E2" fill-opacity="1.0"/>
+</svg>

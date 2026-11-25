@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_document-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M10.0 2.0H32.0L40.0 10.0V44.0a2.0 2.0 0 0 1-2.0 2.0H10.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#file_document-24-g1)"/>
+<path d="M11.0 3.0H31.6L39.0 10.4V43.0a2.0 2.0 0 0 1-2.0 2.0H11.0a2.0 2.0 0 0 1-2.0-2.0V5.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0" stroke-linejoin="round"/>
+<path d="M32.0 2.0V10.0H40.0Z" fill="#C3CEDA"/>
+<path d="M12.0 8.0H26.0V12.0H12.0Z" fill="#1450C8" fill-opacity="1.0"/>
+<path d="M12.0 14.0H36.0V16.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 18.0H34.0V20.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 22.0H36.0V24.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 26.0H34.0V28.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 30.0H36.0V32.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 34.0H34.0V36.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 38.0H36.0V40.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+<path d="M12.0 42.0H34.0V44.0H12.0Z" fill="#1B74E2" fill-opacity="0.85"/>
+</svg>

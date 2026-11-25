@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="network_computer-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A4452"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="network_computer-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1B4FC8"/></linearGradient><linearGradient id="network_computer-24-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M4.0 2.0H44.0a2.0 2.0 0 0 1 2.0 2.0V26.0a2.0 2.0 0 0 1-2.0 2.0H4.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#network_computer-24-g1)"/>
+<path d="M3.0 3.0H45.0V27.0H3.0Z" fill="none" stroke="#8A98AA" stroke-opacity=".6" stroke-width="2.0"/>
+<path d="M5.0 4.0H43.0a1.0 1.0 0 0 1 1.0 1.0V25.0a1.0 1.0 0 0 1-1.0 1.0H5.0a1.0 1.0 0 0 1-1.0-1.0V5.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="url(#network_computer-24-g2)"/>
+<path d="M22.0 28.0H26.0V30.0H22.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M18.0 30.0H30.0V32.0H18.0Z" fill="#A9B7C7" fill-opacity="1.0"/>
+<path d="M24.0 32.0H26.0V34.0H24.0Z" fill="#5D6B7C" fill-opacity="1.0"/>
+<path d="M20.8 34.0H29.2a0.8 0.8 0 0 1 0.8 0.8V37.2a0.8 0.8 0 0 1-0.8 0.8H20.8a0.8 0.8 0 0 1-0.8-0.8V34.8a0.8 0.8 0 0 1 0.8-0.8Z" fill="url(#network_computer-24-g3)"/>
+</svg>

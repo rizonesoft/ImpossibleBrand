@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="file_font-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M10.0 2.0H32.0L40.0 10.0V44.0a2.0 2.0 0 0 1-2.0 2.0H10.0a2.0 2.0 0 0 1-2.0-2.0V4.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#file_font-24-g1)"/>
+<path d="M11.0 3.0H31.6L39.0 10.4V43.0a2.0 2.0 0 0 1-2.0 2.0H11.0a2.0 2.0 0 0 1-2.0-2.0V5.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0" stroke-linejoin="round"/>
+<path d="M32.0 2.0V10.0H40.0Z" fill="#C3CEDA"/>
+<path d="M14.000 40.000L21.000 18.000L27.000 18.000L34.000 40.000L30.000 40.000L28.000 34.000L20.000 34.000L18.000 40.000Z M21.200 30.000L26.800 30.000L24.000 22.000Z" fill-rule="evenodd" fill="#1450C8"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="device_generic-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F5F9"/><stop offset="1" stop-color="#AEBCCB"/></linearGradient><linearGradient id="device_generic-16-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40AEF5"/><stop offset="1" stop-color="#1B74E2"/></linearGradient></defs>
+<path d="M16.2 3.0H31.8a1.2000000000000002 1.2000000000000002 0 0 1 1.2000000000000002 1.2000000000000002V16.8a1.2000000000000002 1.2000000000000002 0 0 1-1.2000000000000002 1.2000000000000002H16.2a1.2000000000000002 1.2000000000000002 0 0 1-1.2000000000000002-1.2000000000000002V4.2a1.2000000000000002 1.2000000000000002 0 0 1 1.2000000000000002-1.2000000000000002Z" fill="url(#device_generic-16-g1)"/>
+<path d="M17.0 4.5H31.0a0.5 0.5 0 0 1 0.5 0.5V16.0a0.5 0.5 0 0 1-0.5 0.5H17.0a0.5 0.5 0 0 1-0.5-0.5V5.0a0.5 0.5 0 0 1 0.5-0.5Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="3.0"/>
+<path d="M18.0 9.0H21.0V12.0H18.0Z" fill="#5D6B7C" fill-opacity="1.0"/>
+<path d="M27.0 9.0H30.0V12.0H27.0Z" fill="#5D6B7C" fill-opacity="1.0"/>
+<path d="M15.0 18.0H33.0a3.0 3.0 0 0 1 3.0 3.0V42.0a3.0 3.0 0 0 1-3.0 3.0H15.0a3.0 3.0 0 0 1-3.0-3.0V21.0a3.0 3.0 0 0 1 3.0-3.0Z" fill="url(#device_generic-16-g2)"/>
+</svg>
