@@ -48,22 +48,35 @@ def test_locate_refuses_bad_settings(world, text, expected):
     assert code == 1 and expected in out
 
 
-def test_locate_reads_a_quoted_origin_with_a_comment(world):
+ORIGIN_FORMS = {
+    "plain": "url = {url}",
+    "quoted with a comment": 'url = "{url}" ; the OS',
+    "continued inside quotes": 'url = "{a}\\\n{b}" # the OS',
+    "a comment ending in a backslash before the section": None,
+    "escaped characters": 'url = "{url}" # a \\"comment\\"',
+}
+
+
+@pytest.mark.parametrize("form", sorted(ORIGIN_FORMS))
+def test_locate_reads_every_origin_form_as_git_does(world, form):
+    """The class: whatever git config syntax names the origin, the probe sees exactly what git sees."""
     config = world["os"] / ".git" / "config"
+    url = git(world["os"], "config", "--get", "remote.origin.url").strip()
     text = config.read_text()
-    url = git(world["os"], "config", "--get", "remote.origin.url").strip()
-    config.write_text(text.replace(f"url = {url}", f'url = "{url}" ; the OS'))
-    assert git(world["os"], "config", "--get", "remote.origin.url").strip() == url  # git reads it the same way
-    assert run_probe(world["brand"], "locate") == (0, str(world["os"]))
-
-
-def test_locate_reads_a_continued_origin(world):
-    config = world["os"] / ".git" / "config"
-    url = git(world["os"], "config", "--get", "remote.origin.url").strip()
-    half = len(url) // 2
-    config.write_text(config.read_text().replace(f"url = {url}", f'url = "{url[:half]}\\\n{url[half:]}" # the OS'))
-    assert git(world["os"], "config", "--get", "remote.origin.url").strip() == url  # git joins it the same way
-    assert run_probe(world["brand"], "locate") == (0, str(world["os"]))
+    if ORIGIN_FORMS[form] is None:
+        text = text.replace('[remote "origin"]', '# an old note \\\n[remote "origin"]')
+    else:
+        line = ORIGIN_FORMS[form].format(url=url, a=url[: len(url) // 2], b=url[len(url) // 2:])
+        text = text.replace(f"url = {url}", line)
+    config.write_text(text)
+    seen_by_git = run_tree(["git", "-C", str(world["os"]), "config", "--local", "--get", "remote.origin.url"],
+                           env={**os.environ, **GIT_ENV})
+    expected = (0, str(world["os"])) if seen_by_git[0] == 0 and seen_by_git[1].strip() == url else None
+    code, out = run_probe(world["brand"], "locate")
+    if expected:
+        assert (code, out) == expected
+    else:
+        assert code == 1  # git does not see the origin either, so neither does the probe
 
 
 def test_fetch_fails_when_the_head_tree_cannot_be_read(world, monkeypatch, capsys):
@@ -371,7 +384,7 @@ def test_a_hanging_git_is_killed_with_its_children(world, tmp_path):
     env = fake_git(tmp_path, f"sleep 300 &\necho $! > {pidfile}\nsleep 300\n")
     start = time.monotonic()
     code, out = run_probe(world["brand"], "contract", env=env)
-    assert code == 1 and "deadline" in out
+    assert code == 1 and "could not be read" in out and "took longer than" in out
     assert time.monotonic() - start < 10
     time.sleep(0.2)
     child = int(pidfile.read_text())

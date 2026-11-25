@@ -33,7 +33,7 @@ import time
 import tomllib
 from pathlib import Path, PurePosixPath
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).parents[1]  # resolved inside the watchdog, never at import
 OS_REMOTE = "rizonesoft/impossible-os"
 CONTRACT = "docs/design/brand-contract.json"
 PROMPT = "docs/unattended-prompt.md"
@@ -93,93 +93,26 @@ def run_git(args, cwd, limit, clock=None, offline=True):
     return proc.returncode, out
 
 
-def git_config_path(checkout):
-    """The config file a checkout's remotes live in: .git/config, or a linked worktree's common config."""
-    dot = Path(checkout) / ".git"
-    if dot.is_dir():
-        return dot / "config"
-    if dot.is_file():
-        text = dot.read_text(encoding="utf-8", errors="replace").strip()
-        if not text.startswith("gitdir:"):
-            return None
-        gitdir = Path(text[len("gitdir:"):].strip())
-        if not gitdir.is_absolute():
-            gitdir = (Path(checkout) / gitdir).resolve()
-        common = gitdir / "commondir"
-        if common.is_file():
-            base = Path(common.read_text(encoding="utf-8").strip())
-            gitdir = base if base.is_absolute() else (gitdir / base).resolve()
-        return gitdir / "config"
-    return None
+class Unreadable(Exception):
+    """A checkout's git config could not be read; the message says why."""
 
 
-def config_value(raw):
-    """A git config value as git reads it: double quotes grouped, backslash escapes, and a comment (# or ;) outside
-    quotes ending the value; unquoted trailing space dropped."""
-    out, quoted, kept = [], False, 0
-    escapes = {"n": "\n", "t": "\t", "b": "\b", "\\": "\\", '"': '"'}
-    i = 0
-    while i < len(raw):
-        char = raw[i]
-        if char == "\\" and i + 1 < len(raw):
-            out.append(escapes.get(raw[i + 1], raw[i + 1]))
-            i += 2
-            kept = len(out)
-            continue
-        if char == '"':
-            quoted = not quoted
-        elif char in "#;" and not quoted:
-            break
-        else:
-            out.append(char)
-            if quoted or not char.isspace():
-                kept = len(out)
-        i += 1
-    return "".join(out[:kept]).strip() if not quoted else "".join(out[:kept])
-
-
-def logical_lines(text):
-    """Config lines with git's continuations joined: a line ending in an unescaped backslash continues on the next."""
-    lines, pending = [], ""
-    for physical in text.splitlines():
-        trailing = len(physical) - len(physical.rstrip("\\"))
-        if trailing % 2 == 1:
-            pending += physical[:-1]
-            continue
-        lines.append(pending + physical)
-        pending = ""
-    if pending:
-        lines.append(pending)
-    return lines
-
-
-def origin_url(checkout):
-    """The `url` of `[remote "origin"]`, read as text (no git call), or None; OSError when the config is unreadable."""
-    config = git_config_path(checkout)
-    if config is None or not config.is_file():
-        return None
-    section = None
-    for raw in logical_lines(config.read_text(encoding="utf-8", errors="replace")):
-        line = raw.strip()
-        if not line or line[0] in "#;":
-            continue
-        head = re.match(r'^\[\s*([A-Za-z0-9.-]+)(?:\s+"((?:[^"\\]|\\.)*)")?\s*\]', line)
-        if head:
-            section = (head.group(1).lower(), head.group(2))
-            continue
-        if section == ("remote", "origin"):
-            key, _, value = line.partition("=")
-            if key.strip().lower() == "url":
-                return config_value(value.strip())
-    return None
-
-
-def readable_origin(checkout):
-    """origin_url, with an unreadable config treated as no origin (a discovery candidate that cannot be read)."""
+def origin_url(checkout, clock=None):
+    """The `remote.origin.url` git itself reads from the checkout's own config (a linked worktree's common config,
+    quotes, escapes, continuations and comments included), or None when there is none; Unreadable when git cannot
+    read the config. git config is the one reader of git's syntax here: a second parser drifts from it."""
     try:
-        return origin_url(checkout)
-    except OSError:
-        return None
+        code, out = run_git(["config", "--local", "--get", "remote.origin.url"], checkout, CALL_SECONDS, clock)
+    except NotMet as error:
+        if clock is not None and clock.left() <= 0:
+            raise  # the probe's time is spent: say so, never "not found"
+        raise Unreadable(str(error)) from None
+    if code == 0:
+        return out.decode("utf-8", errors="replace").strip()
+    if code == 1:
+        return None  # git's own answer for a key that is not set
+    raise Unreadable(f"git config exited {code}")
+
 
 
 def names_remote(url, remote):
@@ -221,13 +154,13 @@ def locate(root, clock=None):
         if not is_checkout(path):
             raise NotMet(f"paths.impossible_os is not a git checkout: {path}")
         try:
-            url = origin_url(path)
-        except OSError as error:
+            url = origin_url(path, clock)
+        except Unreadable as error:
             raise NotMet(f"paths.impossible_os: cannot read its git config: {error}") from None
         if not names_remote(url, OS_REMOTE):
             raise NotMet(f"paths.impossible_os has no origin named {OS_REMOTE}: {path}")
         return path
-    seen, found = set(), []
+    seen, found, unreadable = set(), [], []
     candidates = []
     for pattern_root, pattern in ((root.parent, "*"), (root.parent.parent, "*/*")):
         for candidate in pattern_root.glob(pattern):
@@ -242,10 +175,16 @@ def locate(root, clock=None):
         if resolved in seen or resolved == root or not is_checkout(resolved):
             continue
         seen.add(resolved)
-        if names_remote(readable_origin(resolved), OS_REMOTE):
+        try:
+            url = origin_url(resolved, clock)
+        except Unreadable as error:
+            unreadable.append(f"{resolved} ({error})")
+            continue
+        if names_remote(url, OS_REMOTE):
             found.append(resolved)
     if not found:
-        raise NotMet("no Impossible OS checkout found: set paths.impossible_os in .conclave/local.toml")
+        detail = f"; {len(unreadable)} candidate(s) could not be read: {', '.join(unreadable[:3])}" if unreadable else ""
+        raise NotMet(f"no Impossible OS checkout found{detail}: set paths.impossible_os in .conclave/local.toml")
     if len(found) > 1:
         raise NotMet("more than one Impossible OS checkout (" + ", ".join(map(str, found))
                      + "): set paths.impossible_os in .conclave/local.toml")
@@ -319,7 +258,7 @@ def consumer_checkout(root, entry):
         return None, "no checkout"
     try:
         url = origin_url(checkout)
-    except OSError as error:
+    except Unreadable as error:
         return None, f"its git config cannot be read ({error})"
     if not names_remote(url, entry["remote"]):
         return None, f"origin is not {entry['remote']}"
