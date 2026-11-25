@@ -283,7 +283,31 @@ def check_drawing(text, name, owner, size, others):
     problems, ids, painted = [], set(), False
     if root.get("viewBox") != "0 0 48 48":
         problems.append(f"grid: {name} has viewBox {root.get('viewBox')!r}, not '0 0 48 48'")
-    every_id = {e.get("id") for e in root.iter() if e.get("id")}
+    by_id = {e.get("id"): e for e in root.iter() if e.get("id")}
+    every_id = set(by_id)
+
+    def draws(element, style, seen):
+        """Whether an element a <use> points at paints anything: a shape with geometry and visible paint inside it,
+        following nested references once each."""
+        if id(element) in seen:
+            return False
+        seen.add(id(element))
+        style = {**style, **{k: element.get(k) for k in INHERITED if element.get(k) not in (None, "inherit")}}
+        if opacity(element.get("opacity", 1)) == 0:
+            return False
+        tag = element.tag.replace(SVG, "")
+        if tag == "use":
+            target = by_id.get((element.get("href") or element.get(XLINK + "href") or "#")[1:])
+            return target is not None and draws(target, style, seen)
+        if tag in SHAPES:
+            try:
+                subpaths = outline(element)
+            except ValueError:
+                return False
+            fill = style.get("fill", "#000") != "none" and opacity(style.get("fill-opacity", 1)) > 0
+            stroke = style.get("stroke", "none") != "none" and opacity(style.get("stroke-opacity", 1)) > 0
+            return bool(subpaths) and any(s["parts"] for s in subpaths) and (fill or stroke)
+        return any(draws(child, style, seen) for child in element)
     allowed = SMALL_ELEMENTS if size else ELEMENTS
 
     def walk(element, m, style, alpha, in_defs, depth):
@@ -334,7 +358,9 @@ def check_drawing(text, name, owner, size, others):
                 "cap": style.get("stroke-linecap", "butt"),
             }
             if tag == "use":
-                painted = painted or paint["fill"] or paint["stroke"]
+                target = by_id.get((element.get("href") or element.get(XLINK + "href") or "#")[1:])
+                if target is not None and (paint["fill"] or paint["stroke"]) and draws(target, style, set()):
+                    painted = True
             elif subpaths and any(s["parts"] for s in subpaths) and (paint["fill"] or paint["stroke"]):
                 painted = True
                 if size:

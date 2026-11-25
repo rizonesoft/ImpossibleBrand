@@ -164,6 +164,15 @@ def test_main_drawing_may_use_symbols(tmp_path, capsys):
     refused(tmp_path, capsys, "refers to #demo-missing", main=CRISP + '<use href="#demo-missing"/>')
 
 
+def test_use_of_an_empty_symbol_paints_nothing(tmp_path, capsys):
+    refused(tmp_path, capsys, "empty: demo.svg", main='<symbol id="demo-s"><path/></symbol><use href="#demo-s"/>')
+    refused(tmp_path, capsys, "empty: demo.svg",
+            main='<symbol id="demo-s"><rect width="6" height="6" fill="none"/></symbol><use href="#demo-s"/>')
+    refused(tmp_path, capsys, "empty: demo.svg",
+            main='<symbol id="demo-s"><use href="#demo-t"/></symbol><symbol id="demo-t"><use href="#demo-s"/></symbol>'
+                 '<use href="#demo-s"/>')
+
+
 def test_invisible_drawings_are_empty(tmp_path, capsys):
     refused(tmp_path, capsys, "empty: demo.16.svg", small16="<path/>")
     refused(tmp_path, capsys, "empty: demo.24.svg", small24='<g opacity="0"><circle cx="24" cy="24" r="6"/></g>')
