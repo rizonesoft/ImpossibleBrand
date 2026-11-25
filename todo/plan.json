@@ -1,8 +1,34 @@
 {
-  "title": "Implementation plan",
-  "acceptance": null,
+  "title": "Impossible Brand implementation plan",
+  "acceptance": "Every consumer builds from a pinned brand pack: the OS and every program get their icons, cursors, identity and wallpapers from here, a missing icon is drafted locally and designed here without anyone waiting, and our own cursor set has replaced Adwaita.",
   "phases": {
     "0": "Repository and tooling",
+    "1": "Seed",
+    "2": "Contract, palette and pack",
+    "3": "Engine",
+    "4": "OS switch-over",
+    "5": "Programs and SDK",
+    "6": "Cursors",
     "99": "Manual, operator only"
+  },
+  "needs": [
+    "windows-host",
+    "arm64-host",
+    "display-session",
+    "office",
+    "libreoffice",
+    "store-account",
+    "attended",
+    "owner-decision",
+    "third-party",
+    "operator",
+    "os-contract",
+    "app-pulls-brand",
+    "sdk-pulls-brand"
+  ],
+  "probes": {
+    "os-contract": ["python3", "tools/os_probe.py", "contract"],
+    "app-pulls-brand": ["python3", "tools/os_probe.py", "app-pulls"],
+    "sdk-pulls-brand": ["python3", "tools/os_probe.py", "sdk-pulls"]
   }
 }
