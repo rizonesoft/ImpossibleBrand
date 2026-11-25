@@ -1,0 +1,105 @@
+{
+  "grid": 32,
+  "hotspots": {
+    "arrow": [
+      1,
+      1
+    ],
+    "help": [
+      1,
+      1
+    ],
+    "progress": [
+      1,
+      1
+    ],
+    "wait": [
+      16,
+      16
+    ],
+    "crosshair": [
+      16,
+      16
+    ],
+    "text": [
+      16,
+      16
+    ],
+    "vertical-text": [
+      16,
+      16
+    ],
+    "not-allowed": [
+      16,
+      16
+    ],
+    "no-drop": [
+      1,
+      1
+    ],
+    "ns-resize": [
+      16,
+      16
+    ],
+    "ew-resize": [
+      16,
+      16
+    ],
+    "nwse-resize": [
+      16,
+      16
+    ],
+    "nesw-resize": [
+      16,
+      16
+    ],
+    "move": [
+      16,
+      16
+    ],
+    "hand": [
+      8,
+      1
+    ],
+    "grab": [
+      13,
+      12
+    ],
+    "grabbing": [
+      13,
+      15
+    ],
+    "copy": [
+      1,
+      1
+    ],
+    "alias": [
+      1,
+      1
+    ],
+    "context-menu": [
+      1,
+      1
+    ],
+    "cell": [
+      16,
+      16
+    ],
+    "col-resize": [
+      16,
+      16
+    ],
+    "row-resize": [
+      16,
+      16
+    ],
+    "zoom-in": [
+      12,
+      12
+    ],
+    "zoom-out": [
+      12,
+      12
+    ]
+  }
+}
