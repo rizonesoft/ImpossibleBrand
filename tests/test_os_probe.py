@@ -71,12 +71,8 @@ def test_locate_reads_every_origin_form_as_git_does(world, form):
     config.write_text(text)
     seen_by_git = run_tree(["git", "-C", str(world["os"]), "config", "--local", "--get", "remote.origin.url"],
                            env={**os.environ, **GIT_ENV})
-    expected = (0, str(world["os"])) if seen_by_git[0] == 0 and seen_by_git[1].strip() == url else None
-    code, out = run_probe(world["brand"], "locate")
-    if expected:
-        assert (code, out) == expected
-    else:
-        assert code == 1  # git does not see the origin either, so neither does the probe
+    assert seen_by_git[:2] == (0, url + "\n")  # each fixture is a valid form naming the OS, as git reads it
+    assert run_probe(world["brand"], "locate") == (0, str(world["os"]))
 
 
 def test_fetch_fails_when_the_head_tree_cannot_be_read(world, monkeypatch, capsys):
@@ -429,6 +425,23 @@ def test_fetch_updates_origin_main_in_a_single_branch_checkout(world, tmp_path):
     assert run_probe(world["brand"], "contract")[0] == 1
     assert run_probe(world["brand"], "fetch")[0] == 0
     assert run_probe(world["brand"], "contract")[0] == 0
+
+
+def test_the_watchdog_kills_a_git_still_running_when_it_fires(world, tmp_path):
+    """A consumer whose git config read hangs near the deadline: the watchdog ends the probe and its git group."""
+    real = shutil.which("git")
+    pidfile = tmp_path / "late.pid"
+    entries = [add_consumer(world, f"P{i:02d}", "program", RULE_BRAND) for i in range(3)]
+    write_consumers(world, entries)
+    body = (f'case "$*" in *P02*config*) sleep 300 & echo $! > {pidfile}; wait;; '
+            f'*config*) sleep 2.4; exec {real} "$@";; *) exec {real} "$@";; esac\n')
+    env = fake_git(tmp_path, body)
+    start = time.monotonic()
+    code, out = run_probe(world["brand"], "app-pulls", env=env, timeout=20)
+    assert code == 1 and ("P02" in out or "deadline" in out)
+    assert time.monotonic() - start < 8.6
+    time.sleep(0.2)
+    assert pidfile.exists() and not alive(int(pidfile.read_text()))
 
 
 def test_many_slow_calls_stop_at_the_whole_probe_deadline(world, tmp_path):

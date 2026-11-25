@@ -56,22 +56,23 @@ Sections: 3 | Checklist items: 19
 
 ### Phase 5: Programs and SDK
 
-Sections: 12 | Checklist items: 94
+Sections: 13 | Checklist items: 98
 
-| Status | Reference   | Deliverable                                      | Needs           | Items |
-| ------ | ----------- | ------------------------------------------------ | --------------- | ----- |
-| [ ]    | D04 T01 §1  | Consumer list                                    | none            | 5     |
-| [ ]    | D04 T01 §2  | Request collection                               | none            | 9     |
-| [ ]    | D04 T01 §3  | Programs offered this repository's pull requests | none            | 7     |
-| [ ]    | D04 T01 §4  | App icon rules                                   | none            | 5     |
-| [ ]    | D04 T01 §5  | App icons: text and documents                    | designs-apps    | 8     |
-| [ ]    | D04 T01 §6  | App icons: pictures, sound and video             | designs-apps    | 12    |
-| [ ]    | D04 T01 §7  | App icons: games                                 | designs-apps    | 7     |
-| [ ]    | D04 T01 §8  | App icons: internet and messages                 | designs-apps    | 11    |
-| [ ]    | D04 T01 §9  | App icons: desktop utilities and system tools    | designs-apps    | 13    |
-| [ ]    | D04 T01 §10 | brand.json in every program                      | app-pulls-brand | 6     |
-| [ ]    | D04 T01 §11 | Impossible SDK identity moved here               | sdk-pulls-brand | 6     |
-| [ ]    | D04 T01 §12 | App icons embedded by the SDK build              | sdk-pulls-brand | 5     |
+| Status | Reference   | Deliverable                                              | Needs           | Items |
+| ------ | ----------- | -------------------------------------------------------- | --------------- | ----- |
+| [ ]    | D04 T01 §1  | Consumer list                                            | none            | 5     |
+| [ ]    | D04 T01 §2  | Request collection                                       | none            | 9     |
+| [ ]    | D04 T01 §3  | Programs offered this repository's pull requests         | none            | 7     |
+| [ ]    | D04 T01 §4  | App icon rules                                           | none            | 5     |
+| [ ]    | D04 T01 §5  | App icons: text and documents                            | designs-apps    | 8     |
+| [ ]    | D04 T01 §6  | App icons: pictures, sound and video                     | designs-apps    | 12    |
+| [ ]    | D04 T01 §7  | App icons: games                                         | designs-apps    | 7     |
+| [ ]    | D04 T01 §8  | App icons: internet and messages                         | designs-apps    | 11    |
+| [ ]    | D04 T01 §9  | App icons: desktop utilities and system tools            | designs-apps    | 13    |
+| [ ]    | D04 T01 §10 | brand.json in every program                              | app-pulls-brand | 6     |
+| [ ]    | D04 T01 §11 | Impossible SDK identity moved here                       | sdk-pulls-brand | 6     |
+| [ ]    | D04 T01 §12 | App icons embedded by the SDK build                      | sdk-pulls-brand | 5     |
+| [ ]    | D04 T01 §13 | App icon check: referenced parts and the measure command | none            | 4     |
 
 ### Phase 6: Cursors
 
@@ -98,6 +99,6 @@ Sections: 3 | Checklist items: 13
 | [ ]    | D06 T01 §2 | Five wallpaper pairs wired        | designs-wallpapers   | 4     |
 | [ ]    | D06 T01 §3 | Wallpaper default in the manifest | none                 | 4     |
 
-Progress: 0/50 verified sections, 2 ready to run now.
+Progress: 0/51 verified sections, 2 ready to run now.
 
-Checklist: 21/330 items completed (includes Commit items).
+Checklist: 21/334 items completed (includes Commit items).

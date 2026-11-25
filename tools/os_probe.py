@@ -49,6 +49,10 @@ SET_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
+ACTIVE = set()  # git process groups running now; the watchdog kills them before it ends the process
+ACTIVE_LOCK = threading.Lock()
+
+
 class NotMet(Exception):
     """The Need is not met, or cannot be established; the message is the one line printed."""
 
@@ -81,16 +85,25 @@ def run_git(args, cwd, limit, clock=None, offline=True):
                                 stderr=subprocess.PIPE, start_new_session=True, env=env)
     except OSError as error:
         raise NotMet(f"git could not start: {error}") from None
+    with ACTIVE_LOCK:
+        ACTIVE.add(proc.pid)
     try:
         out, _ = proc.communicate(timeout=limit)
     except subprocess.TimeoutExpired:
-        try:
-            os.killpg(proc.pid, signal.SIGKILL)
-        except ProcessLookupError:  # the group ended between the timeout and the kill: nothing is left to stop
-            pass
+        kill_group(proc.pid)
         proc.communicate()
         raise NotMet(f"deadline: git {' '.join(args[:2])} in {cwd} took longer than {limit:.1f} s") from None
+    finally:
+        with ACTIVE_LOCK:
+            ACTIVE.discard(proc.pid)
     return proc.returncode, out
+
+
+def kill_group(pid):
+    try:
+        os.killpg(pid, signal.SIGKILL)
+    except ProcessLookupError:  # the group ended before the kill: nothing is left to stop
+        pass
 
 
 class Unreadable(Exception):
@@ -251,13 +264,13 @@ def committed_consumers(root, clock):
     return parse_consumers(raw)
 
 
-def consumer_checkout(root, entry):
+def consumer_checkout(root, entry, clock=None):
     """The consumer's checkout beside this repository, or the reason it cannot be used."""
     checkout = Path(root).resolve().parent / entry["name"]
     if not is_checkout(checkout):
         return None, "no checkout"
     try:
-        url = origin_url(checkout)
+        url = origin_url(checkout, clock)
     except Unreadable as error:
         return None, f"its git config cannot be read ({error})"
     if not names_remote(url, entry["remote"]):
@@ -267,7 +280,7 @@ def consumer_checkout(root, entry):
 
 def takes_brand_pulls(entry, root, clock):
     """None when the consumer's committed prompt takes impossible-brand/ pull requests, else the reason."""
-    checkout, reason = consumer_checkout(root, entry)
+    checkout, reason = consumer_checkout(root, entry, clock)
     if reason:
         return reason
     text = show(checkout, f"refs/remotes/origin/main:{PROMPT}", clock)
@@ -428,6 +441,9 @@ def main(argv=None):
     worker.start()
     worker.join(WATCHDOG_SECONDS - (time.monotonic() - started))
     if worker.is_alive():  # a read that blocks below git (a hung mount, a pipe) cannot be timed out in place
+        with ACTIVE_LOCK:
+            for pid in list(ACTIVE):
+                kill_group(pid)  # no git outlives the probe
         print("deadline: the probe ran out of time")
         sys.stdout.flush()
         os._exit(1)

@@ -48,6 +48,7 @@ depends_on: ["icon-engine"]
 | 10 | §10 | brand.json in every program | §3, §5, §6, §7, §8, §9 | [ ] |
 | 11 | §11 | Impossible SDK identity moved here | §1 | [ ] |
 | 12 | §12 | App icons embedded by the SDK build | §10, §11 | [ ] |
+| 13 | §13 | App icon check: referenced parts and the measure command | §4 | [ ] |
 
 ## 1. Consumer list
 
@@ -334,6 +335,26 @@ A program's executable carries its app icon from its pinned pack. The SDK build 
 - [ ] Commit: `consumers: app icons in the SDK build`
 
 **Test checkpoint:** `gh pr view --repo rizonesoft/ImpossibleSDK impossible-brand/app-icon --json state -q .state` prints `OPEN` or `MERGED`.
+
+## 13. App icon check: referenced parts and the measure command
+
+The session's app icon check, `tools/check_icons.py`, accepts a main drawing whose only visible element is a `<use>` of a group that paints nothing, and its `--measure` comparison command was dropped in commit 8ad2e94. Both were found by the pinned reviewer in D01 T01 §1's reconciliations 2 and 3 (`docs/reviews/01-pack/D01-T01-s1.md`, findings 8 and 9), outside that section.
+
+**Phase:** 5
+**Needs:** none
+**Surface:** no
+
+**Build order:**
+
+1. Follow each `<use>` to what it references before deciding a drawing paints something. Done when: an empty referenced group fails `empty`.
+2. Settle `--measure`. Done when: it works again, or the tool's docstring records what replaced it.
+
+- [ ] Resolve `<use>` references in `tools/check_icons.py`'s painted test: a `<use>` paints only when what it references paints. Done when: a main drawing whose only element is `<use href="#x-part"/>` of an empty `<g id="x-part"/>` fails `empty`. Cheaper substitute: refusing `<use>` in main drawings.
+- [ ] Settle the `--measure` option of `tools/check_icons.py`, dropped in 8ad2e94 when the check moved from renders to geometry: restore it, or state in the tool's docstring that the geometry check replaced it. Done when: `--measure` exits 0 printing one line per small drawing, or the docstring names its replacement. Cheaper substitute: leaving it silently gone.
+- [ ] Add both cases to `tests/test_check_icons.py`. Done when: `python3 -m pytest tests/test_check_icons.py -q` passes and fails when the reference resolution is removed.
+- [ ] Commit: `check_icons: referenced parts must paint; --measure settled`
+
+**Test checkpoint:** `python3 -m pytest tests/test_check_icons.py -q` exits 0, and `python3 tools/check_icons.py` exits 0 on the committed icons.
 
 ## Verification
 
