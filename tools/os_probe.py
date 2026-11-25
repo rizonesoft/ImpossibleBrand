@@ -75,11 +75,14 @@ class Clock:
 
 def run_git(args, cwd, limit, clock=None, offline=True):
     """Run git in its own process group; on a timeout kill the whole group. Returns (returncode, stdout bytes).
-    Offline calls may not fetch a missing object of a partial clone (GIT_NO_LAZY_FETCH)."""
+    A commit id always means its own object (GIT_NO_REPLACE_OBJECTS: `git replace` never substitutes another), and
+    offline calls may not fetch a missing object of a partial clone (GIT_NO_LAZY_FETCH)."""
     if clock is not None:
         clock.check()
         limit = min(limit, clock.left())
-    env = {**os.environ, "GIT_NO_LAZY_FETCH": "1"} if offline else None
+    env = {**os.environ, "GIT_NO_REPLACE_OBJECTS": "1"}
+    if offline:
+        env["GIT_NO_LAZY_FETCH"] = "1"
     try:
         proc = subprocess.Popen(["git", "-C", str(cwd), *args], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, start_new_session=True, env=env)

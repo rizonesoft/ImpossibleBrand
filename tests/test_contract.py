@@ -76,6 +76,17 @@ def test_pull_an_older_main_commit_takes_its_own_bytes(os_world):
     assert source["commit"] == os_world["older"] and source["previous"] is None
 
 
+def test_a_replacement_ref_never_changes_what_a_pinned_hash_means(os_world):
+    root = os_world["brand"]
+    git(os_world["os"], "replace", os_world["older"], os_world["off"])  # older now looks like the off-main commit
+    assert git(os_world["os"], "show", f"{os_world['older']}:{PATH}") == OFF  # git, by default, follows it
+    assert cli(root, "pull", os_world["older"])[0] == 0
+    assert (root / "contract" / "os.json").read_bytes() == V1.encode()  # the original object's bytes
+    source = json.loads((root / "contract" / "source.json").read_text())
+    assert source["commit"] == os_world["older"]
+    assert contract.load(root)[0]["icons"][0]["name"] == "computer"
+
+
 def test_an_uppercase_hash_is_accepted_and_recorded_lowercase(os_world):
     root = os_world["brand"]
     assert cli(root, "pull", os_world["tip"].upper())[0] == 0
