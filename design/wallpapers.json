@@ -1,0 +1,38 @@
+{
+  "set": "wallpapers",
+  "approved": "2026-11-25",
+  "board": "https://claude.ai/artifact/CAJGaNrQQiPoRckcKbZkFt",
+  "pairs": [
+    "silk",
+    "aurora",
+    "glass",
+    "fluid",
+    "contours"
+  ],
+  "new_pairs": [
+    "aurora",
+    "glass",
+    "fluid",
+    "contours"
+  ],
+  "note": "Four new pairs chosen from eight directions, joining silk for five. Original artwork from one seeded generator (tools/generators/wallpapers.py), deterministic; rendered at 3840 x 2160 with rsvg-convert, JPEG quality 90. Silk stays the default until the OS adopts another.",
+  "files": [
+    "tools/generators/wallpapers.py",
+    "wallpapers/src/aurora-light.svg",
+    "wallpapers/src/aurora-dark.svg",
+    "wallpapers/src/glass-light.svg",
+    "wallpapers/src/glass-dark.svg",
+    "wallpapers/src/fluid-light.svg",
+    "wallpapers/src/fluid-dark.svg",
+    "wallpapers/src/contours-light.svg",
+    "wallpapers/src/contours-dark.svg",
+    "wallpapers/aurora-light.jpg",
+    "wallpapers/aurora-dark.jpg",
+    "wallpapers/glass-light.jpg",
+    "wallpapers/glass-dark.jpg",
+    "wallpapers/fluid-light.jpg",
+    "wallpapers/fluid-dark.jpg",
+    "wallpapers/contours-light.jpg",
+    "wallpapers/contours-dark.jpg"
+  ]
+}
