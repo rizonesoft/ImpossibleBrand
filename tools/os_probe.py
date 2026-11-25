@@ -28,6 +28,7 @@ import re
 import signal
 import subprocess
 import sys
+import threading
 import time
 import tomllib
 from pathlib import Path, PurePosixPath
@@ -42,12 +43,17 @@ DEADLINE_SECONDS = 8.0
 CALL_SECONDS = 3.0
 FETCH_SECONDS = 20.0
 MAIN_REFSPEC = "+refs/heads/main:refs/remotes/origin/main"
+KINDS = ("os", "sdk", "program")
 SET_NAME = re.compile(r"[a-z0-9][a-z0-9-]*")
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
 class NotMet(Exception):
     """The Need is not met, or cannot be established; the message is the one line printed."""
+
+
+class NotCommitted(NotMet):
+    """The file is absent from the commit (as opposed to present but unreadable)."""
 
 
 class Clock:
@@ -106,8 +112,33 @@ def git_config_path(checkout):
     return None
 
 
+def config_value(raw):
+    """A git config value as git reads it: double quotes grouped, backslash escapes, and a comment (# or ;) outside
+    quotes ending the value; unquoted trailing space dropped."""
+    out, quoted, kept = [], False, 0
+    escapes = {"n": "\n", "t": "\t", "b": "\b", "\\": "\\", '"': '"'}
+    i = 0
+    while i < len(raw):
+        char = raw[i]
+        if char == "\\" and i + 1 < len(raw):
+            out.append(escapes.get(raw[i + 1], raw[i + 1]))
+            i += 2
+            kept = len(out)
+            continue
+        if char == '"':
+            quoted = not quoted
+        elif char in "#;" and not quoted:
+            break
+        else:
+            out.append(char)
+            if quoted or not char.isspace():
+                kept = len(out)
+        i += 1
+    return "".join(out[:kept]).strip() if not quoted else "".join(out[:kept])
+
+
 def origin_url(checkout):
-    """The `url` of `[remote "origin"]`, read as text (no git call), or None."""
+    """The `url` of `[remote "origin"]`, read as text (no git call), or None; OSError when the config is unreadable."""
     config = git_config_path(checkout)
     if config is None or not config.is_file():
         return None
@@ -123,8 +154,16 @@ def origin_url(checkout):
         if section == ("remote", "origin"):
             key, _, value = line.partition("=")
             if key.strip().lower() == "url":
-                return value.strip()
+                return config_value(value.strip())
     return None
+
+
+def readable_origin(checkout):
+    """origin_url, with an unreadable config treated as no origin (a discovery candidate that cannot be read)."""
+    try:
+        return origin_url(checkout)
+    except OSError:
+        return None
 
 
 def names_remote(url, remote):
@@ -165,22 +204,30 @@ def locate(root, clock=None):
             path = (root / path).resolve()
         if not is_checkout(path):
             raise NotMet(f"paths.impossible_os is not a git checkout: {path}")
-        if not names_remote(origin_url(path), OS_REMOTE):
+        try:
+            url = origin_url(path)
+        except OSError as error:
+            raise NotMet(f"paths.impossible_os: cannot read its git config: {error}") from None
+        if not names_remote(url, OS_REMOTE):
             raise NotMet(f"paths.impossible_os has no origin named {OS_REMOTE}: {path}")
         return path
     seen, found = set(), []
+    candidates = []
     for pattern_root, pattern in ((root.parent, "*"), (root.parent.parent, "*/*")):
-        for candidate in sorted(pattern_root.glob(pattern)):
+        for candidate in pattern_root.glob(pattern):
             clock.check()
-            try:
-                resolved = candidate.resolve()
-            except OSError:
-                continue
-            if resolved in seen or resolved == root or not is_checkout(resolved):
-                continue
-            seen.add(resolved)
-            if names_remote(origin_url(resolved), OS_REMOTE):
-                found.append(resolved)
+            candidates.append(candidate)
+    for candidate in sorted(candidates):
+        clock.check()
+        try:
+            resolved = candidate.resolve()
+        except OSError:
+            continue
+        if resolved in seen or resolved == root or not is_checkout(resolved):
+            continue
+        seen.add(resolved)
+        if names_remote(readable_origin(resolved), OS_REMOTE):
+            found.append(resolved)
     if not found:
         raise NotMet("no Impossible OS checkout found: set paths.impossible_os in .conclave/local.toml")
     if len(found) > 1:
@@ -230,14 +277,20 @@ def parse_consumers(raw):
             raise NotMet(f"consumers.json is invalid: an entry lacks name, remote or kind: {entry!r}")
         if not re.fullmatch(r"[A-Za-z0-9._-]+", entry["name"]) or entry["name"] in (".", ".."):
             raise NotMet(f"consumers.json is invalid: not a folder name: {entry['name']!r}")
+        if entry["kind"] not in KINDS:
+            raise NotMet(f"consumers.json is invalid: {entry['name']} has kind {entry['kind']!r}, not one of {KINDS}")
     return entries
 
 
 def committed_consumers(root, clock):
     """consumers.json as committed on HEAD (D04 T01 §1), never the working copy another session may be editing."""
-    raw = show(root, f"{head_commit(root, clock)}:consumers.json", clock)
+    commit = head_commit(root, clock)
+    code, out = run_git(["ls-tree", "-z", commit, "--", "consumers.json"], root, CALL_SECONDS, clock)
+    if code != 0 or not out.strip(b"\0"):  # the tree entry, read without needing the blob
+        raise NotCommitted("consumers.json is not committed (D04 T01 §1)")
+    raw = show(root, f"{commit}:consumers.json", clock)
     if raw is None:
-        raise NotMet("consumers.json is not committed (D04 T01 §1)")
+        raise NotMet("consumers.json is committed but its content cannot be read here (a partial clone?)")
     return parse_consumers(raw)
 
 
@@ -246,7 +299,11 @@ def consumer_checkout(root, entry):
     checkout = Path(root).resolve().parent / entry["name"]
     if not is_checkout(checkout):
         return None, "no checkout"
-    if not names_remote(origin_url(checkout), entry["remote"]):
+    try:
+        url = origin_url(checkout)
+    except OSError as error:
+        return None, f"its git config cannot be read ({error})"
+    if not names_remote(url, entry["remote"]):
         return None, f"origin is not {entry['remote']}"
     return checkout, None
 
@@ -344,10 +401,11 @@ def fetch(root):
         failures.append(f"Impossible OS: {error}")
     try:
         entries = committed_consumers(root, Clock(FETCH_SECONDS))
+    except NotCommitted:
+        entries = []  # before D04 T01 §1 there is no list: only the OS is fetched
     except NotMet as error:
         entries = []
-        if "not committed" not in str(error):
-            failures.append(str(error))
+        failures.append(str(error))
     for entry in entries:
         if entry["kind"] == "os":
             continue
@@ -388,22 +446,35 @@ def main(argv=None):
     if args.command == "fetch":
         return fetch(root)
     clock = Clock(DEADLINE_SECONDS)
-    try:
-        if args.command == "locate":
-            line = str(locate(root, clock))
-        elif args.command == "contract":
-            line = probe_contract(root, clock)
-        elif args.command == "app-pulls":
-            line = probe_pulls(root, "program", clock)
-        elif args.command == "sdk-pulls":
-            line = probe_pulls(root, "sdk", clock)
-        else:
-            line = probe_designs(root, args.set, clock)
-    except NotMet as error:
-        print(error)
-        return 1
-    print(line)
-    return 0
+    result = {}
+
+    def probe():
+        try:
+            if args.command == "locate":
+                result["line"] = str(locate(root, clock))
+            elif args.command == "contract":
+                result["line"] = probe_contract(root, clock)
+            elif args.command == "app-pulls":
+                result["line"] = probe_pulls(root, "program", clock)
+            elif args.command == "sdk-pulls":
+                result["line"] = probe_pulls(root, "sdk", clock)
+            else:
+                result["line"] = probe_designs(root, args.set, clock)
+            result["code"] = 0
+        except NotMet as error:
+            result["line"], result["code"] = str(error), 1
+        except OSError as error:
+            result["line"], result["code"] = f"cannot read: {error}", 1
+
+    worker = threading.Thread(target=probe, daemon=True)
+    worker.start()
+    worker.join(DEADLINE_SECONDS + 0.5)
+    if worker.is_alive():  # a read that blocks below git (a hung mount, a pipe) cannot be timed out in place
+        print("deadline: the probe ran out of time")
+        sys.stdout.flush()
+        os._exit(1)
+    print(result["line"])
+    return result["code"]
 
 
 if __name__ == "__main__":

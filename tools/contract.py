@@ -9,9 +9,10 @@ The commit is a full 40-character hash of a commit on the OS origin/main (it may
 a working tree or a commit only on another branch. The OS is found as tools/os_probe.py locate finds it.
 
 The pair is published as one folder: written to contract.tmp/, then contract/ becomes contract.prev/, contract.tmp/
-becomes contract/, and contract.prev/ is removed. Every command holds build/contract.lock while it works and first
-recovers a pull that stopped part way, so a reader always sees one whole pull, the one before an interrupted pull,
-or none. A pin whose two files do not belong together is refused, never silently replaced: `pull --replace-damaged`
+becomes contract/, and contract.prev/ becomes contract.old/, which is the commit point: one atomic rename. Until it,
+an interrupted pull is undone and the previous pair (or, on a first pull, no pair) is what every later command sees;
+after it the new pair stands and contract.old/ is only removed. Every command holds build/contract.lock while it
+works and first recovers a pull that stopped part way. A pin whose two files do not belong together is refused, never silently replaced: `pull --replace-damaged`
 replaces it and records why. Other tools read the pin with load(), which returns (contract, source).
 """
 import argparse
@@ -50,6 +51,10 @@ def folders(root):
     return root / "contract", root / "contract.tmp", root / "contract.prev"
 
 
+def old_folder(root):
+    return Path(root) / "contract.old"
+
+
 @contextlib.contextmanager
 def locked(root):
     """Hold build/contract.lock, so a reader never recovers or reads while a pull is publishing, and two pulls never
@@ -73,14 +78,17 @@ def locked(root):
 
 
 def recover(root):
-    """Finish or undo a pull that stopped part way, so exactly one whole pair (or none) is visible. Call under lock."""
+    """Undo a pull that stopped before its commit point, or finish one that stopped after it. Call under lock."""
     live, tmp, prev = folders(root)
-    if prev.exists() and not live.exists():
-        os.rename(prev, live)  # stopped between the two renames: the previous pull comes back
-    if prev.exists():
-        shutil.rmtree(prev)  # stopped after publishing: the old pair is no longer needed
-    if tmp.exists():
-        shutil.rmtree(tmp)  # stopped while writing: the new pair was never published
+    old = old_folder(root)
+    if prev.exists():  # stopped before the commit point: the previous pair comes back
+        if live.exists():
+            shutil.rmtree(live)
+        os.rename(prev, live)
+    if old.exists():  # stopped after the commit point: the new pair stands, the old one goes
+        shutil.rmtree(old)
+    if tmp.exists():  # stopped while writing: the new pair was never published
+        shutil.rmtree(tmp)
 
 
 def _refuse_constant(name):
@@ -116,6 +124,8 @@ def validate(data):
         if not attributes:
             raise ContractError("contract: profile.attributes must name attributes")
         for element, names in attributes.items():
+            if element not in profile["elements"]:
+                raise ContractError(f"contract: profile.attributes names {element!r}, which is not in profile.elements")
             _names(names, f"profile.attributes.{element}")
     else:
         _names(attributes, "profile.attributes")
@@ -277,6 +287,7 @@ def show(root=ROOT):
 
 def _publish(root, raw, source):
     live, tmp, prev = folders(root)
+    old = old_folder(root)
     installed = False
     try:
         tmp.mkdir()
@@ -286,10 +297,12 @@ def _publish(root, raw, source):
         if live.exists():
             os.rename(live, prev)
         os.rename(tmp, live)
+        if prev.exists():
+            os.rename(prev, old)  # the commit point
         installed = True
         _sync_dir(root)
-        if prev.exists():
-            shutil.rmtree(prev)
+        if old.exists():
+            shutil.rmtree(old)
     except OSError as error:
         if installed:
             raise ContractError(f"the new pin is installed, but cleanup failed: {error}; the next command finishes it") from None
@@ -301,9 +314,9 @@ def _publish(root, raw, source):
 def pull(commit, root=ROOT, now=None, replace_damaged=False):
     """Publish the contract at an OS commit; on any refusal before publishing nothing changes."""
     root = Path(root)
-    commit = normalise(commit)
     with locked(root):
         recover(root)
+        commit = normalise(commit)
         raw = read_at(commit, root)
         _, names = parse(raw)
         damaged = None

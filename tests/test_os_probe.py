@@ -48,6 +48,43 @@ def test_locate_refuses_bad_settings(world, text, expected):
     assert code == 1 and expected in out
 
 
+def test_locate_reads_a_quoted_origin_with_a_comment(world):
+    config = world["os"] / ".git" / "config"
+    text = config.read_text()
+    url = git(world["os"], "config", "--get", "remote.origin.url").strip()
+    config.write_text(text.replace(f"url = {url}", f'url = "{url}" ; the OS'))
+    assert git(world["os"], "config", "--get", "remote.origin.url").strip() == url  # git reads it the same way
+    assert run_probe(world["brand"], "locate") == (0, str(world["os"]))
+
+
+def test_locate_refuses_unreadable_settings_and_config(world):
+    settings = world["brand"] / ".conclave" / "local.toml"
+    settings.parent.mkdir()
+    settings.write_text(f'[paths]\nimpossible_os = "{world["os"]}"\n')
+    settings.chmod(0)
+    try:
+        code, out = run_probe(world["brand"], "locate")
+    finally:
+        settings.chmod(0o644)
+    assert code == 1 and "invalid .conclave/local.toml" in out
+    config = world["os"] / ".git" / "config"
+    config.chmod(0)
+    try:
+        code, out = run_probe(world["brand"], "locate")
+    finally:
+        config.chmod(0o644)
+    assert code == 1 and "cannot read its git config" in out
+
+
+def test_a_blocking_read_cannot_hold_the_probe_past_its_deadline(world):
+    (world["brand"] / ".conclave").mkdir()
+    os.mkfifo(world["brand"] / ".conclave" / "local.toml")  # reading it blocks until a writer comes, which never does
+    start = time.monotonic()
+    code, out = run_probe(world["brand"], "locate", timeout=20)
+    assert code == 1 and "deadline" in out
+    assert time.monotonic() - start < 10
+
+
 def test_locate_refuses_a_configured_checkout_of_another_repository(world):
     bare, _ = make_remote(world["tmp"], "someone/other", {})
     other = clone(bare, world["tmp"] / "hidden" / "other")
@@ -121,6 +158,13 @@ def test_app_pulls_needs_a_committed_consumers_json(world):
     assert code == 1 and "consumers.json is invalid" in out
 
 
+def test_an_unknown_consumer_kind_makes_the_list_invalid(world):
+    entries = [add_consumer(world, "Calc", "program", RULE_BRAND), add_consumer(world, "Clock", "progam", RULE_OS)]
+    write_consumers(world, entries)
+    code, out = run_probe(world["brand"], "app-pulls")
+    assert code == 1 and "consumers.json is invalid: Clock has kind 'progam'" in out
+
+
 def test_app_pulls_ignores_an_uncommitted_edit_of_consumers_json(world):
     entries = [add_consumer(world, "Calc", "program", RULE_BRAND), add_consumer(world, "Clock", "program", RULE_OS)]
     write_consumers(world, entries)
@@ -138,6 +182,13 @@ def test_app_pulls_reads_programs_only(world):
     assert code == 0, out
     code, out = run_probe(world["brand"], "sdk-pulls")
     assert code == 1 and "ImpossibleSDK" in out
+
+
+def test_sdk_pulls_wants_the_operative_rule_line(world):
+    mention = RULE_OS + "- Pull requests from impossible-brand/ are planned.\n"
+    write_consumers(world, [add_consumer(world, "ImpossibleSDK", "sdk", mention)])
+    code, out = run_probe(world["brand"], "sdk-pulls")
+    assert code == 1 and "ImpossibleSDK (its pull rule does not name impossible-brand/)" in out
 
 
 def test_sdk_pulls_met_when_the_sdk_takes_brand_pulls(world):
@@ -317,6 +368,19 @@ def test_fetch_skips_a_checkout_of_another_repository(world):
     assert code == 1 and "Calc: origin is not rizonesoft/NotCalc, not fetched" in out
 
 
+def test_fetch_fails_when_the_committed_list_cannot_be_read(world, tmp_path):
+    write_consumers(world, [add_consumer(world, "Calc", "program", RULE_BRAND)])
+    bare = tmp_path / "fx" / "deep" / "brand.git"
+    git(tmp_path, "clone", "-q", "--bare", str(world["brand"]), str(bare))
+    git(bare, "config", "uploadpack.allowFilter", "true")
+    lazy = world["brand"].parent / "BrandLazy"
+    git(lazy.parent, "clone", "-q", "--no-checkout", "--filter=blob:none", f"file://{bare}", str(lazy))
+    (lazy / "tools").mkdir()
+    shutil.copy2(PROBE, lazy / "tools" / "os_probe.py")
+    code, out = run_probe(lazy, "fetch")
+    assert code == 1 and "consumers.json is committed but its content cannot be read" in out
+
+
 def test_fetch_updates_origin_main_in_a_single_branch_checkout(world, tmp_path):
     git(world["os_work"], "push", "-q", "origin", "main:other")
     shutil.rmtree(world["os"])
@@ -366,9 +430,19 @@ def test_detect_lists_needs_only_when_met(world):
     assert "os-contract" in have and "designs-apps" in have
     others = ["system-icons", "cursors-windows-11", "cursors-mac", "wallpapers"]
     assert not {f"designs-{s}" for s in others} & have
-    for name in others:
+    ready = {"designs-apps"}
+    for name in others:  # one set at a time: a swapped binding would light the wrong Need
         design(world, name, {**GOOD, "set": name, "files": [f"{name}/one.svg"]}, [f"{name}/one.svg"])
-    assert {f"designs-{s}" for s in ["apps", *others]} <= detected()
+        ready.add(f"designs-{name}")
+        assert {n for n in detected() if n.startswith("designs-")} == ready
+    assert not {"app-pulls-brand", "sdk-pulls-brand"} & detected()
+    entries = [add_consumer(world, "Calc", "program", RULE_BRAND), add_consumer(world, "ImpossibleSDK", "sdk", RULE_OS)]
+    write_consumers(world, entries)
+    have = detected()
+    assert "app-pulls-brand" in have and "sdk-pulls-brand" not in have
+    write_consumers(world, [entries[0], add_consumer(world, "Sdk2", "sdk", RULE_BRAND)])
+    have = detected()
+    assert "sdk-pulls-brand" in have and "app-pulls-brand" in have
 
 
 def test_root_is_accepted_after_the_command(world):

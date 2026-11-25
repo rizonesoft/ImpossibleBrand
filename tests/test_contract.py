@@ -27,6 +27,7 @@ def make_contract(icons=(("computer", "colour"),), cursors=("default",), newline
 
 V1 = make_contract(newline="\r\n")  # CRLF: the pin must keep the blob's bytes
 V2 = make_contract(icons=(("computer", "colour"), ("printer", "colour")), cursors=("default", "wait"))
+V3 = make_contract(icons=(("computer", "colour"),), cursors=("default",))  # retires printer and wait
 OFF = make_contract(icons=(("off", "glyph"),))
 
 
@@ -134,6 +135,12 @@ BAD = {
     "attributes empty map": ({**BASE, "profile": {"elements": ["path"], "attributes": {}}}, "profile.attributes"),
     "attributes of an element": ({**BASE, "profile": {"elements": ["path"], "attributes": {"path": []}}},
                                  "profile.attributes.path"),
+    "attributes of no element": ({**BASE, "profile": {"elements": ["path"], "attributes": {"": ["d"]}}},
+                                 "not in profile.elements"),
+    "attributes of an unlisted element": ({**BASE, "profile": {"elements": ["path"], "attributes": {"rect": ["x"]}}},
+                                          "not in profile.elements"),
+    "profile not object": ({**BASE, "profile": ["path"]}, "profile must be an object"),
+    "cursors not list": ({**BASE, "cursors": "default"}, "cursors must be a list"),
     "tokens not list": ({**BASE, "tokens": "accent"}, "tokens must be a list"),
     "tokens repeated": ({**BASE, "tokens": ["a", "a"]}, "tokens must be unique"),
     "size zero": ({**BASE, "sizes": [0]}, "sizes must be"),
@@ -159,6 +166,19 @@ def test_shape_refusals_name_the_field(case):
     with pytest.raises(contract.ContractError) as caught:
         contract.parse(json.dumps(data))
     assert field in str(caught.value)
+
+
+@pytest.mark.parametrize("case", ["profile not object", "cursors not list", "attributes of no element", "provider"])
+def test_a_malformed_contract_on_main_is_refused_end_to_end_and_keeps_the_pin(os_world, case):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["tip"])[0] == 0
+    before = pair(root)
+    commit_files(os_world["os_work"], {PATH: json.dumps(BAD[case][0])}, case)
+    git(os_world["os_work"], "push", "-q", "origin", "main")
+    git(os_world["os"], "fetch", "-q", "origin", "main")
+    code, out = cli(root, "pull", git(os_world["os"], "rev-parse", "origin/main").strip())
+    assert code == 1 and BAD[case][1] in out
+    assert pair(root) == before
 
 
 def test_non_finite_numbers_are_not_json():
@@ -188,7 +208,7 @@ def interrupt(monkeypatch, step):
         return real_rename(a, b)
 
     def rmtree(path, *args, **kwargs):
-        if step == "rmtree" and Path(path).name == "contract.prev":
+        if step == "rmtree" and Path(path).name == "contract.old":
             raise Stop
         return real_rmtree(path, *args, **kwargs)
 
@@ -202,10 +222,16 @@ def interrupt(monkeypatch, step):
     monkeypatch.setattr(contract, "_write", write)
 
 
-@pytest.mark.parametrize("step, survivor", [("write", "older"), ("rename1", "older"), ("rename2", "older"),
-                                             ("rmtree", "tip")])
-def test_an_interrupted_pull_leaves_one_whole_pair(os_world, monkeypatch, step, survivor):
+@pytest.mark.parametrize("step, committed", [("write", False), ("rename1", False), ("rename2", False),
+                                              ("rename3", False), ("rmtree", True)])
+def test_an_interrupted_pull_leaves_one_whole_pair(os_world, monkeypatch, step, committed):
+    """Before the commit point (renaming contract.prev to contract.old) the previous pair survives byte for byte;
+    after it the new pair does, byte for byte as a clean pull writes it."""
     root = os_world["brand"]
+    clean = root.parent / "clean-pull"
+    shutil.copytree(root, clean)
+    contract.pull(os_world["tip"], clean)
+    new_os = (clean / "contract" / "os.json").read_bytes()
     contract.pull(os_world["older"], root)
     older_pair = pair(root)
     interrupt(monkeypatch, step)
@@ -214,10 +240,28 @@ def test_an_interrupted_pull_leaves_one_whole_pair(os_world, monkeypatch, step, 
     monkeypatch.undo()
     code, out = cli(root, "show")  # a fresh process recovers and reads
     assert code == 0, out
-    assert f"commit {os_world[survivor]}" in out
-    if survivor == "older":
+    if committed:
+        assert out.splitlines()[0] == f"commit {os_world['tip']}"
+        assert pair(root)[0] == new_os
+        assert json.loads(pair(root)[1])["previous"] == os_world["older"]
+    else:
+        assert out.splitlines()[0] == f"commit {os_world['older']}"
         assert pair(root) == older_pair
-    assert not (root / "contract.tmp").exists() and not (root / "contract.prev").exists()
+    for leftover in ("contract.tmp", "contract.prev", "contract.old"):
+        assert not (root / leftover).exists()
+
+
+def test_a_refused_pull_still_recovers_first(os_world, monkeypatch):
+    root = os_world["brand"]
+    contract.pull(os_world["older"], root)
+    before = pair(root)
+    interrupt(monkeypatch, "rename2")
+    with pytest.raises(Stop):
+        contract.pull(os_world["tip"], root)
+    monkeypatch.undo()
+    assert (root / "contract.prev").exists()
+    assert cli(root, "pull", "main")[0] == 1  # a mistyped retry
+    assert not (root / "contract.prev").exists() and pair(root) == before
 
 
 def test_an_interrupted_first_pull_leaves_no_pair(os_world, monkeypatch):
@@ -301,6 +345,21 @@ def test_show_reports_first_unchanged_and_refused_pulls(os_world):
     assert out.endswith("no change")
     assert cli(root, "pull", "main")[0] == 1
     assert cli(root, "show") == (code, out)
+
+
+def test_removals_are_stored_and_shown(os_world):
+    root = os_world["brand"]
+    assert cli(root, "pull", os_world["tip"])[0] == 0
+    commit_files(os_world["os_work"], {PATH: V3}, "retire printer and wait")
+    git(os_world["os_work"], "push", "-q", "origin", "main")
+    git(os_world["os"], "fetch", "-q", "origin", "main")
+    retired = git(os_world["os"], "rev-parse", "origin/main").strip()
+    assert cli(root, "pull", retired)[0] == 0
+    source = json.loads((root / "contract" / "source.json").read_text())
+    assert source["changes"] == {"icons": {"added": [], "removed": [{"name": "printer", "provider": "colour"}]},
+                                 "cursors": {"added": [], "removed": ["wait"]}}
+    code, out = cli(root, "show")
+    assert code == 0 and out.splitlines()[3:] == ["- icon printer (colour)", "- cursor wait"]
 
 
 def test_show_reads_source_json_alone(os_world):
