@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="minesweeper-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6DEE8"/><stop offset="1" stop-color="#AEBCCB"/></linearGradient><linearGradient id="minesweeper-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FA"/><stop offset="1" stop-color="#DCE3EB"/></linearGradient><linearGradient id="minesweeper-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55606E"/><stop offset="1" stop-color="#1E252E"/></linearGradient><linearGradient id="minesweeper-g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient></defs>
+<path d="M8 4H40a4 4 0 0 1 4 4V40a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M8 4H40a4 4 0 0 1 4 4V40a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="url(#minesweeper-g1)"/>
+<path d="M8 4H40a4 4 0 0 1 4 4V40a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M8 4.6H40" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M9.5 7H38.5a2.5 2.5 0 0 1 2.5 2.5V38.5a2.5 2.5 0 0 1-2.5 2.5H9.5a2.5 2.5 0 0 1-2.5-2.5V9.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="url(#minesweeper-g2)"/>
+<path d="M9.5 7H38.5a2.5 2.5 0 0 1 2.5 2.5V38.5a2.5 2.5 0 0 1-2.5 2.5H9.5a2.5 2.5 0 0 1-2.5-2.5V9.5a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M9.5 7.6H38.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M28.8 24.0L35.6 24.0" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M27.39411254969543 27.39411254969543L32.20243866176395 32.20243866176395" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M24.0 28.8L24.0 35.6" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M20.60588745030457 27.39411254969543L15.797561338236049 32.20243866176395" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M19.2 24.0L12.4 24.0" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M20.60588745030457 20.60588745030457L15.797561338236047 15.797561338236049" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M24.0 19.2L23.999999999999996 12.4" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M27.39411254969543 20.60588745030457L32.20243866176395 15.797561338236047" stroke="#3A4452" stroke-opacity="1.0" stroke-width="3.04" stroke-linecap="round"/>
+<path d="M16 24a8 8 0 1 0 16 0a8 8 0 1 0 -16 0Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M16 24a8 8 0 1 0 16 0a8 8 0 1 0 -16 0Z" fill="url(#minesweeper-g3)"/>
+<path d="M16 24a8 8 0 1 0 16 0a8 8 0 1 0 -16 0Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M18.96 21.2a2.24 2.24 0 1 0 4.48 0a2.24 2.24 0 1 0 -4.48 0Z" fill="url(#minesweeper-g4)"/>
+</svg>

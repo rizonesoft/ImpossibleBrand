@@ -127,6 +127,11 @@ Every program repository gets an app icon, drawn here: a free-standing, full-col
 | Music | Music | A record with a blue-to-violet label and a light rim |
 | Sound Recorder | SoundRecorder | A studio microphone with a red record light |
 | Screensavers | Screensavers | A monitor showing a crescent moon and stars (no stars in the 24 and 16 px drawings) |
+| Chess | Chess | A blue rook |
+| Minesweeper | Minesweeper | A mine on a raised tile |
+| Solitaire | Solitaire | Two fanned cards, the ace of spades in front (offset, not tilted, at 24 and 16 px) |
+| Sudoku | Sudoku | A number grid; at 24 and 16 px the filled cells are solid marks |
+| Perihelion | Perihelion | A golden planet in a tilted orbit, with the probe |
 
 ## Adding or changing an icon
 

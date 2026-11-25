@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="chess-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1450C8"/></linearGradient></defs>
+<path d="M13 43H35V39.5C35 38.4 34.1 37.5 33 37.5H31.5L30 22H32.5V10H28.5V14H26V10H22V14H19.5V10H15.5V22H18L16.5 37.5H15C13.9 37.5 13 38.4 13 39.5Z" fill="#08245F" fill-opacity="0.2" transform="translate(0 1.2)"/>
+<path d="M13 43H35V39.5C35 38.4 34.1 37.5 33 37.5H31.5L30 22H32.5V10H28.5V14H26V10H22V14H19.5V10H15.5V22H18L16.5 37.5H15C13.9 37.5 13 38.4 13 39.5Z" fill="url(#chess-g1)"/>
+<path d="M13 43H35V39.5C35 38.4 34.1 37.5 33 37.5H31.5L30 22H32.5V10H28.5V14H26V10H22V14H19.5V10H15.5V22H18L16.5 37.5H15C13.9 37.5 13 38.4 13 39.5Z" fill="none" stroke="#33465F" stroke-opacity=".28" stroke-width=".8"/>
+<path d="M16.5 10.6H18.5" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1" stroke-linecap="round"/>
+<path d="M15.5 20H32.5V22.5H15.5Z" fill="#1450C8" fill-opacity="0.35"/>
+<path d="M17 34H31V35.6H17Z" fill="#FFFFFF" fill-opacity="0.35"/>
+</svg>

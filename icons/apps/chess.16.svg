@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="chess-16-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB8FA"/><stop offset="1" stop-color="#1450C8"/></linearGradient></defs>
+<path d="M18.0 21.0H30.0L33.0 39.0H15.0Z" fill="url(#chess-16-g1)"/>
+<path d="M15.0 9.0H33.0V21.0H15.0Z" fill="url(#chess-16-g1)"/>
+<path d="M15.0 6.0H18.0V9.0H15.0Z" fill="url(#chess-16-g1)"/>
+<path d="M21.0 6.0H27.0V9.0H21.0Z" fill="url(#chess-16-g1)"/>
+<path d="M30.0 6.0H33.0V9.0H30.0Z" fill="url(#chess-16-g1)"/>
+<path d="M12.0 39.0H36.0V42.0H12.0Z" fill="#1450C8"/>
+<path d="M15.0 21.0H33.0V21.0H15.0Z" fill="#1450C8" fill-opacity=".45"/>
+</svg>

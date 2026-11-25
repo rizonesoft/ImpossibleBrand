@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="solitaire-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF2F6"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient><linearGradient id="solitaire-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E3E9F0"/></linearGradient></defs>
+<path d="M6.0 10.0H24.0a2.0 2.0 0 0 1 2.0 2.0V42.0a2.0 2.0 0 0 1-2.0 2.0H6.0a2.0 2.0 0 0 1-2.0-2.0V12.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#solitaire-24-g1)"/>
+<path d="M6.0 11.0H24.0a1.0 1.0 0 0 1 1.0 1.0V42.0a1.0 1.0 0 0 1-1.0 1.0H6.0a1.0 1.0 0 0 1-1.0-1.0V12.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M20.0 4.0H42.0a2.0 2.0 0 0 1 2.0 2.0V36.0a2.0 2.0 0 0 1-2.0 2.0H20.0a2.0 2.0 0 0 1-2.0-2.0V6.0a2.0 2.0 0 0 1 2.0-2.0Z" fill="url(#solitaire-24-g2)"/>
+<path d="M20.0 5.0H42.0a1.0 1.0 0 0 1 1.0 1.0V36.0a1.0 1.0 0 0 1-1.0 1.0H20.0a1.0 1.0 0 0 1-1.0-1.0V6.0a1.0 1.0 0 0 1 1.0-1.0Z" fill="none" stroke="#33465F" stroke-opacity=".3" stroke-width="2.0"/>
+<path d="M31.0 12.25C34.5 16.8 38.0 19.6 38.0 22.4C38.0 25.2 34.85 26.25 32.4 24.5L33.8 28.0H28.2L29.6 24.5C27.15 26.25 24.0 25.2 24.0 22.4C24.0 19.6 27.5 16.8 31.0 12.25Z" fill="#1E252E" fill-opacity="1.0"/>
+</svg>

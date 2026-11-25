@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<defs><linearGradient id="perihelion-24-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BEBF8"/><stop offset="1" stop-color="#22B4E8"/></linearGradient><linearGradient id="perihelion-24-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDE73"/><stop offset="1" stop-color="#F0B429"/></linearGradient></defs>
+<path d="M5.874 32.452A20 10.5 -25 1 1 42.126 15.548A20 10.5 -25 1 1 5.874 32.452Z" fill="none" stroke="url(#perihelion-24-g1)" stroke-width="2.0"/>
+<path d="M15 24a9 9 0 1 0 18 0a9 9 0 1 0 -18 0Z" fill="url(#perihelion-24-g2)"/>
+<path d="M40.6 12.399999999999999L43.4 15.2L40.6 18.0L37.800000000000004 15.2Z" fill="#FFFFFF" fill-opacity="1.0"/>
+<path d="M40.6 12.399999999999999L43.4 15.2L40.6 18.0L37.800000000000004 15.2Z" fill="none" stroke="#08245F" stroke-opacity=".55" stroke-width="1.0"/>
+</svg>
