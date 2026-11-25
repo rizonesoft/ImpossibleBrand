@@ -32,7 +32,7 @@ Every icon is checked at 16 and 24 px on `#202020` and `#F3F3F3` before it lands
 - Glyphs on folders are at least 12 units wide so they survive at 16 px as a coloured blob in the right place.
 - Strokes that carry meaning are at least 1.6 units wide; anything thinner is decoration and may disappear at small sizes.
 - A shape that relies on a light edge for contrast also gets a faint darker edge, so it holds on both light and dark backgrounds.
-- One source file per icon: where detail collapses, simplify the source instead of adding a small-size file.
+- One source file per icon by default: where detail collapses, simplify the source first. A hand-authored per-size override (one file for one size, which wins at that size) is allowed only when simplifying would spoil the large sizes, as with Impossible SDK's own 16 to 32 px drawings.
 
 ## The set
 
@@ -89,7 +89,9 @@ A missing icon is never shipped as the generic fallback and never parked as a st
 
 A draft is drawn from the existing parts and metaphors (the This PC monitor, the folder, the document, the drive), following the palette, the small-size rules and the system SVG profile. Most new icons are an existing part plus an overlay (a drive with a badge, a document with a glyph).
 
-**When no part fits.** When the icon needs an object nothing in the library draws, such as a printer or a camera, the draft adds that object as a **new part** first, drawn to the same rules (palette tokens, light from the top left, the small-size rules), and the icon then composes it. The part is listed in the drafts table too, so polishing it improves every icon that uses it, and the next icon that needs a printer reuses it instead of drawing its own. If an object cannot be drawn credibly even as a simple part, the floor is the **tile plus glyph** draft: the standard rounded tile in the icon's category colour with a simple line glyph built from primitives. It is plain but on-palette, legible and clearly named, which the generic fallback is not.
+A consumer's local draft composes only parts that already exist in its pinned pack, or the tile-plus-glyph floor below; new parts are drawn only in this repository.
+
+**When no part fits.** When the icon needs an object nothing in the library draws, such as a printer or a camera, the section here that designs it adds that object as a **new part** first, drawn to the same rules (palette names, one key light from straight above, the small-size rules), and the icon then composes it. The part is listed in the drafts table too, so polishing it improves every icon that uses it, and the next icon that needs a printer reuses it instead of drawing its own. If an object cannot be drawn credibly even as a simple part, the floor is the **tile plus glyph** draft: the standard rounded tile in the icon's category colour with a simple line glyph built from primitives. It is plain but on-palette, legible and clearly named, which the generic fallback is not.
 
 Polish does not wait for a person (decided 2026-11-14): the section here that designs the icon scores it against the rules on this page, revises it and scores it again, and promotes it when every rule passes. A person can still polish by hand, which makes the icon **hand-authored** and never rewritten by the engine, or reject an icon, which sends it back through the pass. Promotion removes the icon's row from the drafts table.
 

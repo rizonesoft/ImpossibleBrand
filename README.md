@@ -1,6 +1,6 @@
 # Impossible Brand
 
-The art of Impossible OS and its programs: colour icons, cursors, the logo and wordmarks, boot shortcuts, banners and wallpapers. Everything is drawn to one standard and published as a pinned pack that Impossible OS, Impossible SDK and every program repository import, so no program has to depend on the OS to look like it.
+The art of Impossible OS and its programs: colour icons, cursors, the logo and wordmarks, boot shortcuts, banners and wallpapers. Everything is drawn to one standard. The plan is a pinned pack that Impossible OS, Impossible SDK and every program repository import, so no program has to depend on the OS to look like it. Today the repository holds the art seeded from the OS; the pack, the engine and the imports follow the phases in the design below.
 
 ## What is here?
 
